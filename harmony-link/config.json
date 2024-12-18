@@ -1,0 +1,192 @@
+{
+  "entities": {
+    "kaji": {
+      "backend": {
+        "module": "kajiwoto",
+        "characterai": {
+          "apitoken": "your-api-token-here",
+          "chatroomurl": "https://beta.character.ai/chat?char=Hpk0GozjACb3mtHeAaAMb0r9pcJGbzF317I_Ux_ALOA",
+          "plus": false
+        },
+        "kajiwoto": {
+          "username": "user",
+          "password": "password",
+          "kajiroomurl": "kaji_room_url"
+        },
+        "kindroid": {
+          "apikey": "apikey",
+          "kindroidid": "kindroidid"
+        },
+        "oobabooga": {
+          "endpoint": "http://127.0.0.1:9401",
+          "character": "Example",
+          "operationmode": "chat",
+          "instructiontemplate": "WizardLM",
+          "preset": "Kobold-Godlike",
+          "maxnewtokens": 200,
+          "usebackendhistory": true
+        },
+        "openai": {
+          "openaiapikey": "YOUR_OPENAI_API_KEY",
+          "model": "gpt-3.5-turbo",
+          "maxtokens": 100,
+          "temperature": -1,
+          "topp": -1,
+          "n": -1,
+          "stoptokens": [
+            "\\n"
+          ],
+          "systemprompts": [
+            "Your name is Claire, an AI Assistant optimized for Human-to-Machine interaction.",
+            "Humans can talk and interact with you in a metaverse layer where you're controlling your own 3D Avatar.",
+            "Your main task is to act as a companion for empathic, supportive and helpful conversation."
+          ],
+          "userprompts": []
+        }
+      },
+      "countenance": {
+        "module": "harmony",
+        "harmony": {
+          "endpoint": "https://emotions.project-harmony.ai/v1"
+        }
+      },
+      "movement": {
+        "module": "disabled",
+        "harmony": {
+          "endpoint": "https://emotions.project-harmony.ai/v1"
+        },
+        "startupsynctimeout": 30,
+        "executionthreshold": 0.9
+      },
+      "stt": {
+        "module": "disabled",
+        "microphone": {
+          "deviceid": "disabled",
+          "mainstreamtimemillis": 2000,
+          "transitionstreamtimemillis": 1000,
+          "audiostreamsplitrate": 100,
+          "autovadminvoiceactivitymillis": 100
+        },
+        "harmony": {
+          "endpoint": "https://speech.project-harmony.ai/v1"
+        },
+        "openai": {
+          "openaiapikey": "YOUR_OPENAI_API_KEY"
+        }
+      },
+      "tts": {
+        "module": "harmony",
+        "outputtype": "file",
+        "wordstoreplace": {
+          "rracer2021": "Dom"
+        },
+        "vocalizenonverbal": false,
+        "harmony": {
+          "endpoint": "https://speech.project-harmony.ai/v1",
+          "voiceembeddingfile": "https://kajiwoto.ai/v/a07v"
+        },
+        "elevenlabs": {
+          "elevenlabsapikey": "YOUR_ELEVENLABS_API_KEY",
+          "voiceid": "21m00Tcm4TlvDq8ikWAM",
+          "modelid": "eleven_monolingual_v1",
+          "stability": -1,
+          "similarityboost": -1
+        }
+      }
+    },
+    "user": {
+      "backend": {
+        "module": "disabled",
+        "kajiwoto": {
+          "username": "",
+          "password": "",
+          "kajiroomurl": ""
+        },
+        "characterai": {
+          "apitoken": "",
+          "plus": false,
+          "chatroomurl": ""
+        },
+        "oobabooga": {
+          "endpoint": ""
+        },
+        "openai": {
+          "openaiapikey": "hellogpt",
+          "model": "gpt-4o",
+          "maxtokens": 0,
+          "temperature": 0,
+          "topp": 0,
+          "n": 0,
+          "stoptokens": null,
+          "systemprompts": null,
+          "userprompts": null
+        }
+      },
+      "countenance": {
+        "module": "disabled",
+        "harmony": {
+          "endpoint": ""
+        }
+      },
+      "movement": {
+        "module": "disabled",
+        "harmony": {
+          "endpoint": ""
+        },
+        "startupsynctimeout": 0,
+        "executionthreshold": 0
+      },
+      "stt": {
+        "module": "harmony",
+        "microphone": {
+          "deviceid": "auto",
+          "mainstreamtimemillis": 2000,
+          "transitionstreamtimemillis": 2000,
+          "audiostreamsplitrate": 100,
+          "autovadminvoiceactivitymillis": 100
+        },
+        "harmony": {
+          "endpoint": "https://speech.project-harmony.ai/v1"
+        },
+        "openai": {
+          "openaiapikey": "YOUR_OPENAI_API_KEY"
+        }
+      },
+      "tts": {
+        "module": "disabled",
+        "outputtype": "",
+        "wordstoreplace": null,
+        "vocalizenonverbal": false,
+        "harmony": {
+          "endpoint": "",
+          "voiceembeddingfile": ""
+        },
+        "elevenlabs": {
+          "elevenlabsapikey": "",
+          "voiceid": "",
+          "modelid": "",
+          "stability": 0,
+          "similarityboost": 0,
+          "style": 0
+        },
+        "openai": {
+          "openaiapikey": "",
+          "voice": "alloy",
+          "model": "tts-1",
+          "speed": 1.00,
+          "format": "flac"
+        }
+      }
+    }
+  },
+  "general": {
+    "port": 28080,
+    "confirmevents": true,
+    "logfile": true,
+    "workingdir": "./harmony-tmp",
+    "clientconnectionbuffer": 8192000,
+    "useharmonycloud": false,
+    "authendpoint": "https://auth.project-harmony.ai/v1",
+    "userapikey": ""
+  }
+}
