@@ -21,7 +21,7 @@ services:
     volumes:
       - ./text-generation-webui-harmonyai/cache:/home/app/text-generation-webui/cache
       - ./text-generation-webui-harmonyai/characters:/home/app/text-generation-webui/characters
-      - ./text-generation-webui-harmonyai/extensions:/home/app/text-generation-webui/extensions
+#      - ./text-generation-webui-harmonyai/extensions:/home/app/text-generation-webui/extensions
       - ./text-generation-webui-harmonyai/loras:/home/app/text-generation-webui/loras
       - ./text-generation-webui-harmonyai/logs:/home/app/text-generation-webui/logs
       - ./text-generation-webui-harmonyai/models:/home/app/text-generation-webui/models
