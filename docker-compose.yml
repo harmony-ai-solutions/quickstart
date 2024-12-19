@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   harmony-link:
     image: harmonyai/harmony-link:latest
