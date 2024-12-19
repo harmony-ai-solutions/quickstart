@@ -40,11 +40,9 @@ services:
 
   harmonyspeech-engine:
     image: harmonyai/harmonyspeech-engine:latest
-#    environment:
-#      HF_TOKEN: YOUR_HUGGINGFACE_TOKEN
+    env_file: ./harmony-speech-engine/.env
     volumes:
       - ./harmony-speech-engine/config.yml:/app/harmony-speech-engine/config.yml
-      - ~/.cache:/app/harmony-speech-engine/.cache
-      # - .cache:/app/harmony-speech-engine/.cache => To store downloaded hub files locally within repo
+      - ./harmony-speech-engine/cache:/app/harmony-speech-engine/cache
     ports:
       - "12080:12080"
