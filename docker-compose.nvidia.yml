@@ -1,48 +1,48 @@
 version: '3.8'
 
 services:
-#  harmony-link:
-#    image: harmonyai/harmony-link:latest
-#    ports:
-#      - "28080:28080"
-#      - "28081:28081"
-#    volumes:
-#      - ./harmony-link/config.json:/app/config.json
-#
-#  text-generation-webui-harmonyai:
-#    image: harmonyai/text-generation-webui-harmony-ai-nvidia
-#    env_file: ./text-generation-webui-harmonyai/.env
-#    user: "${APP_RUNTIME_UID:-6972}:${APP_RUNTIME_GID:-6972}"
-#    ports:
-#      - "${HOST_PORT:-7860}:${CONTAINER_PORT:-7860}"
-#      - "${HOST_API_PORT:-5000}:${CONTAINER_API_PORT:-5000}"
-#    stdin_open: true
-#    tty: true
-#    volumes:
-#      - ./text-generation-webui-harmonyai/cache:/home/app/text-generation-webui/cache
-#      - ./text-generation-webui-harmonyai/characters:/home/app/text-generation-webui/characters
-##      - ./text-generation-webui-harmonyai/extensions:/home/app/text-generation-webui/extensions
-#      - ./text-generation-webui-harmonyai/loras:/home/app/text-generation-webui/loras
-#      - ./text-generation-webui-harmonyai/logs:/home/app/text-generation-webui/logs
-#      - ./text-generation-webui-harmonyai/models:/home/app/text-generation-webui/models
-#      - ./text-generation-webui-harmonyai/presets:/home/app/text-generation-webui/presets
-#      - ./text-generation-webui-harmonyai/prompts:/home/app/text-generation-webui/prompts
-#      - ./text-generation-webui-harmonyai/softprompts:/home/app/text-generation-webui/softprompts
-#      - ./text-generation-webui-harmonyai/training:/home/app/text-generation-webui/training
-#      - ./text-generation-webui-harmonyai/cloudflared:/etc/cloudflared
-#    deploy:
-#      resources:
-#        reservations:
-#          devices:
-#            - driver: nvidia
-#              capabilities: [ gpu ]
-#
-#  harmonyspeech-ui:
-#    image: harmonyai/harmonyspeech-ui:latest
-#    ports:
-#      - "8080:80"
-#    depends_on:
-#      - harmonyspeech-engine
+  harmony-link:
+    image: harmonyai/harmony-link:latest
+    ports:
+      - "28080:28080"
+      - "28081:28081"
+    volumes:
+      - ./harmony-link/config.json:/app/config.json
+
+  text-generation-webui-harmonyai:
+    image: harmonyai/text-generation-webui-harmony-ai-nvidia
+    env_file: ./text-generation-webui-harmonyai/.env
+    user: "${APP_RUNTIME_UID:-6972}:${APP_RUNTIME_GID:-6972}"
+    ports:
+      - "${HOST_PORT:-7860}:${CONTAINER_PORT:-7860}"
+      - "${HOST_API_PORT:-5000}:${CONTAINER_API_PORT:-5000}"
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./text-generation-webui-harmonyai/cache:/home/app/text-generation-webui/cache
+      - ./text-generation-webui-harmonyai/characters:/home/app/text-generation-webui/characters
+#      - ./text-generation-webui-harmonyai/extensions:/home/app/text-generation-webui/extensions
+      - ./text-generation-webui-harmonyai/loras:/home/app/text-generation-webui/loras
+      - ./text-generation-webui-harmonyai/logs:/home/app/text-generation-webui/logs
+      - ./text-generation-webui-harmonyai/models:/home/app/text-generation-webui/models
+      - ./text-generation-webui-harmonyai/presets:/home/app/text-generation-webui/presets
+      - ./text-generation-webui-harmonyai/prompts:/home/app/text-generation-webui/prompts
+      - ./text-generation-webui-harmonyai/softprompts:/home/app/text-generation-webui/softprompts
+      - ./text-generation-webui-harmonyai/training:/home/app/text-generation-webui/training
+      - ./text-generation-webui-harmonyai/cloudflared:/etc/cloudflared
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [ gpu ]
+
+  harmonyspeech-ui:
+    image: harmonyai/harmonyspeech-ui:latest
+    ports:
+      - "8080:80"
+    depends_on:
+      - harmonyspeech-engine
 
   harmonyspeech-engine:
     image: harmonyai/harmonyspeech-engine:latest
