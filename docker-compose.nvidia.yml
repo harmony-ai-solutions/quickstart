@@ -9,6 +9,7 @@ services:
 
   text-generation-webui-harmonyai:
     image: harmonyai/text-generation-webui-harmony-ai-nvidia
+    pull_policy: always
     env_file: ./text-generation-webui-harmonyai/.env
     user: "${APP_RUNTIME_UID:-6972}:${APP_RUNTIME_GID:-6972}"
     ports:
@@ -37,6 +38,7 @@ services:
 
   harmonyspeech-ui:
     image: harmonyai/harmonyspeech-ui:latest
+    pull_policy: always
     ports:
       - "8080:80"
     depends_on:
@@ -44,6 +46,7 @@ services:
 
   harmonyspeech-engine:
     image: harmonyai/harmonyspeech-engine:latest
+    pull_policy: always
     env_file: ./harmony-speech-engine/.env
     volumes:
       - ./harmony-speech-engine/config.nvidia.yml:/app/harmony-speech-engine/config.yml

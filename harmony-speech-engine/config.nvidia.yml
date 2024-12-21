@@ -33,15 +33,15 @@ model_configs:
     device_config:
       device: "cuda"
 
-  - name: "ov1-synthesizer-zh"
-    model: "myshell-ai/openvoice"
-    model_type: "OpenVoiceV1Synthesizer"
-    language: "ZH"
-    voices: ["default"]
-    max_batch_size: 10
-    dtype: "float32"
-    device_config:
-      device: "cuda"
+#  - name: "ov1-synthesizer-zh"
+#    model: "myshell-ai/openvoice"
+#    model_type: "OpenVoiceV1Synthesizer"
+#    language: "ZH"
+#    voices: ["default"]
+#    max_batch_size: 10
+#    dtype: "float32"
+#    device_config:
+#      device: "cuda"
 
   - name: "ov1-tone-converter"
     model: "myshell-ai/openvoice"
@@ -69,15 +69,55 @@ model_configs:
     device_config:
       device: "cuda"
 
-  - name: "ov2-synthesizer-zh"
-    model: "myshell-ai/MeloTTS-Chinese"
-    model_type: "MeloTTSSynthesizer"
-    language: "ZH"
-    voices: ["default"]
-    max_batch_size: 10
-    dtype: "float32"
-    device_config:
-      device: "cuda"
+#  - name: "ov2-synthesizer-zh"
+#    model: "myshell-ai/MeloTTS-Chinese"
+#    model_type: "MeloTTSSynthesizer"
+#    language: "ZH"
+#    voices: ["ZH"]
+#    max_batch_size: 10
+#    dtype: "float32"
+#    device_config:
+#      device: "cuda"
+#
+#  - name: "ov2-synthesizer-es"
+#    model: "myshell-ai/MeloTTS-Spanish"
+#    model_type: "MeloTTSSynthesizer"
+#    language: "ES"
+#    voices: [ "ES" ]
+#    max_batch_size: 10
+#    dtype: "float32"
+#    device_config:
+#      device: "cuda"
+#
+#  - name: "ov2-synthesizer-fr"
+#    model: "myshell-ai/MeloTTS-French"
+#    model_type: "MeloTTSSynthesizer"
+#    language: "FR"
+#    voices: [ "FR" ]
+#    max_batch_size: 10
+#    dtype: "float32"
+#    device_config:
+#      device: "cuda"
+#
+#  - name: "ov2-synthesizer-jp"
+#    model: "myshell-ai/MeloTTS-Japanese"
+#    model_type: "MeloTTSSynthesizer"
+#    language: "JP"
+#    voices: [ "JP" ]
+#    max_batch_size: 10
+#    dtype: "float32"
+#    device_config:
+#      device: "cuda"
+#
+#  - name: "ov2-synthesizer-kr"
+#    model: "myshell-ai/MeloTTS-Korean"
+#    model_type: "MeloTTSSynthesizer"
+#    language: "KR"
+#    voices: [ "KR" ]
+#    max_batch_size: 10
+#    dtype: "float32"
+#    device_config:
+#      device: "cuda"
 
   - name: "ov2-tone-converter"
     model: "myshell-ai/openvoicev2"
