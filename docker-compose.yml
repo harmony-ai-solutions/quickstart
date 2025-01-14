@@ -30,6 +30,7 @@ services:
       - ./text-generation-webui-harmonyai/softprompts:/home/app/text-generation-webui/softprompts
       - ./text-generation-webui-harmonyai/training:/home/app/text-generation-webui/training
       - ./text-generation-webui-harmonyai/cloudflared:/etc/cloudflared
+      - ./text-generation-webui-harmonyai/CMD_FLAGS.txt:/home/app/text-generation-webui/CMD_FLAGS.txt
 
   harmonyspeech-ui:
     image: harmonyai/harmonyspeech-ui:latest

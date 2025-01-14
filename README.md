@@ -61,8 +61,8 @@ The following table should help with evaluating the requirements:
 | Model Toolchain   | Type | Embedding requires Whisper | CPU only Performance | Voice Quality | Storage & RAM / VRAM required |
 |-------------------|------|----------------------------|----------------------|---------------|-------------------------------|
 | Harmony Speech V1 | TTS  | No                         | Very Good            | Good          | ~1GB                          |
-| OpenVoice V1      | TTS  | Yes                        | Good                 | Very Good     | ~1GB per language             |
-| OpenVoice V2      | TTS  | Yes                        | Good                 | Very Good     | ~1GB per language             |
+| OpenVoice V1      | TTS  | Yes                        | Good                 | Very Good     | ~512GB per language           |
+| OpenVoice V2      | TTS  | Yes                        | Good                 | Very Good     | ~512GB per language           |
 | Faster-Whisper    | STT  | N / A                      | Medium               | N / A         | ~1-6GB (depending on model)   |
 
 For more details on configuring the models in detail, please check out the 
@@ -83,10 +83,14 @@ harmony-link/config.json
 ```
 
 #### Text-Generation-Web-UI
-Make sure to access `http://localhost:7860` after launch and configure the model to be used.
-
 The API is found via `http://localhost:5000`. To Access the API from inside the harmony-link docker container, use this
 URL instead: `http://text-generation-webui-harmonyai:5000`
+
+Make sure to access `http://localhost:7860` after launch and configure the model to be used. 
+Alternatively, you can also download a model into the models folder below text-generation-webui-harmonyai, and comment
+out the flag `--model` in the file `CMD_FLAGS.txt` to load the model on startup. Make sure to download a model which
+is compatible with your system, e.g. GGUF model for CPU vs. GPTQ / EXL2 model for GPU, and that you have sufficient
+RAM / VRAM to load the model and inference cache.
 
 ### 4. Launch the services using docker compose
 From the shell which is pointed at the repo's folder back in Step 2, start and stop the services via docker compose.
