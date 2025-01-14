@@ -1,6 +1,7 @@
 services:
   harmony-link:
     image: harmonyai/harmony-link:latest
+    pull_policy: always
     ports:
       - "28080:28080"
       - "28081:28081"
@@ -45,7 +46,7 @@ services:
       - harmonyspeech-engine
 
   harmonyspeech-engine:
-    image: harmonyai/harmonyspeech-engine:latest
+    image: harmonyai/harmonyspeech-engine-nvidia:latest
     pull_policy: always
     env_file: ./harmony-speech-engine/.env
     volumes:
