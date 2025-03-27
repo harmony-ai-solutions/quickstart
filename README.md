@@ -103,8 +103,8 @@ docker compose down
 ```
 For Nvidia:
 ```
-docker compose -f docker-compose.nvidia up
-docker compose -f docker-compose.nvidia down
+docker compose -f docker-compose.nvidia.yml up
+docker compose -f docker-compose.nvidia.yml down
 ```
 
 If you have questions, or run into issues, please feel free to reach out via Discord; Server link shared below.
