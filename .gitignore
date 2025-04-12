@@ -1,3 +1,6 @@
 .idea/
 text-generation-webui-harmonyai/cache/*
+text-generation-webui-harmonyai/models/*
 harmony-speech-engine/cache/*
+harmony-link/harmony-user.key
+harmony-link/harmony-tmp/*

@@ -9,7 +9,10 @@ a slightly modified version of [Oobabooga's great repository](https://github.com
 - [Harmony Speech Engine](https://github.com/harmony-ai-solutions/harmony-speech-engine), our custom inference engine
 for AI voice generation, voice cloning and Speech transcription.
 
-All docker Images and revision can be found at [Docker-Hub](https://hub.docker.com/u/harmonyai). 
+All docker Images and revision can be found at [Docker-Hub](https://hub.docker.com/u/harmonyai).
+
+For supporting with setup, we created a tutorial video available on YouTube:
+[![Add Human-like AI Characters to ANY Game - BETA Tech Demo #1 - Project Harmony AI](https://img.youtube.com/vi/1YX3H_WcYuY/0.jpg)](https://www.youtube.com/watch?v=1YX3H_WcYuY)
 
 ---
 ## Recommended System Requirements

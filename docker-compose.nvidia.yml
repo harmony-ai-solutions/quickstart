@@ -2,11 +2,14 @@ services:
   harmony-link:
     image: harmonyai/harmony-link:latest
     pull_policy: always
+    env_file: ./harmony-link/.env
     ports:
       - "28080:28080"
       - "28081:28081"
     volumes:
+      - ./harmony-link/harmony-tmp:/app/harmony-tmp
       - ./harmony-link/config.json:/app/config.json
+      - ./harmony-link/harmony-user.key:/app/harmony-user.key
 
   text-generation-webui-harmonyai:
     image: harmonyai/text-generation-webui-harmony-ai-nvidia

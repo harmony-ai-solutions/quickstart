@@ -4,21 +4,20 @@
       "backend": {
         "module": "kajiwoto",
         "characterai": {
-          "apitoken": "your-api-token-here",
-          "chatroomurl": "https://beta.character.ai/chat?char=Hpk0GozjACb3mtHeAaAMb0r9pcJGbzF317I_Ux_ALOA",
-          "plus": false
+          "apitoken": "",
+          "chatroomurl": "https://beta.character.ai/chat?char=Hpk0GozjACb3mtHeAaAMb0r9pcJGbzF317I_Ux_ALOA"
         },
         "kajiwoto": {
-          "username": "user",
-          "password": "password",
-          "kajiroomurl": "kaji_room_url"
+          "username": "",
+          "password": "",
+          "kajiroomurl": ""
         },
         "kindroid": {
-          "apikey": "apikey",
-          "kindroidid": "kindroidid"
+          "apikey": "",
+          "kindroidid": ""
         },
         "oobabooga": {
-          "endpoint": "http://127.0.0.1:9401",
+          "endpoint": "http://text-generation-webui-harmonyai:5000/v1",
           "character": "Example",
           "operationmode": "chat",
           "instructiontemplate": "WizardLM",
@@ -27,7 +26,7 @@
           "usebackendhistory": true
         },
         "openai": {
-          "openaiapikey": "YOUR_OPENAI_API_KEY",
+          "openaiapikey": "",
           "model": "gpt-3.5-turbo",
           "maxtokens": 100,
           "temperature": -1,
@@ -47,31 +46,31 @@
       "countenance": {
         "module": "harmony",
         "harmony": {
-          "endpoint": "https://emotions.project-harmony.ai/v1"
+          "endpoint": "http://text-generation-webui-harmonyai:5000/v1"
         }
       },
       "movement": {
         "module": "disabled",
         "harmony": {
-          "endpoint": "https://emotions.project-harmony.ai/v1"
+          "endpoint": "http://text-generation-webui-harmonyai:5000/v1"
         },
         "startupsynctimeout": 30,
         "executionthreshold": 0.9
       },
       "stt": {
         "module": "disabled",
-        "microphone": {
-          "deviceid": "disabled",
+        "transcription": {
           "mainstreamtimemillis": 2000,
-          "transitionstreamtimemillis": 1000,
-          "audiostreamsplitrate": 100,
-          "autovadminvoiceactivitymillis": 100
+          "transitionstreamtimemillis": 2000,
+          "maxbuffercount": 5
         },
         "harmony": {
-          "endpoint": "https://speech.project-harmony.ai/v1"
+          "endpoint": "http://harmonyspeech-engine:12080",
+          "model": "faster-whisper-large-v3-turbo",
+          "vadmodel": "faster-whisper-tiny"
         },
         "openai": {
-          "openaiapikey": "YOUR_OPENAI_API_KEY"
+          "openaiapikey": ""
         }
       },
       "tts": {
@@ -82,15 +81,26 @@
         },
         "vocalizenonverbal": false,
         "harmony": {
-          "endpoint": "https://speech.project-harmony.ai/v1",
-          "voiceembeddingfile": "https://kajiwoto.ai/v/a07v"
+          "endpoint": "http://harmonyspeech-engine:12080",
+          "voiceconfigfile": "",
+          "format": "wav",
+          "samplerate": 16000,
+          "stream": false
         },
         "elevenlabs": {
-          "elevenlabsapikey": "YOUR_ELEVENLABS_API_KEY",
+          "elevenlabsapikey": "",
           "voiceid": "21m00Tcm4TlvDq8ikWAM",
           "modelid": "eleven_monolingual_v1",
-          "stability": -1,
-          "similarityboost": -1
+          "stability": 0,
+          "similarityboost": 0,
+          "style": 0
+        },
+        "openai": {
+          "openaiapikey": "",
+          "voice": "alloy",
+          "model": "tts-1",
+          "speed": 1.00,
+          "format": "flac"
         }
       }
     },
@@ -111,7 +121,7 @@
           "endpoint": ""
         },
         "openai": {
-          "openaiapikey": "hellogpt",
+          "openaiapikey": "",
           "model": "gpt-4o",
           "maxtokens": 0,
           "temperature": 0,
@@ -138,18 +148,18 @@
       },
       "stt": {
         "module": "harmony",
-        "microphone": {
-          "deviceid": "auto",
+        "transcription": {
           "mainstreamtimemillis": 2000,
           "transitionstreamtimemillis": 2000,
-          "audiostreamsplitrate": 100,
-          "autovadminvoiceactivitymillis": 100
+          "maxbuffercount": 5
         },
         "harmony": {
-          "endpoint": "https://speech.project-harmony.ai/v1"
+          "endpoint": "http://harmonyspeech-engine:12080",
+          "model": "faster-whisper-large-v3-turbo",
+          "vadmodel": "faster-whisper-tiny"
         },
         "openai": {
-          "openaiapikey": "YOUR_OPENAI_API_KEY"
+          "openaiapikey": ""
         }
       },
       "tts": {
@@ -159,7 +169,10 @@
         "vocalizenonverbal": false,
         "harmony": {
           "endpoint": "",
-          "voiceembeddingfile": ""
+          "voiceconfigfile": "",
+          "format": "wav",
+          "samplerate": 16000,
+          "stream": false
         },
         "elevenlabs": {
           "elevenlabsapikey": "",
