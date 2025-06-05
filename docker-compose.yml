@@ -11,6 +11,12 @@ services:
       - ./harmony-link/config.json:/app/config.json
       - ./harmony-link/harmony-user.key:/app/harmony-user.key
 
+  harmony-link-ui:
+    image: harmonyai/harmony-link-ui:latest
+    pull_policy: always
+    ports:
+      - "8080:80"
+
   text-generation-webui-harmonyai:
     image: harmonyai/text-generation-webui-harmony-ai-cpu
     pull_policy: always
@@ -39,7 +45,7 @@ services:
     image: harmonyai/harmonyspeech-ui:latest
     pull_policy: always
     ports:
-      - "8080:80"
+      - "8081:80"
     depends_on:
       - harmonyspeech-engine
 
@@ -47,8 +53,8 @@ services:
     image: harmonyai/harmonyspeech-engine-cpu:latest
     pull_policy: always
     env_file: ./harmony-speech-engine/.env
+    ports:
+      - "12080:12080"
     volumes:
       - ./harmony-speech-engine/config.yml:/app/harmony-speech-engine/config.yml
       - ./harmony-speech-engine/cache:/app/harmony-speech-engine/cache
-    ports:
-      - "12080:12080"
