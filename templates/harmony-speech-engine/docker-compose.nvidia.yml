@@ -1,0 +1,39 @@
+services:
+  harmonyspeech-ui:
+    image: harmonyai/harmonyspeech-ui:latest
+    pull_policy: always
+    ports:
+      - "8081:80"
+    depends_on:
+      - harmonyspeech-engine
+    networks:
+      - harmony-link-network
+    labels:
+      com.docker.compose.project: harmony-link-integration-harmony-speech-engine
+      com.docker.compose.service: harmonyspeech-ui
+
+  harmonyspeech-engine:
+    image: harmonyai/harmonyspeech-engine-nvidia:latest
+    pull_policy: always
+    env_file: ../../harmony-speech-engine/.env
+    ports:
+      - "12080:12080"
+    volumes:
+      - ../../harmony-speech-engine/config.nvidia.yml:/app/harmony-speech-engine/config.yml
+      - ../../harmony-speech-engine/cache:/app/harmony-speech-engine/cache
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [ gpu ]
+    networks:
+      - harmony-link-network
+    labels:
+      com.docker.compose.project: harmony-link-integration-harmony-speech-engine
+      com.docker.compose.service: harmonyspeech-engine
+
+networks:
+  harmony-link-network:
+    external: true
+    name: harmony-link-network

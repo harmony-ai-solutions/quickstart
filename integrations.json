@@ -1,0 +1,12 @@
+[
+  {
+    "name": "text-generation-webui",
+    "displayName": "Text Generation WebUI (Oobabooga)",
+    "description": "Local text generation web interface"
+  },
+  {
+    "name": "harmony-speech-engine",
+    "displayName": "Harmony Speech Engine",
+    "description": "Local speech synthesis and recognition engine"
+  }
+]

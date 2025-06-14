@@ -63,13 +63,23 @@ The Quickstart project itself is primarily a deployment and integration solution
 - **Docker Compose Files**: CPU and NVIDIA GPU configurations established.
 - **Component Integration**: Successful orchestration of Harmony Link, Speech Engine, and Text-Generation WebUI.
 
+### ✅ Integration with Harmony Link (Completed)
+
+**Quickstart Repository Changes:**
+- **Structure Refinement**:
+    - Introduced `.automation/` directory: This new directory is where Harmony Link stores user-customized Docker Compose configurations for integrations. This allows users to modify templates via the Harmony Link UI, with changes persisting here.
+    - Introduced `templates/` directory: Contains the default Docker Compose YAML templates for various external AI services (e.g., `text-generation-webui-harmonyai/docker-compose.cpu.yml`, `harmony-speech-engine/docker-compose.cpu.yml`). These serve as the baseline for user configurations.
+    - Created `integrations.json`: A new manifest file at the root of the quickstart repo that lists all discoverable external integrations, including their unique names, display names, and descriptions. Harmony Link uses this file to populate its "Integrations" UI.
+- **Docker Compose Centralization**:
+    - The root `docker-compose.yml` has been simplified to primarily orchestrate only `harmony-link` and `harmony-link-ui` services.
+    - The `harmony-link` service in `docker-compose.yml` now includes Docker socket mounting (`/var/run/docker.sock`) and the `HARMONY_LINK_CONTAINER_MODE` environment variable set to `true`. This enables Harmony Link to act as a privileged orchestrator, capable of managing other Docker containers defined by the integration templates.
+    - **Shared Network**: The `harmony-link-network` is now defined in the root `docker-compose.yml` and used by all integration templates, ensuring all services communicate within the same network.
+- **Service Management Shift**: Individual AI services like Text-Generation WebUI and Harmony Speech Engine are no longer directly managed by the root `docker-compose.yml` for their full lifecycle. Instead, their deployment and control are now handled dynamically by Harmony Link through its new "Integrations" UI, using the templates and custom configurations within this quickstart repository.
+- **Template Path Resolution**: `env_file` and `volumes` paths in integration templates (`text-generation-webui`, `harmony-speech-engine`) have been adjusted from `../` to `../../` to correctly resolve when deployed via Harmony Link's `.automation` directory.
+- **Docker Compose Labels**: All integration services in the templates now include `com.docker.compose.project` and `com.docker.compose.service` labels for accurate container discovery and grouping by Harmony Link.
+
 ## Evolution of Project Decisions
 - **Docker-first Approach**: Chosen for portability, isolation, and ease of deployment.
 - **Separate CPU/GPU Compose Files**: Provides clear options for different hardware setups.
 - **Volume-based Configuration**: Allows users to easily modify settings without rebuilding images.
-
-## Success Metrics
-- **Deployment Success Rate**: High percentage of users successfully launching the stack.
-- **Time to First Interaction**: Minimal time from download to a working AI character.
-- **Resource Utilization**: Efficient use of CPU/GPU resources.
-- **User Feedback**: Positive feedback on ease of setup and functionality.
+- **Harmony Link as Orchestration Hub**: Shifted the responsibility of managing external AI service containers from manual `docker compose` commands to the Harmony Link application itself, providing a unified UI for setup, configuration, and control. This simplifies the user experience for deploying complex AI ecosystems.

@@ -1,0 +1,40 @@
+services:
+  text-generation-webui:
+    image: harmonyai/text-generation-webui-harmony-ai-nvidia
+    pull_policy: always
+    env_file: ../../text-generation-webui/.env
+    user: "${APP_RUNTIME_UID:-6972}:${APP_RUNTIME_GID:-6972}"
+    ports:
+      - "${HOST_PORT:-7860}:${CONTAINER_PORT:-7860}"
+      - "${HOST_API_PORT:-5000}:${CONTAINER_API_PORT:-5000}"
+    stdin_open: true
+    tty: true
+    volumes:
+      - ../../text-generation-webui/cache:/home/app/text-generation-webui/cache
+      - ../../text-generation-webui/characters:/home/app/text-generation-webui/characters
+#      - ../../text-generation-webui/extensions:/home/app/text-generation-webui/extensions
+      - ../../text-generation-webui/loras:/home/app/text-generation-webui/loras
+      - ../../text-generation-webui/logs:/home/app/text-generation-webui/logs
+      - ../../text-generation-webui/models:/home/app/text-generation-webui/models
+      - ../../text-generation-webui/presets:/home/app/text-generation-webui/presets
+      - ../../text-generation-webui/prompts:/home/app/text-generation-webui/prompts
+      - ../../text-generation-webui/softprompts:/home/app/text-generation-webui/softprompts
+      - ../../text-generation-webui/training:/home/app/text-generation-webui/training
+      - ../../text-generation-webui/cloudflared:/etc/cloudflared
+      - ../../text-generation-webui/CMD_FLAGS.txt:/home/app/text-generation-webui/CMD_FLAGS.txt
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [ gpu ]
+    networks:
+      - harmony-link-network
+    labels:
+      com.docker.compose.project: harmony-link-integration-text-generation-webui
+      com.docker.compose.service: text-generation-webui
+
+networks:
+  harmony-link-network:
+    external: true
+    name: harmony-link-network
