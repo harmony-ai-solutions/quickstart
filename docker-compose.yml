@@ -7,11 +7,18 @@ services:
       - "28080:28080"
       - "28081:28081"
     volumes:
-      - .:/quickstart
       - ./harmony-link/harmony-tmp:/app/harmony-tmp
       - ./harmony-link/config.json:/app/config.json
       - ./harmony-link/harmony-user.key:/app/harmony-user.key
       - /var/run/docker.sock:/var/run/docker.sock
+      # ATTENTION FOR RUNNING DOCKERIZED
+      # This path mounts the quickstart repo on a path matching the host path
+      # The path needs to match the exact path on the host, so docker compose for the integrations works correctly
+      # and relative path mounts will be resolved properly.
+      # For WSL this requires a special mount path starting with "/run/desktop/mnt/host/",
+      # followed by the actual path on the host machine, e.g. "d/projects/quickstart"
+      # also see comments in ./harmony-link/.env file.
+      - /run/desktop/mnt/host/d/projects/quickstart:/run/desktop/mnt/host/d/projects/quickstart
     environment:
       - HARMONY_LINK_CONTAINER_MODE=1
     networks:
@@ -27,5 +34,5 @@ services:
 
 networks:
   harmony-link-network:
+    external: true
     name: harmony-link-network
-    driver: bridge

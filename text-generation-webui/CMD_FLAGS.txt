@@ -7,6 +7,7 @@
 
 # If you downloaded a model into models folder; you can specify model name and max context length here.
 #--model Hermes-3-Llama-3.1-8B-exl2
+##--model Llama-3.2-3B-Instruct-exl2
 #--max_seq_len 4096
 
 # API Key only needed if you want to host publicly
