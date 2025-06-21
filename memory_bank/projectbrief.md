@@ -16,7 +16,7 @@ The Project Harmony.AI Quickstart repository provides configurations and templat
 5. **Accelerated Development**: Provide a ready-to-use platform for building on Harmony.AI, with integrated control over external services.
 
 ## Key Innovation
-The Quickstart project's innovation now extends to its role as a managed ecosystem. It abstracts away the complexities of individual service installations and inter-service communication by providing structured templates and a manifest (`integrations.json`) that Harmony Link uses to orchestrate and control the entire AI character interaction environment with minimal user effort.
+The Quickstart project abstracts away the complexities of individual service installations and inter-service communication by providing structured templates and a manifest (`integrations.json`) that Harmony Link uses to orchestrate and control the entire AI character interaction environment with minimal user effort.
 
 ## Target Users
 - New users and developers evaluating Harmony.AI.

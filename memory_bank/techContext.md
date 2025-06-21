@@ -50,6 +50,7 @@
 - **New**: `.automation/` directory for Harmony Link to store user-customized Docker Compose configurations.
 - **New**: `templates/` directory containing default Docker Compose YAML templates for integrations.
 - **New**: `integrations.json` manifest file for integration discovery by Harmony Link.
+- **New**: Direct editing and Git-based reversion of integration-specific config files (e.g., `CMD_FLAGS.txt`, `config.yml`) via Harmony Link UI.
 - **Git Ignore for Nested Repos**: The `.gitignore` file is configured to ignore nested `.git` repositories that may be downloaded as part of AI models, preventing Git conflicts.
 
 ### System Requirements
@@ -64,7 +65,8 @@
 
 ### Integration Management by Harmony Link (New Workflow)
 - **Quickstart Repository Path**: Harmony Link's UI now requires the path to this quickstart repository to discover and manage integrations.
-- **UI-driven Configuration**: Users can configure Docker Compose files for individual services (e.g., Text-Generation WebUI, Harmony Speech Engine) directly through the Harmony Link UI. These configurations are saved in the `.automation/` directory.
+- **UI-driven Configuration (Docker Compose)**: Users can configure Docker Compose files for individual services (e.g., Text-Generation WebUI, Harmony Speech Engine) directly through the Harmony Link UI. These configurations are saved in the `.automation/` directory.
+- **UI-driven Configuration (Additional Files)**: Users can now directly edit integration-specific configuration files (e.g., `CMD_FLAGS.txt`, `config.yml`) through the Harmony Link UI, with support for device-specific files and a "Revert to Default" option using Git.
 - **UI-driven Control**: Start, stop, and restart external AI service containers directly from the Harmony Link UI.
 - **Centralized Orchestration**: Harmony Link acts as a privileged Docker client, capable of executing `docker compose` commands for the services defined in this repository, even when Harmony Link itself is containerized.
 - **Corrected Template Paths**: `env_file` and `volumes` paths in integration templates (e.g., `text-generation-webui`, `harmony-speech-engine`) have been adjusted from `../` to `../../` to correctly resolve when deployed via Harmony Link's `.automation` directory.
@@ -74,6 +76,6 @@
 - **Clone Repository**: `git clone https://github.com/harmony-ai-solutions/quickstart`
 - **Navigate**: `cd quickstart`
 - **Launch Harmony Link**: `docker compose up -d harmony-link harmony-link-ui` (or run standalone Harmony Link binary).
-- **Manage Integrations via Harmony Link UI**: Use the new "Integrations" tab in the Harmony Link UI to set the quickstart repo path, discover services, configure their Docker Compose files, and control their lifecycle (start/stop/restart).
+- **Manage Integrations via Harmony Link UI**: Use the new "Integrations" tab in the Harmony Link UI to set the quickstart repo path, discover services, configure their Docker Compose files, and control their lifecycle (start/stop/restart). You can also now edit additional config files directly from the UI.
 - **Stop Harmony Link**: `docker compose down harmony-link harmony-link-ui`
-- **Configuration**: Modify configurations via the Harmony Link UI, which will update files in the `.automation/` directory.
+- **Configuration**: Modify configurations via the Harmony Link UI, which will update files in the `.automation/` directory or directly in the integration's directory.

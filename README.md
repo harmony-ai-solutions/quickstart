@@ -63,13 +63,13 @@ Alternatively, launch the standalone binary.
 2.  **Navigate to "Integrations" Tab**: In the Harmony Link UI, go to the newly added "Integrations" tab.
 3.  **Set Quickstart Repository Path**: You will be prompted to set the path to this quickstart repository (e.g., `D:/projects/quickstart` on Windows, or `/path/to/quickstart` on Linux/macOS). This path is crucial for Harmony Link to discover available integrations and their templates.
 4.  **Discover and Manage Integrations**: Once the path is set, Harmony Link will discover the `integrations.json` file and list available AI services (e.g., Text Generation WebUI, Harmony Speech Engine).
-5.  **Configure and Control**: For each integration, you can:
-    *   **Configure**: Click the "Configure" button to open a YAML editor. Here, you can view the default Docker Compose template (e.g., `docker-compose.cpu.yml` or `docker-compose.nvidia.yml` from the `templates/` directory) or customize it. Your custom configurations will be saved in the `.automation/` directory within this quickstart repo.
-    *   **Start/Stop/Restart**: Use the control buttons to manage the lifecycle of the individual AI service containers. Harmony Link will orchestrate these services using their respective Docker Compose files.
-    *   **Shared Network**: All services managed by Harmony Link will join the `harmony-link-network` for seamless communication. This network will be automatically created if it doesn't exist.
+5.  **Configure Docker Compose**: For each integration, you can click the "Configure" button to open a YAML editor. Here, you can view the default Docker Compose template (e.g., `docker-compose.cpu.yml` or `docker-compose.nvidia.yml` from the `templates/` directory) or customize it. Your custom configurations will be saved in the `.automation/` directory within this quickstart repo.
+6.  **Configure Additional Files**: For integrations that require additional configuration files (e.g., `CMD_FLAGS.txt` for Text-Generation WebUI, `config.yml` for Harmony Speech Engine), click the "Config Files" button. This will open a modal where you can view and edit these files directly. Changes are saved to the original files in this repository. A "Revert to Default" option is available to restore files to their last committed state using Git.
+7.  **Start/Stop/Restart**: Use the control buttons to manage the lifecycle of the individual AI service containers. Harmony Link will orchestrate these services using their respective Docker Compose files.
+8.  **Shared Network**: All services managed by Harmony Link will join the `harmony-link-network` for seamless communication. This network will be automatically created if it doesn't exist.
 
 #### Harmony Speech Engine & Text-Generation-Web-UI
-These services are now managed through the Harmony Link UI. You can configure their specific settings (e.g., models, ports) by editing their Docker Compose files via the "Integrations" tab. The template files for these services are located in the `templates/` directory, and any custom configurations you save will be stored in the `.automation/` directory.
+These services are now managed through the Harmony Link UI. You can configure their specific settings (e.g., models, ports) by editing their Docker Compose files via the "Integrations" tab. The template files for these services are located in the `templates/` directory, and any custom configurations you save will be stored in the `.automation/` directory. Additionally, you can now directly edit their specific configuration files (like `CMD_FLAGS.txt` and `config.yml`) through the "Config Files" button in the Harmony Link UI.
 
 **Relevant config files (now templates):**
 - `templates/harmony-speech-engine/docker-compose.cpu.yml`

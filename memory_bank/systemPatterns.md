@@ -56,6 +56,11 @@
 - **Purpose**: Lists all discoverable external AI services within the quickstart repository, providing metadata for Harmony Link's UI.
 - **Design**: A simple JSON file that Harmony Link reads to populate its Integrations tab.
 
+#### 9. Configurable Files (New)
+- **Pattern**: Direct File Editing with Git Revert
+- **Purpose**: Allows users to modify integration-specific configuration files (e.g., `CMD_FLAGS.txt`, `config.yml`) directly from the Harmony Link UI.
+- **Design**: Changes are written directly to the files in the quickstart repository, and a Git `checkout` command is used for reverting to the last committed state.
+
 ## Key Technical Decisions
 
 ### 1. Docker-First Deployment
@@ -148,6 +153,7 @@ graph TD
     C --> D{Docker Daemon};
     D -- Start/Stop/Status --> E[External AI Service Container];
     C -- Read/Write --> F[Quickstart Repo (.automation/ & templates/)];
+    C -- Read/Write/Revert --> G[Quickstart Repo (Config Files)];
 ```
 
 ### Service Dependencies
