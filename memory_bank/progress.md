@@ -77,6 +77,9 @@ The Quickstart project itself is primarily a deployment and integration solution
 - **Service Management Shift**: Individual AI services like Text-Generation WebUI and Harmony Speech Engine are no longer directly managed by the root `docker-compose.yml` for their full lifecycle. Instead, their deployment and control are now handled dynamically by Harmony Link through its new "Integrations" UI, using the templates and custom configurations within this quickstart repository.
 - **Template Path Resolution**: `env_file` and `volumes` paths in integration templates (`text-generation-webui`, `harmony-speech-engine`) have been adjusted from `../` to `../../` to correctly resolve when deployed via Harmony Link's `.automation` directory.
 - **Docker Compose Labels**: All integration services in the templates now include `com.docker.compose.project` and `com.docker.compose.service` labels for accurate container discovery and grouping by Harmony Link.
+- **Container Orchestration Fixes**: The `docker-compose.yml` was updated to enable Harmony Link to control integrations even when Harmony Link itself is running inside a container.
+- **Git Repository Management**: The `.gitignore` was updated to ignore nested git repositories that may be downloaded with AI models, preventing conflicts.
+- **Project Modularization**: The project structure was modularized, creating the `templates/` and `.automation/` directories for better organization and management of Docker Compose configurations.
 
 ## Evolution of Project Decisions
 - **Docker-first Approach**: Chosen for portability, isolation, and ease of deployment.

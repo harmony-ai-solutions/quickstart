@@ -12,6 +12,7 @@
     - Ports: `28080` (main), `28081` (management API)
     - Configuration: `harmony-link/config.json` mounted as a volume.
     - **Role**: Acts as the primary orchestrator for other AI services in this repository via its new Integrations UI.
+    - **Containerized Orchestration**: The `harmony-link` service in `docker-compose.yml` is configured with Docker socket mounting (`/var/run/docker.sock`) and the `HARMONY_LINK_CONTAINER_MODE` environment variable set to `true`, enabling it to manage other Docker containers even when Harmony Link itself is running inside a container.
 - **Text-Generation WebUI (Harmony AI fork)**:
     - Docker Images: `harmonyai/text-generation-webui-harmony-ai-cpu` (default), `harmonyai/text-generation-webui-harmony-ai-nvidia` (for GPU)
     - Ports: `7860` (UI), `5000` (API)
@@ -30,7 +31,7 @@
 ### Build and Deployment
 - **Docker Hub**: All official Docker images are hosted on `hub.docker.com/u/harmonyai`.
 - **Docker Compose Files**:
-    - `docker-compose.yml`: Used to launch `harmony-link` and `harmony-link-ui`.
+    - `docker-compose.yml`: Used to launch `harmony-link` and `harmony-link-ui`, and configured to support Harmony Link's containerized orchestration capabilities.
     - `docker-compose.nvidia.yml`: No longer directly used for launching all services; individual service templates are now in `templates/`.
 - **Volume Mounts**: Persistent storage for configurations, models, and cache data.
 
@@ -49,6 +50,7 @@
 - **New**: `.automation/` directory for Harmony Link to store user-customized Docker Compose configurations.
 - **New**: `templates/` directory containing default Docker Compose YAML templates for integrations.
 - **New**: `integrations.json` manifest file for integration discovery by Harmony Link.
+- **Git Ignore for Nested Repos**: The `.gitignore` file is configured to ignore nested `.git` repositories that may be downloaded as part of AI models, preventing Git conflicts.
 
 ### System Requirements
 - **CPU**: 4+ cores (GPU support), 8+ cores (CPU-only).
@@ -64,7 +66,7 @@
 - **Quickstart Repository Path**: Harmony Link's UI now requires the path to this quickstart repository to discover and manage integrations.
 - **UI-driven Configuration**: Users can configure Docker Compose files for individual services (e.g., Text-Generation WebUI, Harmony Speech Engine) directly through the Harmony Link UI. These configurations are saved in the `.automation/` directory.
 - **UI-driven Control**: Start, stop, and restart external AI service containers directly from the Harmony Link UI.
-- **Centralized Orchestration**: Harmony Link acts as a privileged Docker client, capable of executing `docker compose` commands for the services defined in this repository.
+- **Centralized Orchestration**: Harmony Link acts as a privileged Docker client, capable of executing `docker compose` commands for the services defined in this repository, even when Harmony Link itself is containerized.
 - **Corrected Template Paths**: `env_file` and `volumes` paths in integration templates (e.g., `text-generation-webui`, `harmony-speech-engine`) have been adjusted from `../` to `../../` to correctly resolve when deployed via Harmony Link's `.automation` directory.
 - **Docker Compose Labels**: All integration services in the templates now include `com.docker.compose.project` and `com.docker.compose.service` labels for accurate container discovery and grouping by Harmony Link.
 

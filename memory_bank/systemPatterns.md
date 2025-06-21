@@ -7,7 +7,7 @@
 - **Independent Services**: Each Harmony.AI component runs as a separate Docker container.
 - **Internal Networking**: Services communicate securely and efficiently within a private Docker network.
 - **External Exposure**: Selected ports are mapped to the host for user interaction and external integrations.
-- **Harmony Link as Primary Orchestrator (New)**: Harmony Link now takes on the role of orchestrating other AI services within this repository, providing a unified UI for their management.
+- **Harmony Link as Primary Orchestrator (New)**: Harmony Link now takes on the role of orchestrating other AI services within this repository, providing a unified UI for their management, even when Harmony Link itself is running in a container.
 
 ### Key Components and Their Patterns
 
@@ -15,13 +15,13 @@
 - **Pattern**: Orchestration as Code, Configuration as Code
 - **Purpose**: Defines the multi-service application, including images, ports, volumes, and dependencies.
 - **Design**: Declarative YAML files for reproducible deployments.
-- **New Role**: The root `docker-compose.yml` is now used to launch `harmony-link` and `harmony-link-ui`. Individual service `docker-compose.yml` files are now templates located in `templates/` and managed by Harmony Link.
+- **New Role**: The root `docker-compose.yml` is now used to launch `harmony-link` and `harmony-link-ui`, and is configured to support Harmony Link's containerized orchestration capabilities. Individual service `docker-compose.yml` files are now templates located in `templates/` and managed by Harmony Link.
 
 #### 2. Harmony Link Service
 - **Pattern**: Agentic Runtime, Central Orchestrator
 - **Purpose**: Manages AI character interactions, integrates with various AI backends and game engine plugins.
 - **Integration**: Communicates with Text-Generation WebUI and Harmony Speech Engine.
-- **New Capability**: Acts as a privileged Docker client to start, stop, and configure other services defined in this quickstart repository.
+- **New Capability**: Acts as a privileged Docker client to start, stop, and configure other services defined in this quickstart repository, including handling command execution paths for Docker-in-Docker scenarios.
 
 #### 3. Text-Generation WebUI Service
 - **Pattern**: AI Inference Server, Web Interface
@@ -70,7 +70,7 @@
 - **Simplicity**: Easy to define and run multi-container applications with a single command.
 - **Declarative**: YAML files provide a clear, version-controlled definition of the stack.
 - **Local Development**: Ideal for setting up a complete local development and testing environment.
-- **New Role**: Now also serves as the underlying technology for Harmony Link's integration management.
+- **New Role**: Now also serves as the underlying technology for Harmony Link's integration management, including supporting Docker-in-Docker orchestration.
 
 ### 3. Separate CPU and GPU Compose Files
 **Rationale**:
@@ -89,7 +89,7 @@
 **Rationale**:
 - **Unified User Experience**: Provides a single UI for managing both Harmony Link's internal settings and external AI services.
 - **Simplified Deployment**: Automates the process of launching and configuring external services, reducing manual CLI interaction.
-- **Privileged Control**: Harmony Link's ability to access the Docker daemon allows it to manage the lifecycle of other containers directly.
+- **Privileged Control**: Harmony Link's ability to access the Docker daemon allows it to manage the lifecycle of other containers directly, even when Harmony Link itself is containerized.
 
 ## Design Patterns in Use (at the orchestration level)
 
