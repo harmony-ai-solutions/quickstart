@@ -2,11 +2,51 @@
   {
     "name": "text-generation-webui",
     "displayName": "Text Generation WebUI (Oobabooga)",
-    "description": "Local text generation web interface"
+    "description": "Local text generation web interface",
+    "configFiles": {
+      "cpu": [
+        {
+          "name": "CMD_FLAGS.txt",
+          "path": "text-generation-webui/CMD_FLAGS.txt",
+          "description": "Command line flags and model configuration",
+          "type": "txt",
+          "required": false
+        }
+      ],
+      "nvidia": [
+        {
+          "name": "CMD_FLAGS.txt",
+          "path": "text-generation-webui/CMD_FLAGS.txt",
+          "description": "Command line flags and model configuration",
+          "type": "txt",
+          "required": false
+        }
+      ]
+    }
   },
   {
     "name": "harmony-speech-engine",
     "displayName": "Harmony Speech Engine",
-    "description": "Local speech synthesis and recognition engine"
+    "description": "Local speech synthesis and recognition engine",
+    "configFiles": {
+      "cpu": [
+        {
+          "name": "config.yml",
+          "path": "harmony-speech-engine/config.yml",
+          "description": "Model configuration for CPU inference",
+          "type": "yaml",
+          "required": true
+        }
+      ],
+      "nvidia": [
+        {
+          "name": "config.yml",
+          "path": "harmony-speech-engine/config.nvidia.yml",
+          "description": "Model configuration for NVIDIA GPU inference",
+          "type": "yaml",
+          "required": true
+        }
+      ]
+    }
   }
 ]
