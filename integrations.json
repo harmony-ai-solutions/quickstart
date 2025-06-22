@@ -22,6 +22,11 @@
           "required": false
         }
       ]
+    },
+    "compatibleProviders": {
+      "backend": ["openaicompatible"],
+      "countenance": ["openaicompatible"],
+      "movement": ["openaicompatible"]
     }
   },
   {
@@ -47,6 +52,10 @@
           "required": true
         }
       ]
+    },
+    "compatibleProviders": {
+      "tts": ["harmonyspeech"],
+      "stt": ["harmonyspeech"]
     }
   }
 ]
