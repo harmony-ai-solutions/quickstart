@@ -26,7 +26,8 @@
     "compatibleProviders": {
       "backend": ["openaicompatible"],
       "countenance": ["openaicompatible"],
-      "movement": ["openaicompatible"]
+      "movement": ["openaicompatible"],
+      "rag": ["openaicompatible"]
     }
   },
   {
