@@ -1,7 +1,7 @@
 [
   {
     "name": "text-generation-webui",
-    "displayName": "Text Generation WebUI (Oobabooga)",
+    "displayName": "Text Generation WebUI",
     "description": "Local text generation web interface",
     "configFiles": {
       "cpu": [
