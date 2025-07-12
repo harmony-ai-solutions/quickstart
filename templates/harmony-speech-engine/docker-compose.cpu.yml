@@ -19,7 +19,7 @@ services:
     ports:
       - "12080:12080"
     volumes:
-      - ../../../../harmony-speech-engine/config.yml:/app/harmony-speech-engine/config.yml
+      - ./config.yml:/app/harmony-speech-engine/config.yml
       - ../../../../harmony-speech-engine/cache:/app/harmony-speech-engine/cache
     networks:
       - harmony-link-network

@@ -3,6 +3,7 @@
     "name": "text-generation-webui",
     "displayName": "Text Generation WebUI",
     "description": "Local text generation web interface",
+    "projectWebsite": "https://github.com/harmony-ai-solutions/text-generation-webui-harmony-ai",
     "apiPath": "/v1",
     "webPath": "/",
     "configFiles": {
@@ -36,6 +37,7 @@
     "name": "harmony-speech-engine",
     "displayName": "Harmony Speech Engine",
     "description": "Local speech synthesis and recognition engine",
+    "projectWebsite": "https://github.com/harmony-ai-solutions/harmony-speech-engine",
     "apiPath": "/v1",
     "configFiles": {
       "cpu": [
