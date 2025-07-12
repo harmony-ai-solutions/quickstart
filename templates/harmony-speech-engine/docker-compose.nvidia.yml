@@ -15,12 +15,12 @@ services:
   harmonyspeech-engine:
     image: harmonyai/harmonyspeech-engine-nvidia:latest
     pull_policy: always
-    env_file: ../../harmony-speech-engine/.env
+    env_file: ../../../../harmony-speech-engine/.env
     ports:
       - "12080:12080"
     volumes:
-      - ../../harmony-speech-engine/config.nvidia.yml:/app/harmony-speech-engine/config.yml
-      - ../../harmony-speech-engine/cache:/app/harmony-speech-engine/cache
+      - ../../../../harmony-speech-engine/config.nvidia.yml:/app/harmony-speech-engine/config.yml
+      - ../../../../harmony-speech-engine/cache:/app/harmony-speech-engine/cache
     deploy:
       resources:
         reservations:

@@ -3,6 +3,8 @@
     "name": "text-generation-webui",
     "displayName": "Text Generation WebUI",
     "description": "Local text generation web interface",
+    "apiPath": "/v1",
+    "webPath": "/",
     "configFiles": {
       "cpu": [
         {
@@ -34,6 +36,7 @@
     "name": "harmony-speech-engine",
     "displayName": "Harmony Speech Engine",
     "description": "Local speech synthesis and recognition engine",
+    "apiPath": "/v1",
     "configFiles": {
       "cpu": [
         {
