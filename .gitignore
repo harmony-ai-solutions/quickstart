@@ -6,6 +6,10 @@ text-generation-webui/logs/
 harmony-speech-engine/cache/
 harmony-link/harmony-user.key
 harmony-link/harmony-tmp/*
+ollama/ollama/
+ollama/ollama-webui/
+localai/images/
+localai/models/
 
 # Ignore nested git repositories and related files
 **/.git/

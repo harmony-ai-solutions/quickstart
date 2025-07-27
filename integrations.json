@@ -2,7 +2,7 @@
   {
     "name": "text-generation-webui",
     "displayName": "Text Generation WebUI",
-    "description": "Local text generation web interface",
+    "description": "Local text generation web interface and OpenAI Compatible API Server",
     "projectWebsite": "https://github.com/harmony-ai-solutions/text-generation-webui-harmony-ai",
     "apiPath": "/v1",
     "webPath": "/",
@@ -62,6 +62,42 @@
     "compatibleProviders": {
       "tts": ["harmonyspeech"],
       "stt": ["harmonyspeech"]
+    }
+  },
+  {
+    "name": "localai",
+    "displayName": "LocalAI",
+    "description": "Drop-In Framework for local AI Services in the style of OpenAI. Supports LLMs, Neural Encoders, TTS & STT Pipelines",
+    "projectWebsite": "https://localai.io/",
+    "apiPath": "/v1",
+    "webPath": "/",
+    "configFiles": {
+      "cpu": []
+    },
+    "compatibleProviders": {
+      "backend": ["openaicompatible"],
+      "countenance": ["openaicompatible"],
+      "movement": ["openaicompatible"],
+      "rag": ["openaicompatible"],
+      "tts": ["openaicompatible"],
+      "stt": ["openaicompatible"]
+    }
+  },
+  {
+    "name": "ollama",
+    "displayName": "Ollama",
+    "description": "Drop-In Framework for local AI Services in the style of OpenAI. Supports LLMs & Neural Encoders",
+    "projectWebsite": "https://ollama.com/",
+    "apiPath": "/v1",
+    "webPath": "/",
+    "configFiles": {
+      "cpu": []
+    },
+    "compatibleProviders": {
+      "backend": ["openaicompatible"],
+      "countenance": ["openaicompatible"],
+      "movement": ["openaicompatible"],
+      "rag": ["openaicompatible"]
     }
   }
 ]
