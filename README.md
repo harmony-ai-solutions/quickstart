@@ -2,12 +2,14 @@
 This repo contains configurations and templates for quickly setting up external Harmony AI modules for running locally, primarily orchestrated by Harmony Link.
 
 It provides a simplistic approach using Docker Compose files and Docker images which are being provided via Docker Hub.
-The default configuration consists of:
+The available integrations include:
 - [Harmony Link](https://github.com/harmony-ai-solutions/harmony-link), our agentic runtime.
 - [Our Text-Generation Web-UI fork](https://github.com/harmony-ai-solutions/text-generation-webui-harmony-ai), 
 a slightly modified version of [Oobabooga's great repository](https://github.com/oobabooga/text-generation-webui).
 - [Harmony Speech Engine](https://github.com/harmony-ai-solutions/harmony-speech-engine), our custom inference engine
 for AI voice generation, voice cloning and Speech transcription.
+- [LocalAI](https://localai.io/), a drop-in framework for local AI services supporting LLMs, Neural Encoders, TTS & STT pipelines.
+- [Ollama](https://ollama.com/), a drop-in framework for local AI services supporting LLMs and Neural Encoders.
 
 All Docker Images and revisions can be found at [Docker-Hub](https://hub.docker.com/u/harmonyai).
 
@@ -62,7 +64,7 @@ Alternatively, launch the standalone binary.
 1.  **Launch Harmony Link Application**: Launch the `harmony-link` and `harmony-link-ui` containers or the Harmony Link desktop application.
 2.  **Navigate to "Integrations" Tab**: In the Harmony Link UI, go to the newly added "Integrations" tab.
 3.  **Set Quickstart Repository Path**: You will be prompted to set the path to this quickstart repository (e.g., `D:/projects/quickstart` on Windows, or `/path/to/quickstart` on Linux/macOS). This path is crucial for Harmony Link to discover available integrations and their templates.
-4.  **Discover and Manage Integrations**: Once the path is set, Harmony Link will discover the `integrations.json` file and list available AI services (e.g., Text Generation WebUI, Harmony Speech Engine).
+4.  **Discover and Manage Integrations**: Once the path is set, Harmony Link will discover the `integrations.json` file and list available AI services (Text Generation WebUI, Harmony Speech Engine, LocalAI, and Ollama).
 5.  **Configure Docker Compose**: For each integration, you can click the "Configure" button to open a YAML editor. Here, you can view the default Docker Compose template (e.g., `docker-compose.cpu.yml` or `docker-compose.nvidia.yml` from the `templates/` directory) or customize it. Your custom configurations will be saved in the `.automation/` directory within this quickstart repo.
 6.  **Configure Additional Files**: For integrations that require additional configuration files (e.g., `CMD_FLAGS.txt` for Text-Generation WebUI, `config.yml` for Harmony Speech Engine), click the "Config Files" button. This will open a modal where you can view and edit these files directly. Changes are saved to the original files in this repository. A "Revert to Default" option is available to restore files to their last committed state using Git.
 7.  **Start/Stop/Restart**: Use the control buttons to manage the lifecycle of the individual AI service containers. Harmony Link will orchestrate these services using their respective Docker Compose files.

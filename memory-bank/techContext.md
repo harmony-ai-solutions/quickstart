@@ -13,6 +13,8 @@
     - Configuration: `harmony-link/config.json` mounted as a volume.
     - **Role**: Acts as the primary orchestrator for other AI services in this repository via its new Integrations UI.
     - **Containerized Orchestration**: The `harmony-link` service in `docker-compose.yml` is configured with Docker socket mounting (`/var/run/docker.sock`) and the `HARMONY_LINK_CONTAINER_MODE` environment variable set to `true`, enabling it to manage other Docker containers even when Harmony Link itself is running inside a container.
+
+### Available AI Service Integrations
 - **Text-Generation WebUI (Harmony AI fork)**:
     - Docker Images: `harmonyai/text-generation-webui-harmony-ai-cpu` (default), `harmonyai/text-generation-webui-harmony-ai-nvidia` (for GPU)
     - Ports: `7860` (UI), `5000` (API)
@@ -27,6 +29,20 @@
     - Docker Image: `harmonyai/harmonyspeech-ui:latest`
     - Ports: `8080` (UI)
     - Dependency: Depends on `harmonyspeech-engine`.
+- **LocalAI**:
+    - Docker Images: `localai/localai:latest-cpu` (CPU), `localai/localai:latest-gpu-nvidia-cuda-12` (NVIDIA GPU)
+    - Ports: `8080` (API/UI)
+    - Configuration: `.env` file for environment variables, volume mounts for models and configuration
+    - **Capabilities**: Comprehensive AI framework supporting LLMs, Neural Encoders, TTS & STT pipelines
+    - **API Compatibility**: OpenAI-compatible API endpoints
+    - **Management**: Managed and launched via Harmony Link's Integrations UI.
+- **Ollama**:
+    - Docker Images: `ollama/ollama:latest` (CPU/GPU auto-detect), with separate web UI container
+    - Ports: `11434` (API), `3000` (Web UI)
+    - Configuration: `.env` file for environment variables, volume mounts for models
+    - **Capabilities**: LLM and Neural Encoder services with OpenAI-compatible API
+    - **Hardware Support**: CPU, NVIDIA GPU, and AMD GPU configurations available
+    - **Management**: Managed and launched via Harmony Link's Integrations UI.
 
 ### Build and Deployment
 - **Docker Hub**: All official Docker images are hosted on `hub.docker.com/u/harmonyai`.
