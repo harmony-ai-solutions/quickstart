@@ -31,7 +31,6 @@ services:
       - ollama
     ports:
       - "${WEBUI_HOST_PORT:-8080}:${WEBUI_CONTAINER_PORT:-8080}"
-    restart: unless-stopped
     networks:
       - harmony-link-network
     labels:
