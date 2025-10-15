@@ -1,5 +1,6 @@
 .idea/
 .automation/
+aphrodite-engine/cache/
 text-generation-webui/cache/
 text-generation-webui/models/
 text-generation-webui/logs/

@@ -72,7 +72,8 @@
     "apiPath": "/v1",
     "webPath": "/",
     "configFiles": {
-      "cpu": []
+      "cpu": [],
+      "nvidia": []
     },
     "compatibleProviders": {
       "backend": ["openaicompatible"],
@@ -91,13 +92,47 @@
     "apiPath": "/v1",
     "webPath": "/",
     "configFiles": {
-      "cpu": []
+      "cpu": [],
+      "nvidia": [],
+      "amd": []
     },
     "compatibleProviders": {
       "backend": ["openaicompatible"],
       "countenance": ["openaicompatible"],
       "movement": ["openaicompatible"],
       "rag": ["openaicompatible"]
+    }
+  },
+  {
+    "name": "aphrodite-engine",
+    "displayName": "Aphrodite-Engine",
+    "description": "LLM Inference Engine with a focus on hobbyist and local LLM users. Supports a variety of quantization methods and optimizations.",
+    "projectWebsite": "https://aphrodite.pygmalion.chat",
+    "apiPath": "/v1",
+    "configFiles": {
+      "cpu": [
+        {
+          "name": ".env",
+          "path": "aphrodite-engine/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "nvidia": [
+        {
+          "name": ".env",
+          "path": "aphrodite-engine/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ]
+    },
+    "compatibleProviders": {
+      "backend": ["openaicompatible"],
+      "countenance": ["openaicompatible"],
+      "movement": ["openaicompatible"]
     }
   }
 ]
