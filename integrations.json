@@ -9,6 +9,13 @@
     "configFiles": {
       "cpu": [
         {
+          "name": ".env",
+          "path": "text-generation-webui/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        },
+        {
           "name": "CMD_FLAGS.txt",
           "path": "text-generation-webui/CMD_FLAGS.txt",
           "description": "Command line flags and model configuration",
@@ -17,6 +24,13 @@
         }
       ],
       "nvidia": [
+        {
+          "name": ".env",
+          "path": "text-generation-webui/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        },
         {
           "name": "CMD_FLAGS.txt",
           "path": "text-generation-webui/CMD_FLAGS.txt",
@@ -42,6 +56,13 @@
     "configFiles": {
       "cpu": [
         {
+          "name": ".env",
+          "path": "harmony-speech-engine/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        },
+        {
           "name": "config.yml",
           "path": "harmony-speech-engine/config.yml",
           "description": "Model configuration for CPU inference",
@@ -50,6 +71,13 @@
         }
       ],
       "nvidia": [
+        {
+          "name": ".env",
+          "path": "harmony-speech-engine/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        },
         {
           "name": "config.yml",
           "path": "harmony-speech-engine/config.nvidia.yml",
@@ -72,8 +100,24 @@
     "apiPath": "/v1",
     "webPath": "/",
     "configFiles": {
-      "cpu": [],
-      "nvidia": []
+      "cpu": [
+        {
+          "name": ".env",
+          "path": "localai/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "nvidia": [
+        {
+          "name": ".env",
+          "path": "localai/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ]
     },
     "compatibleProviders": {
       "backend": ["openaicompatible"],
@@ -92,9 +136,33 @@
     "apiPath": "/v1",
     "webPath": "/",
     "configFiles": {
-      "cpu": [],
-      "nvidia": [],
-      "amd": []
+      "cpu": [
+        {
+          "name": ".env",
+          "path": "ollama/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "nvidia": [
+        {
+          "name": ".env",
+          "path": "ollama/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "amd": [
+        {
+          "name": ".env",
+          "path": "ollama/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ]
     },
     "compatibleProviders": {
       "backend": ["openaicompatible"],

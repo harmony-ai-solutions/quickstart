@@ -4,9 +4,9 @@ services:
     image: ollama/ollama:latest
     pull_policy: always
     tty: true
-    env_file: ../../../../ollama/.env
+    env_file: .env
     ports:
-      - "${HOST_PORT:-11434}:${CONTAINER_PORT:-11434}"
+      - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-11434}:${CONTAINER_PORT:-11434}"
     volumes:
       - ../../../../ollama/ollama:/root/.ollama
     deploy:
@@ -24,13 +24,13 @@ services:
   ollama-webui:
     image: ghcr.io/open-webui/open-webui:main
     pull_policy: always
-    env_file: ../../../../ollama/.env
+    env_file: .env
     volumes:
       - ../../../../ollama/ollama-webui:/app/backend/data
     depends_on:
       - ollama
     ports:
-      - "${WEBUI_HOST_PORT:-8080}:${WEBUI_CONTAINER_PORT:-8080}"
+      - "${BIND_IP:-0.0.0.0}:${WEBUI_HOST_PORT:-8080}:${WEBUI_CONTAINER_PORT:-8080}"
     networks:
       - harmony-link-network
     labels:

@@ -2,8 +2,9 @@ services:
   harmonyspeech-ui:
     image: harmonyai/harmonyspeech-ui:latest
     pull_policy: always
+    env_file: .env
     ports:
-      - "8081:80"
+      - "${BIND_IP:-0.0.0.0}:${UI_HOST_PORT:-8081}:${UI_CONTAINER_PORT:-80}"
     depends_on:
       - harmonyspeech-engine
     networks:
@@ -15,9 +16,9 @@ services:
   harmonyspeech-engine:
     image: harmonyai/harmonyspeech-engine-cpu:latest
     pull_policy: always
-    env_file: ../../../../harmony-speech-engine/.env
+    env_file: .env
     ports:
-      - "12080:12080"
+      - "${BIND_IP:-0.0.0.0}:${ENGINE_HOST_PORT:-12080}:${ENGINE_CONTAINER_PORT:-12080}"
     volumes:
       - ./config.yml:/app/harmony-speech-engine/config.yml
       - ../../../../harmony-speech-engine/cache:/app/harmony-speech-engine/cache

@@ -4,7 +4,7 @@ services:
     pull_policy: always
     env_file: .env
     ports:
-      - "${HOST_PORT:-2242}:${CONTAINER_PORT:-2242}"
+      - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-2242}:${CONTAINER_PORT:-2242}"
     volumes:
       - ../../../../aphrodite-engine/cache:/root/.cache/huggingface
     deploy:
