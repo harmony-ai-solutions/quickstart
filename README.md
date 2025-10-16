@@ -4,12 +4,13 @@ This repo contains configurations and templates for quickly setting up external 
 It provides a simplistic approach using Docker Compose files and Docker images which are being provided via Docker Hub.
 The available integrations include:
 - [Harmony Link](https://github.com/harmony-ai-solutions/harmony-link), our agentic runtime.
-- [Our Text-Generation Web-UI fork](https://github.com/harmony-ai-solutions/text-generation-webui-harmony-ai), 
+- [Our Text-Generation Web-UI fork](https://github.com/harmony-ai-solutions/text-generation-webui-harmony-ai),
 a slightly modified version of [Oobabooga's great repository](https://github.com/oobabooga/text-generation-webui).
 - [Harmony Speech Engine](https://github.com/harmony-ai-solutions/harmony-speech-engine), our custom inference engine
 for AI voice generation, voice cloning and Speech transcription.
 - [LocalAI](https://localai.io/), a drop-in framework for local AI services supporting LLMs, Neural Encoders, TTS & STT pipelines.
 - [Ollama](https://ollama.com/), a drop-in framework for local AI services supporting LLMs and Neural Encoders.
+- [Aphrodite-Engine](https://aphrodite.pygmalion.chat), an LLM Inference Engine with a focus on hobbyist and local LLM users with support for various quantization methods and optimizations.
 
 All Docker Images and revisions can be found at [Docker-Hub](https://hub.docker.com/u/harmonyai).
 
