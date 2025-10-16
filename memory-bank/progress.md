@@ -1,13 +1,13 @@
 # Project Harmony.AI Quickstart - Progress
 
 ## Current Status Overview
-The Quickstart project is a stable and comprehensive deployment solution for the Harmony.AI ecosystem. It provides pre-configured Docker Compose setups for both CPU-only and NVIDIA GPU environments (with AMD GPU support for select services), enabling rapid deployment of Harmony Link and four major AI service integrations: Text-Generation WebUI, Harmony Speech Engine, LocalAI, and Ollama.
+The Quickstart project is a stable and comprehensive deployment solution for the Harmony.AI ecosystem. It provides pre-configured Docker Compose setups for both CPU-only and NVIDIA GPU environments (with AMD GPU support for select services), enabling rapid deployment of Harmony Link and five major AI service integrations: Text-Generation WebUI, Harmony Speech Engine, LocalAI, Ollama, and Aphrodite-Engine.
 
 ## What Works (Completed Features)
 
 ### ✅ Core Deployment
 - **Docker Compose Setup**: Functional `docker-compose.yml` for launching Harmony Link and its UI, with integration services managed through Harmony Link's interface.
-- **Containerized Services**: All core Harmony.AI components (Harmony Link, Speech Engine, Text-Generation WebUI, LocalAI, Ollama) are successfully containerized.
+- **Containerized Services**: All core Harmony.AI components (Harmony Link, Speech Engine, Text-Generation WebUI, LocalAI, Ollama, Aphrodite-Engine) are successfully containerized.
 - **Image Management**: Utilizes `pull_policy: always` to ensure up-to-date Docker images from Docker Hub.
 - **Port Mapping**: Correctly maps container ports to host ports for external access.
 - **Multi-GPU Support**: Templates support CPU, NVIDIA GPU, and AMD GPU configurations where applicable.

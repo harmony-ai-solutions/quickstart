@@ -1,13 +1,27 @@
 # Project Harmony.AI Quickstart - Active Context
 
 ## Current Work Focus
-**JUST COMPLETED**: Major expansion of the integration ecosystem with LocalAI and Ollama support, plus enhanced template compatibility for Harmony Link's instance handling system. The Quickstart project now supports four major AI service integrations with comprehensive Docker Compose templates and improved metadata.
+**JUST COMPLETED**: Added Aphrodite-Engine integration and applied comprehensive port binding optimizations to eliminate IPv4/IPv6 dual-stack issues. The Quickstart project now supports five AI service integrations with standardized IPv4-only binding control and consistent .env configuration patterns.
 
 The Quickstart project continues to serve as a stable deployment solution for the Harmony.AI ecosystem, now with significantly expanded integration capabilities. The focus remains on ensuring continued compatibility with Harmony Link's evolving integration management features while providing users with a broader range of AI service options.
 
 ## Recent Changes
 
-### ✅ LocalAI and Ollama Integration Support (Just Completed)
+### ✅ Port Binding Optimizations & New Aphrodite Integration (Just Completed)
+**Description**: Added Aphrodite-Engine integration and standardized IPv4-only binding control across all integrations, resolving dual-stack service discovery issues.
+
+**Key Changes:**
+- **Aphrodite Integration**: Added LLM inference engine with hobbyist focus, supporting quantization methods and optimizations
+- **BIND_IP Implementation**: Added `BIND_IP=0.0.0.0` to all .env files for IPv4-only port binding
+- **Template Updates**: Used `${BIND_IP:-0.0.0.0}:${HOST_PORT}` format in all docker-compose files, relative env_file references
+- **Architecture Support**: Enabled AMD GPU template for Ollama, comprehensive driver configurations across integrations
+- **Configuration Management**: Updated integrations.json with .env requirements, maintained template consistency
+
+**Files Modified:** All integration .env files, docker-compose templates, integrations.json, and aphrodite-specific directories.
+
+**Impact:** Eliminated IPv4/IPv6 dual-stack binding conflicts, expanded ecosystem to 5 AI services (LocalAI, Ollama, Textgen WebUI, Harmony Speech, Aphrodite), ensured cross-hardware compatibility.
+
+### ✅ LocalAI and Ollama Integration Support (Previously Completed)
 **Description**: Added comprehensive support for two major AI service frameworks, significantly expanding the ecosystem's capabilities and providing users with more deployment options.
 
 **Key Changes:**
@@ -46,8 +60,8 @@ The Quickstart project continues to serve as a stable deployment solution for th
 - Created `localai/.env`, `ollama/.env` with configuration templates
 - Created comprehensive template directory structure for both services
 
-**Impact**: 
-- **Expanded Ecosystem**: Users now have access to four major AI service integrations (Text-Generation WebUI, Harmony Speech Engine, LocalAI, Ollama)
+**Impact**:
+- **Expanded Ecosystem**: Users now have access to five major AI service integrations (Text-Generation WebUI, Harmony Speech Engine, LocalAI, Ollama, Aphrodite)
 - **Broader Hardware Support**: Ollama templates include AMD GPU support in addition to CPU and NVIDIA options
 - **Enhanced Flexibility**: LocalAI provides comprehensive AI pipeline support including TTS/STT capabilities
 - **Improved Documentation**: Project website references help users understand each integration's capabilities
@@ -87,13 +101,13 @@ The Quickstart project continues to serve as a stable deployment solution for th
 - **Git Repository Management**: Updated `.gitignore` to prevent conflicts with nested Git repositories.
 
 ## Next Steps
-- **Monitor Compatibility**: Continuously ensure compatibility with new Harmony Link features and updates across all four integrations.
+- **Monitor Compatibility**: Continuously ensure compatibility with new Harmony Link features and updates across all five integrations.
 - **Template Optimization**: Consider optimizing Docker Compose templates based on user feedback and performance metrics.
 - **Documentation Enhancement**: Explore opportunities to improve setup documentation for the expanded integration ecosystem.
 - **Hardware Support Expansion**: Investigate additional hardware acceleration options for the growing service ecosystem.
 
 ## Active Decisions and Considerations
-- **Comprehensive Integration Ecosystem**: The project now supports four major AI service types, providing users with extensive deployment flexibility while maintaining consistent management through Harmony Link.
+- **Comprehensive Integration Ecosystem**: The project now supports five major AI service types, providing users with extensive deployment flexibility while maintaining consistent management through Harmony Link.
 - **Hardware Compatibility Focus**: Ensuring broad hardware support (CPU, NVIDIA GPU, AMD GPU) across all integrations to maximize accessibility.
 - **Template Consistency**: Maintaining consistent Docker Compose template patterns across all integrations for predictable behavior and easier maintenance.
 - **Maintaining the Quickstart project as a user-friendly and reliable deployment solution for the expanded Harmony.AI ecosystem.
