@@ -11,6 +11,7 @@ for AI voice generation, voice cloning and Speech transcription.
 - [LocalAI](https://localai.io/), a drop-in framework for local AI services supporting LLMs, Neural Encoders, TTS & STT pipelines.
 - [Ollama](https://ollama.com/), a drop-in framework for local AI services supporting LLMs and Neural Encoders.
 - [Aphrodite-Engine](https://aphrodite.pygmalion.chat), an LLM Inference Engine with a focus on hobbyist and local LLM users with support for various quantization methods and optimizations.
+- [vLLM](https://github.com/vllm-project/vllm), a high-performance LLM inference engine optimized for enterprise workloads and supporting various quantization methods.
 
 All Docker Images and revisions can be found at [Docker-Hub](https://hub.docker.com/u/harmonyai).
 
@@ -71,32 +72,11 @@ Alternatively, launch the standalone binary.
 7.  **Start/Stop/Restart**: Use the control buttons to manage the lifecycle of the individual AI service containers. Harmony Link will orchestrate these services using their respective Docker Compose files.
 8.  **Shared Network**: All services managed by Harmony Link will join the `harmony-link-network` for seamless communication. This network will be automatically created if it doesn't exist.
 
-#### Harmony Speech Engine & Text-Generation-Web-UI
-These services are now managed through the Harmony Link UI. You can configure their specific settings (e.g., models, ports) by editing their Docker Compose files via the "Integrations" tab. The template files for these services are located in the `templates/` directory, and any custom configurations you save will be stored in the `.automation/` directory. Additionally, you can now directly edit their specific configuration files (like `CMD_FLAGS.txt` and `config.yml`) through the "Config Files" button in the Harmony Link UI.
+All integrations are managed through Harmony Link. You can configure their specific settings (e.g., models, ports) after creating an Instance in the "Integrations" tab, by editing it's Configuration (docker compose setup) and individual config and env files.
 
-**Relevant config files (now templates):**
-- `templates/harmony-speech-engine/docker-compose.cpu.yml`
-- `templates/harmony-speech-engine/docker-compose.nvidia.yml`
-- `templates/text-generation-webui-harmonyai/docker-compose.cpu.yml`
-- `templates/text-generation-webui-harmonyai/docker-compose.nvidia.yml`
+The base template files for these services are located in the `templates/` directory; you should not edit them unless you want to apply a global change. After creation of an instance, a copy of the template and the corresponding config files will be stored in the instance's folder inside the `.automation/` directory.
 
-Relevant config files for Harmony Speech Engine:
-```
-harmony-speech-engine/config.yml
-harmony-speech-engine/config.nvidia.yml 
-```
-
-The following table should help with evaluating the requirements:
-
-| Model Toolchain   | Type | Embedding requires Whisper | CPU only Performance | Voice Quality | Storage & RAM / VRAM required |
-|-------------------|------|----------------------------|----------------------|---------------|-------------------------------|
-| Harmony Speech V1 | TTS  | No                         | Very Good            | Good          | ~1GB                          |
-| OpenVoice V1      | TTS  | Yes                        | Good                 | Very Good     | ~512GB per language           |
-| OpenVoice V2      | TTS  | Yes                        | Good                 | Very Good     | ~512GB per language           |
-| Faster-Whisper    | STT  | N / A                      | Medium               | N / A         | ~1-6GB (depending on model)   |
-
-For more details on configuring the models in detail, please check out the 
-[Harmony Speech Engine Model Documentation](https://github.com/harmony-ai-solutions/harmony-speech-engine/blob/main/docs/models.md).
+For further configuration and setup details, please refer to each integration's particular documentation, reachable via the "Project Website" buttons in Harmony Link's UI.
 
 If you have questions, or run into issues, please feel free to reach out via Discord; Server link shared below.
 

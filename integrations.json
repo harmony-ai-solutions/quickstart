@@ -202,5 +202,37 @@
       "countenance": ["openaicompatible"],
       "movement": ["openaicompatible"]
     }
+  },
+  {
+    "name": "vllm",
+    "displayName": "vLLM",
+    "description": "High Performance LLM Inference Engine optimized for enterprise workloads. Supports a variety of quantization methods and optimizations.",
+    "projectWebsite": "https://github.com/vllm-project/vllm",
+    "apiPath": "/v1",
+    "configFiles": {
+      "cpu": [
+        {
+          "name": ".env",
+          "path": "vllm/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "nvidia": [
+        {
+          "name": ".env",
+          "path": "vllm/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ]
+    },
+    "compatibleProviders": {
+      "backend": ["openaicompatible"],
+      "countenance": ["openaicompatible"],
+      "movement": ["openaicompatible"]
+    }
   }
 ]
