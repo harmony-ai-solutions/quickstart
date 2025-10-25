@@ -1,6 +1,6 @@
 services:
   text-generation-webui:
-    image: harmonyai/text-generation-webui-harmony-ai-nvidia
+    image: harmonyai/text-generation-webui-harmony-ai-nvidia:latest
     pull_policy: always
     env_file: .env
     user: "${APP_RUNTIME_UID:-6972}:${APP_RUNTIME_GID:-6972}"
@@ -21,7 +21,7 @@ services:
       - ../../../../text-generation-webui/softprompts:/home/app/text-generation-webui/softprompts
       - ../../../../text-generation-webui/training:/home/app/text-generation-webui/training
       - ../../../../text-generation-webui/cloudflared:/etc/cloudflared
-      - ./CMD_FLAGS.txt:/home/app/text-generation-webui/CMD_FLAGS.txt
+      - ./user_data/CMD_FLAGS.txt:/home/app/text-generation-webui/user_data/CMD_FLAGS.txt
     deploy:
       resources:
         reservations:
