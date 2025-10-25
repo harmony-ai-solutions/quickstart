@@ -3,6 +3,9 @@ services:
     image: vllm/vllm-openai:latest
     pull_policy: always
     env_file: .env
+    # IPC & shared memory settings: Required if running WSL and multi-gpu
+    #ipc: host
+    #shm_size: '8gb'
     ports:
       - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-8000}:${CONTAINER_PORT:-8000}"
     volumes:

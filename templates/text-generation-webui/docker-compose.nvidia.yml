@@ -10,18 +10,22 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - ../../../../text-generation-webui/cache:/home/app/text-generation-webui/cache
-      - ../../../../text-generation-webui/characters:/home/app/text-generation-webui/characters
-#      - ../../../../text-generation-webui/extensions:/home/app/text-generation-webui/extensions
-      - ../../../../text-generation-webui/loras:/home/app/text-generation-webui/loras
-      - ../../../../text-generation-webui/logs:/home/app/text-generation-webui/logs
-      - ../../../../text-generation-webui/models:/home/app/text-generation-webui/models
-      - ../../../../text-generation-webui/presets:/home/app/text-generation-webui/presets
-      - ../../../../text-generation-webui/prompts:/home/app/text-generation-webui/prompts
-      - ../../../../text-generation-webui/softprompts:/home/app/text-generation-webui/softprompts
-      - ../../../../text-generation-webui/training:/home/app/text-generation-webui/training
-      - ../../../../text-generation-webui/cloudflared:/etc/cloudflared
-      - ./user_data/CMD_FLAGS.txt:/home/app/text-generation-webui/user_data/CMD_FLAGS.txt
+      - ../../../../text-generation-webui/cache:/home/app/text-generation-webui/user_data/cache
+      - ../../../../text-generation-webui/cloudflared:/etc/user_data/cloudflared
+      - ../../../../text-generation-webui/characters:/home/app/text-generation-webui/user_data/characters
+      - ../../../../text-generation-webui/extensions:/home/app/text-generation-webui/user_data/extensions
+      - ../../../../text-generation-webui/grammars:/home/app/text-generation-webui/user_data/grammars
+      - ../../../../text-generation-webui/instruction-templates:/home/app/text-generation-webui/user_data/instruction-templates
+      - ../../../../text-generation-webui/loras:/home/app/text-generation-webui/user_data/loras
+      - ../../../../text-generation-webui/logs:/home/app/text-generation-webui/user_data/logs
+      - ../../../../text-generation-webui/mmproj:/home/app/text-generation-webui/user_data/mmproj
+      - ../../../../text-generation-webui/models:/home/app/text-generation-webui/user_data/models
+      - ../../../../text-generation-webui/presets:/home/app/text-generation-webui/user_data/presets
+      - ../../../../text-generation-webui/prompts:/home/app/text-generation-webui/user_data/prompts
+      - ../../../../text-generation-webui/softprompts:/home/app/text-generation-webui/user_data/softprompts
+      - ../../../../text-generation-webui/training:/home/app/text-generation-webui/user_data/training
+      - ./settings.yaml:/home/app/text-generation-webui/user_data/settings.yaml
+      - ./CMD_FLAGS.txt:/home/app/text-generation-webui/user_data/CMD_FLAGS.txt
     deploy:
       resources:
         reservations:

@@ -21,6 +21,13 @@
           "description": "Command line flags and model configuration",
           "type": "txt",
           "required": false
+        },
+        {
+          "name": "settings.yaml",
+          "path": "text-generation-webui/settings.yaml",
+          "description": "Additional settings for the web UI. Will be auto created if not present.",
+          "type": "txt",
+          "required": false
         }
       ],
       "nvidia": [
@@ -35,6 +42,13 @@
           "name": "CMD_FLAGS.txt",
           "path": "text-generation-webui/CMD_FLAGS.txt",
           "description": "Command line flags and model configuration",
+          "type": "txt",
+          "required": false
+        },
+        {
+          "name": "settings.yaml",
+          "path": "text-generation-webui/settings.yaml",
+          "description": "Additional settings for the web UI. Will be auto created if not present.",
           "type": "txt",
           "required": false
         }
