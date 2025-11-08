@@ -24,7 +24,7 @@ services:
       ${LLAMA_EXTRA_ARGS}
     devices:
 #      - "/dev/dxg" # WSL2 - Not working as of now
-      - "/dev/dxg"
+      - "/dev/kfd"
       - "/dev/dri"
     security_opt:
       - seccomp:unconfined

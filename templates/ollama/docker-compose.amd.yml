@@ -9,12 +9,10 @@ services:
       - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-11434}:${CONTAINER_PORT:-11434}"
     volumes:
       - ../../../../ollama/ollama:/root/.ollama
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: amd
-              capabilities: [ gpu ]
+    devices:
+#      - "/dev/dxg" # WSL2 - Not working as of now
+      - "/dev/kfd"
+      - "/dev/dri"
     networks:
       - harmony-link-network
     labels:
