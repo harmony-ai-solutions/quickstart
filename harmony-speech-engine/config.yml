@@ -150,3 +150,31 @@ model_configs:
     dtype: "float32"
     device_config:
       device: "cpu"
+
+  # Silero VAD - SOTA voice activity detection model
+  - name: "silero-vad"
+    model: "silero-vad"
+    model_type: "SileroVAD"
+    load_format: "onnx"  # Use ONNX version for better performance
+    max_batch_size: 16
+    dtype: "float32"
+    device_config:
+      device: "cpu"  # Silero VAD is CPU-optimized
+
+  # VoiceFixer Restorer - for audio denoising and enhancement
+  - name: "voicefixer-restorer"
+    model: "jlmarrugom/voice_fixer"  # Alternative: "cqchangm/voicefixer"
+    model_type: "VoiceFixerRestorer"
+    max_batch_size: 4
+    dtype: "float32"
+    device_config:
+      device: "cpu"
+
+  # VoiceFixer Vocoder - for mel-spectrogram to audio conversion
+  - name: "voicefixer-vocoder"
+    model: "jlmarrugom/voice_fixer"  # Alternative: "cqchangm/voicefixer"
+    model_type: "VoiceFixerVocoder"
+    max_batch_size: 4
+    dtype: "float32"
+    device_config:
+      device: "cpu"

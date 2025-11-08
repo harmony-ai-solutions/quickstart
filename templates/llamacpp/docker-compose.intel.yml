@@ -1,0 +1,37 @@
+services:
+  llama.cpp:
+    image: ghcr.io/ggml-org/llama.cpp:server-intel
+    pull_policy: always
+    env_file: .env
+    user: "${APP_RUNTIME_UID:-6972}:${APP_RUNTIME_GID:-6972}"
+    ports:
+      - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-8000}:${CONTAINER_PORT:-8000}"
+    stdin_open: true
+    tty: true
+    volumes:
+      - ../../../../llamacpp/models:/models
+      - ../../../../llamacpp/cache:/cache
+    command: >
+      -m ${MODEL_PATH}
+      --host 0.0.0.0
+      --port ${CONTAINER_PORT}
+      -c ${LLAMA_CTX_SIZE}
+      -ngl ${LLAMA_N_GPU_LAYERS}
+      -mg ${LLAMA_MAIN_GPU}
+      ${LLAMA_EXTRA_ARGS}
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: intel
+              capabilities: [ gpu ]
+    networks:
+      - harmony-link-network
+    labels:
+      com.docker.compose.project: harmony-link-integration-llamacpp
+      com.docker.compose.service: llamacpp
+
+networks:
+  harmony-link-network:
+    external: true
+    name: harmony-link-network

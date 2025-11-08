@@ -1,5 +1,56 @@
 [
   {
+    "name": "llamacpp",
+    "displayName": "llama.cpp",
+    "description": "OpenAI Compatible API Server for GGUF models with high performance CPU/GPU inference",
+    "projectWebsite": "https://github.com/ggml-org/llama.cpp",
+    "apiPath": "/v1",
+    "configFiles": {
+      "cpu": [
+        {
+          "name": ".env",
+          "path": "llamacpp/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "nvidia": [
+        {
+          "name": ".env",
+          "path": "llamacpp/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "amd": [
+        {
+          "name": ".env",
+          "path": "llamacpp/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "intel": [
+        {
+          "name": ".env",
+          "path": "llamacpp/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ]
+    },
+    "compatibleProviders": {
+      "backend": ["openaicompatible"],
+      "countenance": ["openaicompatible"],
+      "movement": ["openaicompatible"],
+      "rag": ["openaicompatible"]
+    }
+  },
+  {
     "name": "text-generation-webui",
     "displayName": "Text Generation WebUI",
     "description": "Local text generation web interface and OpenAI Compatible API Server",

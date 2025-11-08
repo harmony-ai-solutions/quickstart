@@ -1,0 +1,6 @@
+Place your GGUF model files here.
+
+Supported formats: .gguf files
+The model file path should be specified in the .env file using the MODEL_PATH variable.
+
+Example: MODEL_PATH=/models/your-model.gguf

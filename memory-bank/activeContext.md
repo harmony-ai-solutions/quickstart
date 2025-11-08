@@ -1,11 +1,37 @@
 # Project Harmony.AI Quickstart - Active Context
 
 ## Current Work Focus
-**JUST COMPLETED**: Added Aphrodite-Engine integration and applied comprehensive port binding optimizations to eliminate IPv4/IPv6 dual-stack issues. The Quickstart project now supports five AI service integrations with standardized IPv4-only binding control and consistent .env configuration patterns.
+**JUST COMPLETED**: Added llama.cpp OpenAI Compatible Server integration with comprehensive hardware support (CPU, NVIDIA, AMD, Intel) and applied comprehensive port binding optimizations to eliminate IPv4/IPv6 dual-stack issues. The Quickstart project now supports six AI service integrations with standardized IPv4-only binding control and consistent .env configuration patterns.
 
 The Quickstart project continues to serve as a stable deployment solution for the Harmony.AI ecosystem, now with significantly expanded integration capabilities. The focus remains on ensuring continued compatibility with Harmony Link's evolving integration management features while providing users with a broader range of AI service options.
 
 ## Recent Changes
+
+### ✅ llama.cpp OpenAI Compatible Server Integration (Just Completed)
+**Description**: Added comprehensive llama.cpp integration with OpenAI-compatible API server support across all major hardware platforms (CPU, NVIDIA, AMD, Intel GPUs).
+
+**Key Changes:**
+- **Complete Hardware Support**: Created Docker Compose templates for all variants:
+  - CPU: `ghcr.io/ggml-org/llama.cpp:server`
+  - NVIDIA: `ghcr.io/ggml-org/llama.cpp:server-cuda`
+  - AMD: `ghcr.io/ggml-org/llama.cpp:server-vulkan`
+  - Intel: `ghcr.io/ggml-org/llama.cpp:server-intel`
+- **Directory Structure**: Created `llama.cpp/` with `.env` configuration, `models/` and `cache/` directories
+- **Environment Configuration**: Comprehensive `.env` file with default settings (2 threads, 8192 context), GPU offload controls, and extensible extra arguments
+- **Template Architecture**: All templates include model validation, proper port binding, volume mounts, and Harmony Link network integration
+- **Integration Manifest**: Updated `integrations.json` with llama.cpp entry supporting backend, countenance, movement, and RAG modules
+- **Model Management**: Placeholder file in models directory with clear instructions for GGUF file placement
+
+**Files Modified:**
+- `integrations.json`: Added llama.cpp integration metadata
+- `llama.cpp/.env`: Environment configuration template
+- `llama.cpp/models/place-your-models-here.txt`: Model placement instructions
+- `templates/llama.cpp/docker-compose.cpu.yml`: CPU template
+- `templates/llama.cpp/docker-compose.nvidia.yml`: NVIDIA GPU template
+- `templates/llama.cpp/docker-compose.amd.yml`: AMD GPU template
+- `templates/llama.cpp/docker-compose.intel.yml`: Intel GPU template
+
+**Impact:** Expanded ecosystem to 6 AI services with native GGUF model support, providing users with high-performance local LLM inference across all major hardware platforms while maintaining Harmony Link's unified management interface.
 
 ### ✅ Port Binding Optimizations & New Aphrodite Integration (Just Completed)
 **Description**: Added Aphrodite-Engine integration and standardized IPv4-only binding control across all integrations, resolving dual-stack service discovery issues.
@@ -61,7 +87,7 @@ The Quickstart project continues to serve as a stable deployment solution for th
 - Created comprehensive template directory structure for both services
 
 **Impact**:
-- **Expanded Ecosystem**: Users now have access to five major AI service integrations (Text-Generation WebUI, Harmony Speech Engine, LocalAI, Ollama, Aphrodite)
+- **Expanded Ecosystem**: Users now have access to six major AI service integrations (Text-Generation WebUI, Harmony Speech Engine, LocalAI, Ollama, Aphrodite, llama.cpp)
 - **Broader Hardware Support**: Ollama templates include AMD GPU support in addition to CPU and NVIDIA options
 - **Enhanced Flexibility**: LocalAI provides comprehensive AI pipeline support including TTS/STT capabilities
 - **Improved Documentation**: Project website references help users understand each integration's capabilities
@@ -107,7 +133,7 @@ The Quickstart project continues to serve as a stable deployment solution for th
 - **Hardware Support Expansion**: Investigate additional hardware acceleration options for the growing service ecosystem.
 
 ## Active Decisions and Considerations
-- **Comprehensive Integration Ecosystem**: The project now supports five major AI service types, providing users with extensive deployment flexibility while maintaining consistent management through Harmony Link.
+- **Comprehensive Integration Ecosystem**: The project now supports six major AI service types, providing users with extensive deployment flexibility while maintaining consistent management through Harmony Link.
 - **Hardware Compatibility Focus**: Ensuring broad hardware support (CPU, NVIDIA GPU, AMD GPU) across all integrations to maximize accessibility.
 - **Template Consistency**: Maintaining consistent Docker Compose template patterns across all integrations for predictable behavior and easier maintenance.
 - **Maintaining the Quickstart project as a user-friendly and reliable deployment solution for the expanded Harmony.AI ecosystem.
