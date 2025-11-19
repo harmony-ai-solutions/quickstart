@@ -33,6 +33,15 @@
           "required": true
         }
       ],
+      "amd-wsl": [
+        {
+          "name": ".env",
+          "path": "llamacpp/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
       "intel": [
         {
           "name": ".env",
@@ -227,6 +236,15 @@
           "type": "txt",
           "required": true
         }
+      ],
+      "amd-wsl": [
+        {
+          "name": ".env",
+          "path": "ollama/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
       ]
     },
     "compatibleProviders": {
@@ -285,6 +303,24 @@
         }
       ],
       "nvidia": [
+        {
+          "name": ".env",
+          "path": "vllm/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "amd": [
+        {
+          "name": ".env",
+          "path": "vllm/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "amd-wsl": [
         {
           "name": ".env",
           "path": "vllm/.env",

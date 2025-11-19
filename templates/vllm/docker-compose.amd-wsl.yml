@@ -1,13 +1,21 @@
 services:
-  aphrodite-engine:
-    image: vllm/vllm-openai:latest
+  vllm:
+    image: rocm/vllm:latest
     pull_policy: always
     env_file: .env
+    # IPC & shared memory settings: Required for WSL multi-gpu
+    ipc: host
+    shm_size: '8gb'
     ports:
       - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-8000}:${CONTAINER_PORT:-8000}"
     volumes:
       - ../../../../vllm/cache:/root/.cache/huggingface
-      - ../../../../vllm/models:/root/models
+      - ../../../../vllm/models:/models
+      # WSL2: Override interfaces to allow GPU access
+      - /usr/lib/wsl/lib/libdxcore.so:/usr/lib/libdxcore.so
+      - /opt/rocm/lib/libhsa-runtime64.so.1:/opt/rocm/lib/libhsa-runtime64.so.1
+    devices:
+      - "/dev/dxg" # WSL2
     command: >
       --model ${VLLM_MODEL:-NousResearch/Meta-Llama-3.1-8B-Instruct}
       --tensor-parallel-size ${VLLM_TENSOR_PARALLEL_SIZE:-1}
@@ -21,4 +29,3 @@ services:
 networks:
   harmony-link-network:
     external: true
-    name: harmony-link-network

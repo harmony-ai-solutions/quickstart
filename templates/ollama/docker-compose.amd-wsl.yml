@@ -5,13 +5,18 @@ services:
     pull_policy: always
     tty: true
     env_file: .env
+    # IPC & shared memory settings: Required for WSL multi-gpu
+    ipc: host
+    shm_size: '8gb'
     ports:
       - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-11434}:${CONTAINER_PORT:-11434}"
     volumes:
       - ../../../../ollama/ollama:/root/.ollama
+      # WSL2: Override interfaces to allow GPU access
+      - /usr/lib/wsl/lib/libdxcore.so:/usr/lib/libdxcore.so
+      - /opt/rocm/lib/libhsa-runtime64.so.1:/opt/rocm/lib/libhsa-runtime64.so.1
     devices:
-      - "/dev/kfd"
-      - "/dev/dri"
+      - "/dev/dxg" # WSL2
     networks:
       - harmony-link-network
     labels:
@@ -37,4 +42,3 @@ services:
 networks:
   harmony-link-network:
     external: true
-    name: harmony-link-network

@@ -3,6 +3,9 @@ services:
     image: rocm/llama.cpp:llama.cpp-b6356_rocm6.4.2_ubuntu24.04_server
     pull_policy: always
     env_file: .env
+    # IPC & shared memory settings: Required for WSL multi-gpu
+    ipc: host
+    shm_size: '8gb'
     user: "${APP_RUNTIME_UID:-6972}:${APP_RUNTIME_GID:-6972}"
     ports:
       - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-8000}:${CONTAINER_PORT:-8000}"
@@ -11,6 +14,9 @@ services:
     volumes:
       - ../../../../llamacpp/models:/models
       - ../../../../llamacpp/cache:/cache
+      # WSL2: Override interfaces to allow GPU access
+      - /usr/lib/wsl/lib/libdxcore.so:/usr/lib/libdxcore.so
+      - /opt/rocm/lib/libhsa-runtime64.so.1:/opt/rocm/lib/libhsa-runtime64.so.1
     command: >
       -m ${MODEL_PATH}
       --host 0.0.0.0
@@ -20,8 +26,7 @@ services:
       -mg ${LLAMA_MAIN_GPU}
       ${LLAMA_EXTRA_ARGS}
     devices:
-      - "/dev/kfd"
-      - "/dev/dri"
+      - "/dev/dxg" # WSL2
     security_opt:
       - seccomp:unconfined
     cap_add:
@@ -37,4 +42,3 @@ services:
 networks:
   harmony-link-network:
     external: true
-    name: harmony-link-network

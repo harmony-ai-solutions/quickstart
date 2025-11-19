@@ -1,6 +1,6 @@
 services:
-  aphrodite-engine:
-    image: vllm/vllm-openai:latest
+  vllm:
+    image: rocm/vllm:latest
     pull_policy: always
     env_file: .env
     ports:
@@ -8,6 +8,9 @@ services:
     volumes:
       - ../../../../vllm/cache:/root/.cache/huggingface
       - ../../../../vllm/models:/root/models
+    devices:
+      - "/dev/kfd"
+      - "/dev/dri"
     command: >
       --model ${VLLM_MODEL:-NousResearch/Meta-Llama-3.1-8B-Instruct}
       --tensor-parallel-size ${VLLM_TENSOR_PARALLEL_SIZE:-1}
