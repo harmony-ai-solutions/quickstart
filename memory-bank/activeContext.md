@@ -14,22 +14,22 @@ The Quickstart project now includes comprehensive CI/CD automation for WSL2-opti
 - **Base ROCm Image Workflow** (`docker-release-base-rocm-wsl.yml`):
   - Builds `harmonyai/base-rocm-wsl` image from ROCm 6.4.4 + Python 3.12 base
   - Supports RDNA 1-4 GPU architectures (gfx1010 through gfx1201)
-  - Tags: `6.4.4-py3.12-wsl` for releases, `dev` for manual builds, always `latest`
+  - Tags: `6.4.4-py3.12-wsl2` for releases, `dev` for manual builds, always `latest`
   - Includes space optimization and build cache management for large ROCm installation
   
 - **llama.cpp ROCm Image Workflow** (`docker-release-llamacpp-wsl.yml`):
   - Builds `harmonyai/llamacpp-rocm-wsl` image with HIP-enabled llama.cpp server
   - Built on top of base-rocm-wsl image
-  - Same tagging strategy: `6.4.4-py3.12-wsl` / `dev` / `latest`
+  - Same tagging strategy: `6.4.4-py3.12-wsl2` / `dev` / `latest`
   - Independent workflow allowing separate deployment cycles
 
 - **Dockerfile Updates**:
-  - Updated llama.cpp Dockerfile to reference correct base image: `harmonyai/base-rocm-wsl:6.4.4-py3.12-wsl`
+  - Updated llama.cpp Dockerfile to reference correct base image: `harmonyai/base-rocm-wsl:6.4.4-py3.12-wsl2`
   - Ensures reproducible builds with pinned base image version
 
 - **Workflow Features**:
   - Triggered by git tag push (any tag) or manual workflow_dispatch
-  - Version handling: git tags → `6.4.4-py3.12-wsl`, manual → `dev` (customizable)
+  - Version handling: git tags → `6.4.4-py3.12-wsl2`, manual → `dev` (customizable)
   - Build space maximization (removes dotnet, android, haskell to free ~20GB)
   - Docker data-root relocation to workspace for large image builds
   - Build cache redirection (pip, npm, ccache, cargo) for faster builds
