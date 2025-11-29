@@ -1,6 +1,6 @@
 services:
   llama.cpp:
-    image: harmonyai/llama-cpp-rocm-wsl2:latest
+    image: harmonyai/llamacpp-rocm-wsl2:latest
     pull_policy: always
     env_file: .env
     # IPC & shared memory settings: Required for WSL multi-gpu

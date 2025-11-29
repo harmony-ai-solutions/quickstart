@@ -63,16 +63,59 @@ newgrp docker
 
 ## Building Images
 
-### Step 1: Build Base Image
+### Step 1: Build Base ROCm Image
 
-The base image provides ROCm, Python, and build tools:
+The base ROCm image provides ROCm 6.4.4, Python 3.12, and build tools:
 
 ```bash
 cd docker/base
-docker build -f Dockerfile-ROCm-6_4_4-Python-3_12-WSL2 -t harmonyai/base-rocm:6_4_4-py3_12-wsl2:latest .
+docker build -f Dockerfile-ROCm-6_4_4-Python-3_12-WSL2 -t harmonyai/base-rocm-wsl2:6.4.4-py3.12-wsl2 .
 ```
 
-### Step 2: Build Application Images
+### Step 2: (Optional) Build PyTorch Base Images
+
+You can build PyTorch-enabled base images with specific versions. These include PyTorch, TorchVision, TorchAudio, and Triton:
+
+#### PyTorch 2.6.0
+
+```bash
+cd docker/base
+docker build -f Dockerfile-PyTorch-2_6_0-ROCm-6_4_4-WSL2 -t harmonyai/base-pytorch-rocm-wsl2:2.6.0-rocm6.4.4 .
+```
+
+**Included versions:**
+- PyTorch: 2.6.0
+- TorchVision: 0.21.0
+- TorchAudio: 2.6.0
+- Triton: 3.2.0
+
+#### PyTorch 2.7.1
+
+```bash
+cd docker/base
+docker build -f Dockerfile-PyTorch-2_7_1-ROCm-6_4_4-WSL2 -t harmonyai/base-pytorch-rocm-wsl2:2.7.1-rocm6.4.4 .
+```
+
+**Included versions:**
+- PyTorch: 2.7.1
+- TorchVision: 0.22.1
+- TorchAudio: 2.7.1
+- Triton: 3.3.1
+
+#### PyTorch 2.8.0
+
+```bash
+cd docker/base
+docker build -f Dockerfile-PyTorch-2_8_0-ROCm-6_4_4-WSL2 -t harmonyai/base-pytorch-rocm-wsl2:2.8.0-rocm6.4.4 .
+```
+
+**Included versions:**
+- PyTorch: 2.8.0
+- TorchVision: 0.23.0
+- TorchAudio: 2.8.0
+- Triton: 3.4.0
+
+### Step 3: Build Application Images
 
 Once the base image is built, build application images:
 
@@ -80,22 +123,38 @@ Once the base image is built, build application images:
 
 ```bash
 cd docker/llamacpp
-docker build -f Dockerfile-llamacpp-WSL2 -t harmonyai/llama-cpp-rocm-wsl2:latest .
+docker build -f Dockerfile-llamacpp-WSL2 -t harmonyai/llamacpp-rocm-wsl2:latest .
 ```
 
 ## Image Structure
 
 ```
 docker/
-├── README.md                          # This file
-├── base/                              # Base images
-│   ├── Dockerfile-ROCm-6_4_4-Python-3_12-WSL2
+├── README.md                                        # This file
+├── base/                                            # Base images
+│   ├── Dockerfile-ROCm-6_4_4-Python-3_12-WSL2      # Base ROCm + Python
+│   ├── Dockerfile-PyTorch-2_6_0-ROCm-6_4_4-WSL2    # PyTorch 2.6.0 variant
+│   ├── Dockerfile-PyTorch-2_7_1-ROCm-6_4_4-WSL2    # PyTorch 2.7.1 variant
+│   ├── Dockerfile-PyTorch-2_8_0-ROCm-6_4_4-WSL2    # PyTorch 2.8.0 variant
 │   └── README.md
-└── llamacpp/                          # llama.cpp application
-    ├── Dockerfile-llamacpp-WSL        # Builds on base image
+└── llamacpp/                                        # llama.cpp application
+    ├── Dockerfile-llamacpp-WSL2                     # Builds on base image
     ├── entrypoint.sh
     └── README.md
 ```
+
+## PyTorch Image Details
+
+The PyTorch base images are built on top of the base ROCm WSL2 image and include:
+- Pre-installed PyTorch with ROCm 6.4.4 support
+- TorchVision, TorchAudio, and Triton libraries
+- Optimized for AMD RDNA 1-4 discrete GPUs (gfx1010-gfx1201)
+- Automatic verification of PyTorch installation during build
+
+These images are suitable for:
+- Deep learning workloads requiring PyTorch
+- Custom applications needing PyTorch as a base layer
+- Development and testing of PyTorch-based AI models
 
 ## Running Containers
 
