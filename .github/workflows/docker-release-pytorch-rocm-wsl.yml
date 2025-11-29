@@ -1,0 +1,226 @@
+name: Build and Push PyTorch ROCm WSL Docker Images
+
+on:
+  workflow_dispatch:
+    inputs:
+      pytorch_version:
+        description: 'PyTorch version to build (2.6.0, 2.7.1, 2.8.0, or all)'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - 2.6.0
+          - 2.7.1
+          - 2.8.0
+      tag_suffix:
+        description: 'Tag suffix (e.g., dev, rc1)'
+        default: 'dev'
+
+jobs:
+  build-pytorch-2-6-0:
+    if: github.event.inputs.pytorch_version == 'all' || github.event.inputs.pytorch_version == '2.6.0'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 2048
+          temp-reserve-mb: 100
+          swap-size-mb: 1024
+          remove-dotnet: 'true'
+          remove-docker-images: 'true'
+          remove-android: 'true'
+          remove-haskell: 'true'
+          remove-codeql: 'true'
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Relocate Docker data-root into workspace
+        shell: bash
+        run: |
+          set -euxo pipefail
+          ROOT="${{ github.workspace }}/.docker-root"
+          sudo mkdir -p "$ROOT"
+          sudo systemctl stop docker || sudo service docker stop || sudo pkill -9 dockerd || true
+          if [ -d /var/lib/docker ] && [ ! -L /var/lib/docker ]; then
+            sudo rsync -aH /var/lib/docker/ "$ROOT"/ || true
+            sudo rm -rf /var/lib/docker
+          fi
+          sudo mkdir -p /var/lib/docker
+          sudo mount --bind "$ROOT" /var/lib/docker
+          sudo systemctl start docker || sudo service docker start || true
+          docker info | grep -i "Docker Root Dir" || true
+          df -h /var/lib/docker || true
+
+      - name: Redirect build caches into workspace
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p "${{ github.workspace }}/.caches"/{npm,pip,ccache,cargo,buildx}
+          {
+            echo "PIP_CACHE_DIR=${{ github.workspace }}/.caches/pip"
+            echo "PIP_NO_INPUT=1"
+            echo "NPM_CONFIG_CACHE=${{ github.workspace }}/.caches/npm"
+            echo "CCACHE_DIR=${{ github.workspace }}/.caches/ccache"
+            echo "CARGO_HOME=${{ github.workspace }}/.caches/cargo"
+            echo "DOCKER_BUILDKIT=1"
+          } >> "$GITHUB_ENV"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker registry
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+      - name: Build and push PyTorch 2.6.0 image
+        uses: docker/build-push-action@v3
+        with:
+          context: ./docker/base
+          file: ./docker/base/Dockerfile-PyTorch-2_6_0-ROCm-6_4_4-WSL2
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_HUB_USERNAME }}/base-pytorch-rocm-wsl2:2.6.0-rocm6.4.4-${{ github.event.inputs.tag_suffix }}
+            ${{ secrets.DOCKER_HUB_USERNAME }}/base-pytorch-rocm-wsl2:2.6.0-latest
+
+  build-pytorch-2-7-1:
+    if: github.event.inputs.pytorch_version == 'all' || github.event.inputs.pytorch_version == '2.7.1'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 2048
+          temp-reserve-mb: 100
+          swap-size-mb: 1024
+          remove-dotnet: 'true'
+          remove-docker-images: 'true'
+          remove-android: 'true'
+          remove-haskell: 'true'
+          remove-codeql: 'true'
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Relocate Docker data-root into workspace
+        shell: bash
+        run: |
+          set -euxo pipefail
+          ROOT="${{ github.workspace }}/.docker-root"
+          sudo mkdir -p "$ROOT"
+          sudo systemctl stop docker || sudo service docker stop || sudo pkill -9 dockerd || true
+          if [ -d /var/lib/docker ] && [ ! -L /var/lib/docker ]; then
+            sudo rsync -aH /var/lib/docker/ "$ROOT"/ || true
+            sudo rm -rf /var/lib/docker
+          fi
+          sudo mkdir -p /var/lib/docker
+          sudo mount --bind "$ROOT" /var/lib/docker
+          sudo systemctl start docker || sudo service docker start || true
+          docker info | grep -i "Docker Root Dir" || true
+          df -h /var/lib/docker || true
+
+      - name: Redirect build caches into workspace
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p "${{ github.workspace }}/.caches"/{npm,pip,ccache,cargo,buildx}
+          {
+            echo "PIP_CACHE_DIR=${{ github.workspace }}/.caches/pip"
+            echo "PIP_NO_INPUT=1"
+            echo "NPM_CONFIG_CACHE=${{ github.workspace }}/.caches/npm"
+            echo "CCACHE_DIR=${{ github.workspace }}/.caches/ccache"
+            echo "CARGO_HOME=${{ github.workspace }}/.caches/cargo"
+            echo "DOCKER_BUILDKIT=1"
+          } >> "$GITHUB_ENV"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker registry
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+      - name: Build and push PyTorch 2.7.1 image
+        uses: docker/build-push-action@v3
+        with:
+          context: ./docker/base
+          file: ./docker/base/Dockerfile-PyTorch-2_7_1-ROCm-6_4_4-WSL2
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_HUB_USERNAME }}/base-pytorch-rocm-wsl2:2.7.1-rocm6.4.4-${{ github.event.inputs.tag_suffix }}
+            ${{ secrets.DOCKER_HUB_USERNAME }}/base-pytorch-rocm-wsl2:2.7.1-latest
+
+  build-pytorch-2-8-0:
+    if: github.event.inputs.pytorch_version == 'all' || github.event.inputs.pytorch_version == '2.8.0'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 2048
+          temp-reserve-mb: 100
+          swap-size-mb: 1024
+          remove-dotnet: 'true'
+          remove-docker-images: 'true'
+          remove-android: 'true'
+          remove-haskell: 'true'
+          remove-codeql: 'true'
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Relocate Docker data-root into workspace
+        shell: bash
+        run: |
+          set -euxo pipefail
+          ROOT="${{ github.workspace }}/.docker-root"
+          sudo mkdir -p "$ROOT"
+          sudo systemctl stop docker || sudo service docker stop || sudo pkill -9 dockerd || true
+          if [ -d /var/lib/docker ] && [ ! -L /var/lib/docker ]; then
+            sudo rsync -aH /var/lib/docker/ "$ROOT"/ || true
+            sudo rm -rf /var/lib/docker
+          fi
+          sudo mkdir -p /var/lib/docker
+          sudo mount --bind "$ROOT" /var/lib/docker
+          sudo systemctl start docker || sudo service docker start || true
+          docker info | grep -i "Docker Root Dir" || true
+          df -h /var/lib/docker || true
+
+      - name: Redirect build caches into workspace
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p "${{ github.workspace }}/.caches"/{npm,pip,ccache,cargo,buildx}
+          {
+            echo "PIP_CACHE_DIR=${{ github.workspace }}/.caches/pip"
+            echo "PIP_NO_INPUT=1"
+            echo "NPM_CONFIG_CACHE=${{ github.workspace }}/.caches/npm"
+            echo "CCACHE_DIR=${{ github.workspace }}/.caches/ccache"
+            echo "CARGO_HOME=${{ github.workspace }}/.caches/cargo"
+            echo "DOCKER_BUILDKIT=1"
+          } >> "$GITHUB_ENV"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker registry
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+      - name: Build and push PyTorch 2.8.0 image
+        uses: docker/build-push-action@v3
+        with:
+          context: ./docker/base
+          file: ./docker/base/Dockerfile-PyTorch-2_8_0-ROCm-6_4_4-WSL2
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_HUB_USERNAME }}/base-pytorch-rocm-wsl2:2.8.0-rocm6.4.4-${{ github.event.inputs.tag_suffix }}
+            ${{ secrets.DOCKER_HUB_USERNAME }}/base-pytorch-rocm-wsl2:2.8.0-latest
