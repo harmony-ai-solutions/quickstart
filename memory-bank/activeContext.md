@@ -1,11 +1,49 @@
 # Project Harmony.AI Quickstart - Active Context
 
 ## Current Work Focus
-**JUST COMPLETED**: Added llama.cpp OpenAI Compatible Server integration with comprehensive hardware support (CPU, NVIDIA, AMD, Intel) and applied comprehensive port binding optimizations to eliminate IPv4/IPv6 dual-stack issues. The Quickstart project now supports six AI service integrations with standardized IPv4-only binding control and consistent .env configuration patterns.
+**JUST COMPLETED**: Implemented GitHub Actions CI/CD workflows for automated Docker image deployment of AMD ROCm WSL2 images. Added two workflows for building and pushing the base ROCm image and llama.cpp ROCm image to Docker Hub, with flexible version tagging for releases and dev builds.
 
-The Quickstart project continues to serve as a stable deployment solution for the Harmony.AI ecosystem, now with significantly expanded integration capabilities. The focus remains on ensuring continued compatibility with Harmony Link's evolving integration management features while providing users with a broader range of AI service options.
+The Quickstart project now includes comprehensive CI/CD automation for WSL2-optimized Docker images alongside its six AI service integrations. This enables automated deployment of ROCm-based images for AMD GPU users on WSL2, complementing the existing integration management capabilities.
 
 ## Recent Changes
+
+### ✅ GitHub Actions CI/CD for AMD ROCm WSL2 Images (Just Completed)
+**Description**: Implemented automated build and deployment workflows for Docker images optimized for AMD GPUs on WSL2, enabling consistent releases to Docker Hub.
+
+**Key Changes:**
+- **Base ROCm Image Workflow** (`docker-release-base-rocm-wsl.yml`):
+  - Builds `harmonyai/base-rocm-wsl` image from ROCm 6.4.4 + Python 3.12 base
+  - Supports RDNA 1-4 GPU architectures (gfx1010 through gfx1201)
+  - Tags: `6.4.4-py3.12-wsl` for releases, `dev` for manual builds, always `latest`
+  - Includes space optimization and build cache management for large ROCm installation
+  
+- **llama.cpp ROCm Image Workflow** (`docker-release-llamacpp-wsl.yml`):
+  - Builds `harmonyai/llamacpp-rocm-wsl` image with HIP-enabled llama.cpp server
+  - Built on top of base-rocm-wsl image
+  - Same tagging strategy: `6.4.4-py3.12-wsl` / `dev` / `latest`
+  - Independent workflow allowing separate deployment cycles
+
+- **Dockerfile Updates**:
+  - Updated llama.cpp Dockerfile to reference correct base image: `harmonyai/base-rocm-wsl:6.4.4-py3.12-wsl`
+  - Ensures reproducible builds with pinned base image version
+
+- **Workflow Features**:
+  - Triggered by git tag push (any tag) or manual workflow_dispatch
+  - Version handling: git tags → `6.4.4-py3.12-wsl`, manual → `dev` (customizable)
+  - Build space maximization (removes dotnet, android, haskell to free ~20GB)
+  - Docker data-root relocation to workspace for large image builds
+  - Build cache redirection (pip, npm, ccache, cargo) for faster builds
+  - Docker Buildx for advanced build features
+  - Requires GitHub secrets: `DOCKER_HUB_USERNAME`, `DOCKER_HUB_PASSWORD`
+
+**Files Created/Modified:**
+- `.github/workflows/docker-release-base-rocm-wsl.yml`: Base image build workflow
+- `.github/workflows/docker-release-llamacpp-wsl.yml`: llama.cpp image build workflow  
+- `docker/llamacpp/Dockerfile-llamacpp-WSL2`: Updated base image reference
+- `memory-bank/activeContext.md`: Documented CI/CD implementation
+
+**Impact:** Automated Docker image deployment enables consistent releases of AMD ROCm WSL2 images to Docker Hub, making it easier for users to access pre-built images without manual builds. The workflows follow the same optimization patterns as harmony-speech-engine, ensuring reliable builds of large ROCm-based images on GitHub Actions runners.
+
 
 ### ✅ llama.cpp OpenAI Compatible Server Integration (Just Completed)
 **Description**: Added comprehensive llama.cpp integration with OpenAI-compatible API server support across all major hardware platforms (CPU, NVIDIA, AMD, Intel GPUs).
