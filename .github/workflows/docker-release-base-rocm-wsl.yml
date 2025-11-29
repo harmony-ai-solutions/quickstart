@@ -11,7 +11,7 @@ on:
         default: 'dev'
 
 jobs:
-  build-and-push-base-rocm-wsl:
+  build-and-push-base-rocm-wsl2:
     runs-on: ubuntu-latest
 
     steps:
@@ -84,7 +84,7 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
-      - name: Build and push base-rocm-wsl image
+      - name: Build and push base-rocm-wsl2 image
         uses: docker/build-push-action@v3
         with:
           context: ./docker/base

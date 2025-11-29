@@ -4,7 +4,7 @@
 
 # Use the base image (build it first or pull from registry)
 # To build base: cd ../base && docker build -f Dockerfile-ROCm-6_4_4-Python-3_12-WSL2 -t harmonyai/base-rocm-wsl2:6.4.4-py3.12-wsl .
-FROM harmonyai/base-rocm-wsl:6.4.4-py3.12-wsl2
+FROM harmonyai/base-rocm-wsl2:6.4.4-py3.12-wsl2
 
 # GPU architectures to compile for (RDNA 1-4 discrete GPUs)
 # RDNA 1: gfx1010 (RX 5700/XT), gfx1012 (RX 5500/XT)

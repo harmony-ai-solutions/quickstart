@@ -11,20 +11,20 @@ The Quickstart project now includes comprehensive CI/CD automation for WSL2-opti
 **Description**: Implemented automated build and deployment workflows for Docker images optimized for AMD GPUs on WSL2, enabling consistent releases to Docker Hub.
 
 **Key Changes:**
-- **Base ROCm Image Workflow** (`docker-release-base-rocm-wsl.yml`):
-  - Builds `harmonyai/base-rocm-wsl` image from ROCm 6.4.4 + Python 3.12 base
+- **Base ROCm Image Workflow** (`docker-release-base-rocm-wsl2.yml`):
+  - Builds `harmonyai/base-rocm-wsl2` image from ROCm 6.4.4 + Python 3.12 base
   - Supports RDNA 1-4 GPU architectures (gfx1010 through gfx1201)
   - Tags: `6.4.4-py3.12-wsl2` for releases, `dev` for manual builds, always `latest`
   - Includes space optimization and build cache management for large ROCm installation
   
 - **llama.cpp ROCm Image Workflow** (`docker-release-llamacpp-wsl.yml`):
   - Builds `harmonyai/llamacpp-rocm-wsl` image with HIP-enabled llama.cpp server
-  - Built on top of base-rocm-wsl image
+  - Built on top of base-rocm-wsl2 image
   - Same tagging strategy: `6.4.4-py3.12-wsl2` / `dev` / `latest`
   - Independent workflow allowing separate deployment cycles
 
 - **Dockerfile Updates**:
-  - Updated llama.cpp Dockerfile to reference correct base image: `harmonyai/base-rocm-wsl:6.4.4-py3.12-wsl2`
+  - Updated llama.cpp Dockerfile to reference correct base image: `harmonyai/base-rocm-wsl2:6.4.4-py3.12-wsl2`
   - Ensures reproducible builds with pinned base image version
 
 - **Workflow Features**:
@@ -37,7 +37,7 @@ The Quickstart project now includes comprehensive CI/CD automation for WSL2-opti
   - Requires GitHub secrets: `DOCKER_HUB_USERNAME`, `DOCKER_HUB_PASSWORD`
 
 **Files Created/Modified:**
-- `.github/workflows/docker-release-base-rocm-wsl.yml`: Base image build workflow
+- `.github/workflows/docker-release-base-rocm-wsl2.yml`: Base image build workflow
 - `.github/workflows/docker-release-llamacpp-wsl.yml`: llama.cpp image build workflow  
 - `docker/llamacpp/Dockerfile-llamacpp-WSL2`: Updated base image reference
 - `memory-bank/activeContext.md`: Documented CI/CD implementation
