@@ -12,11 +12,10 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - ../../../../llamacpp/models:/models
-      - ../../../../llamacpp/cache:/cache
-      # WSL2: Override interfaces to allow GPU access
+      - ../../../../shared/models:/models
+      - ../../../../shared/cache:/cache
+      # WSL2 GPU access library
       - /usr/lib/wsl/lib/libdxcore.so:/usr/lib/libdxcore.so
-      - /opt/rocm/lib/libhsa-runtime64.so.1:/opt/rocm/lib/libhsa-runtime64.so.1
     command: >
       -m ${MODEL_PATH}
       --host 0.0.0.0

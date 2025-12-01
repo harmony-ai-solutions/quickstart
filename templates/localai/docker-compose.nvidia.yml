@@ -7,8 +7,8 @@ services:
       - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-8080}:${CONTAINER_PORT:-8080}"
     volumes:
       # - ./config.yml:/app/harmony-speech-engine/config.yml
-      - ../../../../localai/models:${MODELS_PATH:-/models}
-      - ../../../../localai/images/:/tmp/generated/images/
+      - ../../../../shared/models:${MODELS_PATH:-/models}
+      - ../../../../shared/localai-data/:/tmp/generated/images/
     deploy:
       resources:
         reservations:

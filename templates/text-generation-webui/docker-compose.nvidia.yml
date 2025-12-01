@@ -10,20 +10,21 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - ../../../../text-generation-webui/cache:/home/app/text-generation-webui/user_data/cache
-      - ../../../../text-generation-webui/cloudflared:/etc/user_data/cloudflared
-      - ../../../../text-generation-webui/characters:/home/app/text-generation-webui/user_data/characters
-      - ../../../../text-generation-webui/extensions:/home/app/text-generation-webui/user_data/extensions
-      - ../../../../text-generation-webui/grammars:/home/app/text-generation-webui/user_data/grammars
-      - ../../../../text-generation-webui/instruction-templates:/home/app/text-generation-webui/user_data/instruction-templates
-      - ../../../../text-generation-webui/loras:/home/app/text-generation-webui/user_data/loras
-      - ../../../../text-generation-webui/logs:/home/app/text-generation-webui/user_data/logs
-      - ../../../../text-generation-webui/mmproj:/home/app/text-generation-webui/user_data/mmproj
-      - ../../../../text-generation-webui/models:/home/app/text-generation-webui/user_data/models
-      - ../../../../text-generation-webui/presets:/home/app/text-generation-webui/user_data/presets
-      - ../../../../text-generation-webui/prompts:/home/app/text-generation-webui/user_data/prompts
-      - ../../../../text-generation-webui/softprompts:/home/app/text-generation-webui/user_data/softprompts
-      - ../../../../text-generation-webui/training:/home/app/text-generation-webui/user_data/training
+      - ../../../../shared/cache:/home/app/text-generation-webui/user_data/cache
+      - ../../../../shared/cloudflared:/etc/user_data/cloudflared
+      - ../../../../shared/characters:/home/app/text-generation-webui/user_data/characters
+      - ../../../../shared/extensions:/home/app/text-generation-webui/user_data/extensions
+      - ../../../../shared/grammars:/home/app/text-generation-webui/user_data/grammars
+      - ../../../../shared/instruction-templates:/home/app/text-generation-webui/user_data/instruction-templates
+      - ../../../../shared/loras:/home/app/text-generation-webui/user_data/loras
+      - ../../../../shared/logs:/home/app/text-generation-webui/user_data/logs
+      - ../../../../shared/mmproj:/home/app/text-generation-webui/user_data/mmproj
+      - ../../../../shared/models:/home/app/text-generation-webui/user_data/models
+      - ../../../../shared/.textgen/config.yaml:/home/app/text-generation-webui/user_data/models/config.yaml
+      - ../../../../shared/presets:/home/app/text-generation-webui/user_data/presets
+      - ../../../../shared/prompts:/home/app/text-generation-webui/user_data/prompts
+      - ../../../../shared/softprompts:/home/app/text-generation-webui/user_data/softprompts
+      - ../../../../shared/training:/home/app/text-generation-webui/user_data/training
       - ./settings.yaml:/home/app/text-generation-webui/user_data/settings.yaml
       - ./CMD_FLAGS.txt:/home/app/text-generation-webui/user_data/CMD_FLAGS.txt
     deploy:

@@ -9,7 +9,7 @@ services:
     ports:
       - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-2242}:${CONTAINER_PORT:-2242}"
     volumes:
-      - ../../../../aphrodite-engine/cache:/root/.cache/huggingface
+      - ../../../../shared/cache:/root/.cache/huggingface
     deploy:
       resources:
         reservations:

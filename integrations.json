@@ -9,7 +9,7 @@
       "cpu": [
         {
           "name": ".env",
-          "path": "llamacpp/.env",
+          "path": "templates/llamacpp/.env",
           "description": "Basic env configuration & overrides",
           "type": "txt",
           "required": true
@@ -18,7 +18,7 @@
       "nvidia": [
         {
           "name": ".env",
-          "path": "llamacpp/.env",
+          "path": "templates/llamacpp/.env",
           "description": "Basic env configuration & overrides",
           "type": "txt",
           "required": true
@@ -27,7 +27,7 @@
       "amd": [
         {
           "name": ".env",
-          "path": "llamacpp/.env",
+          "path": "templates/llamacpp/.env",
           "description": "Basic env configuration & overrides",
           "type": "txt",
           "required": true
@@ -36,7 +36,7 @@
       "amd-wsl": [
         {
           "name": ".env",
-          "path": "llamacpp/.env",
+          "path": "templates/llamacpp/.env",
           "description": "Basic env configuration & overrides",
           "type": "txt",
           "required": true
@@ -45,7 +45,7 @@
       "intel": [
         {
           "name": ".env",
-          "path": "llamacpp/.env",
+          "path": "templates/llamacpp/.env",
           "description": "Basic env configuration & overrides",
           "type": "txt",
           "required": true
@@ -70,21 +70,21 @@
       "cpu": [
         {
           "name": ".env",
-          "path": "text-generation-webui/.env",
+          "path": "templates/text-generation-webui/.env",
           "description": "Basic env configuration & overrides",
           "type": "txt",
           "required": true
         },
         {
           "name": "CMD_FLAGS.txt",
-          "path": "text-generation-webui/CMD_FLAGS.txt",
+          "path": "templates/text-generation-webui/CMD_FLAGS.txt",
           "description": "Command line flags and model configuration",
           "type": "txt",
           "required": false
         },
         {
           "name": "settings.yaml",
-          "path": "text-generation-webui/settings.yaml",
+          "path": "templates/text-generation-webui/settings.yaml",
           "description": "Additional settings for the web UI. Will be auto created if not present.",
           "type": "txt",
           "required": false
@@ -93,21 +93,44 @@
       "nvidia": [
         {
           "name": ".env",
-          "path": "text-generation-webui/.env",
+          "path": "templates/text-generation-webui/.env",
           "description": "Basic env configuration & overrides",
           "type": "txt",
           "required": true
         },
         {
           "name": "CMD_FLAGS.txt",
-          "path": "text-generation-webui/CMD_FLAGS.txt",
+          "path": "templates/text-generation-webui/CMD_FLAGS.txt",
           "description": "Command line flags and model configuration",
           "type": "txt",
           "required": false
         },
         {
           "name": "settings.yaml",
-          "path": "text-generation-webui/settings.yaml",
+          "path": "templates/text-generation-webui/settings.yaml",
+          "description": "Additional settings for the web UI. Will be auto created if not present.",
+          "type": "txt",
+          "required": false
+        }
+      ],
+      "amd-wsl": [
+        {
+          "name": ".env",
+          "path": "templates/text-generation-webui/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        },
+        {
+          "name": "CMD_FLAGS.txt",
+          "path": "templates/text-generation-webui/CMD_FLAGS.txt",
+          "description": "Command line flags and model configuration",
+          "type": "txt",
+          "required": false
+        },
+        {
+          "name": "settings.yaml",
+          "path": "templates/text-generation-webui/settings.yaml",
           "description": "Additional settings for the web UI. Will be auto created if not present.",
           "type": "txt",
           "required": false
@@ -131,14 +154,14 @@
       "cpu": [
         {
           "name": ".env",
-          "path": "harmony-speech-engine/.env",
+          "path": "templates/harmony-speech-engine/.env",
           "description": "Basic env configuration & overrides",
           "type": "txt",
           "required": true
         },
         {
           "name": "config.yml",
-          "path": "harmony-speech-engine/config.yml",
+          "path": "templates/harmony-speech-engine/config.yml",
           "description": "Model configuration for CPU inference",
           "type": "yaml",
           "required": true
@@ -147,15 +170,31 @@
       "nvidia": [
         {
           "name": ".env",
-          "path": "harmony-speech-engine/.env",
+          "path": "templates/harmony-speech-engine/.env",
           "description": "Basic env configuration & overrides",
           "type": "txt",
           "required": true
         },
         {
           "name": "config.yml",
-          "path": "harmony-speech-engine/config.nvidia.yml",
-          "description": "Model configuration for NVIDIA GPU inference",
+          "path": "templates/harmony-speech-engine/config.gpu.yml",
+          "description": "Model configuration for GPU inference",
+          "type": "yaml",
+          "required": true
+        }
+      ],
+      "amd-wsl": [
+        {
+          "name": ".env",
+          "path": "templates/harmony-speech-engine/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        },
+        {
+          "name": "config.yml",
+          "path": "templates/harmony-speech-engine/config.gpu.yml",
+          "description": "Model configuration for GPU inference",
           "type": "yaml",
           "required": true
         }
@@ -177,7 +216,7 @@
       "cpu": [
         {
           "name": ".env",
-          "path": "localai/.env",
+          "path": "templates/localai/.env",
           "description": "Basic env configuration & overrides",
           "type": "txt",
           "required": true
@@ -186,7 +225,7 @@
       "nvidia": [
         {
           "name": ".env",
-          "path": "localai/.env",
+          "path": "templates/localai/.env",
           "description": "Basic env configuration & overrides",
           "type": "txt",
           "required": true
@@ -213,7 +252,7 @@
       "cpu": [
         {
           "name": ".env",
-          "path": "ollama/.env",
+          "path": "templates/ollama/.env",
           "description": "Basic env configuration & overrides",
           "type": "txt",
           "required": true
@@ -222,7 +261,7 @@
       "nvidia": [
         {
           "name": ".env",
-          "path": "ollama/.env",
+          "path": "templates/ollama/.env",
           "description": "Basic env configuration & overrides",
           "type": "txt",
           "required": true
@@ -231,7 +270,7 @@
       "amd": [
         {
           "name": ".env",
-          "path": "ollama/.env",
+          "path": "templates/ollama/.env",
           "description": "Basic env configuration & overrides",
           "type": "txt",
           "required": true
@@ -240,7 +279,7 @@
       "amd-wsl": [
         {
           "name": ".env",
-          "path": "ollama/.env",
+          "path": "templates/ollama/.env",
           "description": "Basic env configuration & overrides",
           "type": "txt",
           "required": true
@@ -264,7 +303,7 @@
       "cpu": [
         {
           "name": ".env",
-          "path": "aphrodite-engine/.env",
+          "path": "templates/aphrodite-engine/.env",
           "description": "Basic env configuration & overrides",
           "type": "txt",
           "required": true
@@ -273,7 +312,7 @@
       "nvidia": [
         {
           "name": ".env",
-          "path": "aphrodite-engine/.env",
+          "path": "templates/aphrodite-engine/.env",
           "description": "Basic env configuration & overrides",
           "type": "txt",
           "required": true
@@ -296,7 +335,7 @@
       "cpu": [
         {
           "name": ".env",
-          "path": "vllm/.env",
+          "path": "templates/vllm/.env",
           "description": "Basic env configuration & overrides",
           "type": "txt",
           "required": true
@@ -305,7 +344,7 @@
       "nvidia": [
         {
           "name": ".env",
-          "path": "vllm/.env",
+          "path": "templates/vllm/.env",
           "description": "Basic env configuration & overrides",
           "type": "txt",
           "required": true
@@ -314,7 +353,7 @@
       "amd": [
         {
           "name": ".env",
-          "path": "vllm/.env",
+          "path": "templates/vllm/.env",
           "description": "Basic env configuration & overrides",
           "type": "txt",
           "required": true
@@ -323,7 +362,7 @@
       "amd-wsl": [
         {
           "name": ".env",
-          "path": "vllm/.env",
+          "path": "templates/vllm/.env",
           "description": "Basic env configuration & overrides",
           "type": "txt",
           "required": true

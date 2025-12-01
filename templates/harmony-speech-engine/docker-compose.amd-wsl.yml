@@ -14,20 +14,27 @@ services:
       com.docker.compose.service: harmonyspeech-ui
 
   harmonyspeech-engine:
-    image: harmonyai/harmonyspeech-engine-nvidia:latest
+    image: harmonyai/harmonyspeech-engine-amd-wsl:latest
     pull_policy: always
     env_file: .env
+    # IPC & shared memory settings: Required for WSL multi-gpu
+    ipc: host
+    shm_size: '8gb'
     ports:
       - "${BIND_IP:-0.0.0.0}:${ENGINE_HOST_PORT:-12080}:${ENGINE_CONTAINER_PORT:-12080}"
     volumes:
       - ./config.yml:/app/harmony-speech-engine/config.yml
       - ../../../../shared/cache:/app/harmony-speech-engine/cache
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              capabilities: [ gpu ]
+      # WSL2: Override interfaces to allow GPU access
+      - /usr/lib/wsl/lib/libdxcore.so:/usr/lib/libdxcore.so
+    devices:
+      - "/dev/dxg" # WSL2
+    security_opt:
+      - seccomp:unconfined
+    cap_add:
+      - SYS_PTRACE
+    group_add:
+      - video
     networks:
       - harmony-link-network
     labels:

@@ -6,8 +6,8 @@ services:
     ports:
       - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-8000}:${CONTAINER_PORT:-8000}"
     volumes:
-      - ../../../../vllm/cache:/root/.cache/huggingface
-      - ../../../../vllm/models:/root/models
+      - ../../../../shared/cache:/root/.cache/huggingface
+      - ../../../../shared/models:/root/models
     devices:
       - "/dev/kfd"
       - "/dev/dri"

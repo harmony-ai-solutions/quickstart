@@ -21,7 +21,7 @@ services:
       - "${BIND_IP:-0.0.0.0}:${ENGINE_HOST_PORT:-12080}:${ENGINE_CONTAINER_PORT:-12080}"
     volumes:
       - ./config.yml:/app/harmony-speech-engine/config.yml
-      - ../../../../harmony-speech-engine/cache:/app/harmony-speech-engine/cache
+      - ../../../../shared/cache:/app/harmony-speech-engine/cache
     networks:
       - harmony-link-network
     labels:

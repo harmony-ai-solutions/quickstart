@@ -9,8 +9,8 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - ../../../../llamacpp/models:/models
-      - ../../../../llamacpp/cache:/cache
+      - ../../../../shared/models:/models
+      - ../../../../shared/cache:/cache
     command: >
       -m ${MODEL_PATH}
       --host 0.0.0.0

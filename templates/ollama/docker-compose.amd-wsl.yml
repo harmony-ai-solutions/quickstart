@@ -11,10 +11,9 @@ services:
     ports:
       - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-11434}:${CONTAINER_PORT:-11434}"
     volumes:
-      - ../../../../ollama/ollama:/root/.ollama
+      - ../../../../shared/ollama-data:/root/.ollama
       # WSL2: Override interfaces to allow GPU access
       - /usr/lib/wsl/lib/libdxcore.so:/usr/lib/libdxcore.so
-      - /opt/rocm/lib/libhsa-runtime64.so.1:/opt/rocm/lib/libhsa-runtime64.so.1
     devices:
       - "/dev/dxg" # WSL2
     networks:
@@ -28,7 +27,7 @@ services:
     pull_policy: always
     env_file: .env
     volumes:
-      - ../../../../ollama/ollama-webui:/app/backend/data
+      - ../../../../shared/ollama-webui-data:/app/backend/data
     depends_on:
       - ollama
     ports:

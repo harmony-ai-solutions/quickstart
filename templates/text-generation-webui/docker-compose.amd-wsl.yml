@@ -1,6 +1,6 @@
 services:
   text-generation-webui:
-    image: harmonyai/text-generation-webui-harmony-ai-cpu:latest
+    image: harmonyai/text-generation-webui-harmony-ai-amd-wsl:latest
     pull_policy: always
     env_file: .env
     user: "${APP_RUNTIME_UID:-6972}:${APP_RUNTIME_GID:-6972}"
@@ -9,6 +9,12 @@ services:
       - "${BIND_IP:-0.0.0.0}:${HOST_API_PORT:-5000}:${CONTAINER_API_PORT:-5000}"
     stdin_open: true
     tty: true
+    devices:
+      - /dev/dxg
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp=unconfined
     volumes:
       - ../../../../shared/cache:/home/app/text-generation-webui/user_data/cache
       - ../../../../shared/cloudflared:/etc/user_data/cloudflared
@@ -27,6 +33,8 @@ services:
       - ../../../../shared/training:/home/app/text-generation-webui/user_data/training
       - ./settings.yaml:/home/app/text-generation-webui/user_data/settings.yaml
       - ./CMD_FLAGS.txt:/home/app/text-generation-webui/user_data/CMD_FLAGS.txt
+      # WSL2 GPU access library
+      - /usr/lib/wsl/lib/libdxcore.so:/usr/lib/libdxcore.so
     networks:
       - harmony-link-network
     labels:
