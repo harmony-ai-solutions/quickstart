@@ -13,6 +13,7 @@ services:
     tty: true
     volumes:
       - ../../../../shared/models:/models
+      - ../../../../shared/mmproj:/mmproj
       - ../../../../shared/cache:/cache
       # WSL2 GPU access library
       - /usr/lib/wsl/lib/libdxcore.so:/usr/lib/libdxcore.so

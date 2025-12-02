@@ -9,7 +9,7 @@ services:
     ports:
       - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-8000}:${CONTAINER_PORT:-8000}"
     volumes:
-      - ../../../../shared/cache:/root/.cache/huggingface
+      - ../../../../shared/cache:/root/.cache
       - ../../../../shared/models:/root/models
       # WSL2: Override interfaces to allow GPU access
       - /usr/lib/wsl/lib/libdxcore.so:/usr/lib/libdxcore.so
