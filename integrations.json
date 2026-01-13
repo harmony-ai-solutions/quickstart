@@ -54,7 +54,7 @@
     },
     "compatibleProviders": {
       "backend": ["openaicompatible"],
-      "countenance": ["openaicompatible"],
+      "cognition": ["openaicompatible"],
       "movement": ["openaicompatible"],
       "rag": ["openaicompatible"]
     }
@@ -139,7 +139,7 @@
     },
     "compatibleProviders": {
       "backend": ["openaicompatible"],
-      "countenance": ["openaicompatible"],
+      "cognition": ["openaicompatible"],
       "movement": ["openaicompatible"],
       "rag": ["openaicompatible"]
     }
@@ -202,7 +202,8 @@
     },
     "compatibleProviders": {
       "tts": ["harmonyspeech"],
-      "stt": ["harmonyspeech"]
+      "stt": ["harmonyspeech"],
+      "vad": ["harmonyspeech"]
     }
   },
   {
@@ -234,7 +235,7 @@
     },
     "compatibleProviders": {
       "backend": ["openaicompatible"],
-      "countenance": ["openaicompatible"],
+      "cognition": ["openaicompatible"],
       "movement": ["openaicompatible"],
       "rag": ["openaicompatible"],
       "tts": ["openaicompatible"],
@@ -288,7 +289,7 @@
     },
     "compatibleProviders": {
       "backend": ["openaicompatible"],
-      "countenance": ["openaicompatible"],
+      "cognition": ["openaicompatible"],
       "movement": ["openaicompatible"],
       "rag": ["openaicompatible"]
     }
@@ -321,7 +322,7 @@
     },
     "compatibleProviders": {
       "backend": ["openaicompatible"],
-      "countenance": ["openaicompatible"],
+      "cognition": ["openaicompatible"],
       "movement": ["openaicompatible"]
     }
   },
@@ -371,7 +372,7 @@
     },
     "compatibleProviders": {
       "backend": ["openaicompatible"],
-      "countenance": ["openaicompatible"],
+      "cognition": ["openaicompatible"],
       "movement": ["openaicompatible"]
     }
   }
