@@ -10,51 +10,29 @@ services:
       - ./harmony-link/harmony-tmp:/app/harmony-tmp
       - ./harmony-link/config.json:/app/config.json
       - ./harmony-link/harmony-user.key:/app/harmony-user.key
+      - /var/run/docker.sock:/var/run/docker.sock
+      # ATTENTION FOR RUNNING DOCKERIZED
+      # This path mounts the quickstart repo on a path matching the host path
+      # The path needs to match the exact path on the host, so docker compose for the integrations works correctly
+      # and relative path mounts will be resolved properly.
+      # For WSL this requires a special mount path starting with "/run/desktop/mnt/host/",
+      # followed by the actual path on the host machine, e.g. "d/projects/quickstart"
+      # also see comments in ./harmony-link/.env file.
+      - /run/desktop/mnt/host/d/projects/quickstart:/run/desktop/mnt/host/d/projects/quickstart
+    environment:
+      - HARMONY_LINK_CONTAINER_MODE=1
+    networks:
+      - harmony-link-network
 
   harmony-link-ui:
     image: harmonyai/harmony-link-ui:latest
     pull_policy: always
     ports:
       - "8080:80"
+    networks:
+      - harmony-link-network
 
-  text-generation-webui-harmonyai:
-    image: harmonyai/text-generation-webui-harmony-ai-cpu
-    pull_policy: always
-    env_file: ./text-generation-webui-harmonyai/.env
-    user: "${APP_RUNTIME_UID:-6972}:${APP_RUNTIME_GID:-6972}"
-    ports:
-      - "${HOST_PORT:-7860}:${CONTAINER_PORT:-7860}"
-      - "${HOST_API_PORT:-5000}:${CONTAINER_API_PORT:-5000}"
-    stdin_open: true
-    tty: true
-    volumes:
-      - ./text-generation-webui-harmonyai/cache:/home/app/text-generation-webui/cache
-      - ./text-generation-webui-harmonyai/characters:/home/app/text-generation-webui/characters
-#      - ./text-generation-webui-harmonyai/extensions:/home/app/text-generation-webui/extensions
-      - ./text-generation-webui-harmonyai/loras:/home/app/text-generation-webui/loras
-      - ./text-generation-webui-harmonyai/logs:/home/app/text-generation-webui/logs
-      - ./text-generation-webui-harmonyai/models:/home/app/text-generation-webui/models
-      - ./text-generation-webui-harmonyai/presets:/home/app/text-generation-webui/presets
-      - ./text-generation-webui-harmonyai/prompts:/home/app/text-generation-webui/prompts
-      - ./text-generation-webui-harmonyai/softprompts:/home/app/text-generation-webui/softprompts
-      - ./text-generation-webui-harmonyai/training:/home/app/text-generation-webui/training
-      - ./text-generation-webui-harmonyai/cloudflared:/etc/cloudflared
-      - ./text-generation-webui-harmonyai/CMD_FLAGS.txt:/home/app/text-generation-webui/CMD_FLAGS.txt
-
-  harmonyspeech-ui:
-    image: harmonyai/harmonyspeech-ui:latest
-    pull_policy: always
-    ports:
-      - "8081:80"
-    depends_on:
-      - harmonyspeech-engine
-
-  harmonyspeech-engine:
-    image: harmonyai/harmonyspeech-engine-cpu:latest
-    pull_policy: always
-    env_file: ./harmony-speech-engine/.env
-    ports:
-      - "12080:12080"
-    volumes:
-      - ./harmony-speech-engine/config.yml:/app/harmony-speech-engine/config.yml
-      - ./harmony-speech-engine/cache:/app/harmony-speech-engine/cache
+networks:
+  harmony-link-network:
+    external: true
+    name: harmony-link-network

@@ -36,7 +36,7 @@ jobs:
         run: |
           $inputsVersion = '${{ github.event.inputs.version }}'
           if ($env:GITHUB_REF -like 'refs/tags/*') {
-            $env:VERSION = '6.4.4-py3.12-wsl'
+            $env:VERSION = '6.4.4-py3.12-wsl2'
           } elseif ($env:GITHUB_EVENT_NAME -eq 'workflow_dispatch' -and $inputsVersion -ne '') {
             $env:VERSION = $inputsVersion
           } else {
@@ -91,5 +91,5 @@ jobs:
           file: ./docker/llamacpp/Dockerfile-llamacpp-WSL2
           push: true
           tags: |
-            ${{ secrets.DOCKER_HUB_USERNAME }}/llamacpp-rocm-wsl:${{ env.VERSION }}
-            ${{ secrets.DOCKER_HUB_USERNAME }}/llamacpp-rocm-wsl:latest
+            ${{ secrets.DOCKER_HUB_USERNAME }}/llamacpp-rocm-wsl2:${{ env.VERSION }}
+            ${{ secrets.DOCKER_HUB_USERNAME }}/llamacpp-rocm-wsl2:latest

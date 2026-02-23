@@ -1,0 +1,21 @@
+services:
+  localai:
+    image: localai/localai:latest-cpu
+    pull_policy: always
+    env_file: .env
+    ports:
+      - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-8080}:${CONTAINER_PORT:-8080}"
+    volumes:
+      # - ./config.yml:/app/harmony-speech-engine/config.yml
+      - ../../../../shared/models:${MODELS_PATH:-/models}
+      - ../../../../shared/localai-data/:/tmp/generated/images/
+    networks:
+      - harmony-link-network
+    labels:
+      com.docker.compose.project: harmony-link-integration-localai
+      com.docker.compose.service: localai
+
+networks:
+  harmony-link-network:
+    external: true
+    name: harmony-link-network

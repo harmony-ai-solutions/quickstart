@@ -1,6 +1,37 @@
+# IDE and editor files
 .idea/
-text-generation-webui-harmonyai/cache/*
-text-generation-webui-harmonyai/models/*
-harmony-speech-engine/cache/*
+.vscode/
+
+# Instance automation directory
+.automation/
+
+# Harmony Link base module data
 harmony-link/harmony-user.key
 harmony-link/harmony-tmp/*
+
+# Shared runtime data (preserve directory structure with .gitkeep)
+shared/*
+
+# Ignore nested git repositories and related files
+**/.git/
+**/.git
+**/.gitignore
+**/.gitattributes
+**/.gitmodules
+
+# Specifically ignore git data in model directories
+shared/models/**/.git/
+shared/models/**/.git
+shared/models/**/.gitignore
+shared/models/**/.gitattributes
+
+# Ignore other version control systems that might be nested
+**/.hg/
+**/.svn/
+
+# Model files
+*.gguf
+*.safetensors
+*.bin
+*.pt
+*.pth

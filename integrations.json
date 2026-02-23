@@ -1,0 +1,379 @@
+[
+  {
+    "name": "llamacpp",
+    "displayName": "llama.cpp",
+    "description": "OpenAI Compatible API Server for GGUF models with high performance CPU/GPU inference",
+    "projectWebsite": "https://github.com/ggml-org/llama.cpp",
+    "apiPath": "/v1",
+    "configFiles": {
+      "cpu": [
+        {
+          "name": ".env",
+          "path": "templates/llamacpp/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "nvidia": [
+        {
+          "name": ".env",
+          "path": "templates/llamacpp/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "amd": [
+        {
+          "name": ".env",
+          "path": "templates/llamacpp/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "amd-wsl": [
+        {
+          "name": ".env",
+          "path": "templates/llamacpp/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "intel": [
+        {
+          "name": ".env",
+          "path": "templates/llamacpp/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ]
+    },
+    "compatibleProviders": {
+      "backend": ["openaicompatible"],
+      "cognition": ["openaicompatible"],
+      "movement": ["openaicompatible"],
+      "rag": ["openaicompatible"]
+    }
+  },
+  {
+    "name": "text-generation-webui",
+    "displayName": "Text Generation WebUI",
+    "description": "Local text generation web interface and OpenAI Compatible API Server",
+    "projectWebsite": "https://github.com/harmony-ai-solutions/text-generation-webui-harmony-ai",
+    "apiPath": "/v1",
+    "webPath": "/",
+    "configFiles": {
+      "cpu": [
+        {
+          "name": ".env",
+          "path": "templates/text-generation-webui/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        },
+        {
+          "name": "CMD_FLAGS.txt",
+          "path": "templates/text-generation-webui/CMD_FLAGS.txt",
+          "description": "Command line flags and model configuration",
+          "type": "txt",
+          "required": false
+        },
+        {
+          "name": "settings.yaml",
+          "path": "templates/text-generation-webui/settings.yaml",
+          "description": "Additional settings for the web UI. Will be auto created if not present.",
+          "type": "txt",
+          "required": false
+        }
+      ],
+      "nvidia": [
+        {
+          "name": ".env",
+          "path": "templates/text-generation-webui/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        },
+        {
+          "name": "CMD_FLAGS.txt",
+          "path": "templates/text-generation-webui/CMD_FLAGS.txt",
+          "description": "Command line flags and model configuration",
+          "type": "txt",
+          "required": false
+        },
+        {
+          "name": "settings.yaml",
+          "path": "templates/text-generation-webui/settings.yaml",
+          "description": "Additional settings for the web UI. Will be auto created if not present.",
+          "type": "txt",
+          "required": false
+        }
+      ],
+      "amd-wsl": [
+        {
+          "name": ".env",
+          "path": "templates/text-generation-webui/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        },
+        {
+          "name": "CMD_FLAGS.txt",
+          "path": "templates/text-generation-webui/CMD_FLAGS.txt",
+          "description": "Command line flags and model configuration",
+          "type": "txt",
+          "required": false
+        },
+        {
+          "name": "settings.yaml",
+          "path": "templates/text-generation-webui/settings.yaml",
+          "description": "Additional settings for the web UI. Will be auto created if not present.",
+          "type": "txt",
+          "required": false
+        }
+      ]
+    },
+    "compatibleProviders": {
+      "backend": ["openaicompatible"],
+      "cognition": ["openaicompatible"],
+      "movement": ["openaicompatible"],
+      "rag": ["openaicompatible"]
+    }
+  },
+  {
+    "name": "harmony-speech-engine",
+    "displayName": "Harmony Speech Engine",
+    "description": "Local speech synthesis and recognition engine",
+    "projectWebsite": "https://github.com/harmony-ai-solutions/harmony-speech-engine",
+    "apiPath": "/v1",
+    "configFiles": {
+      "cpu": [
+        {
+          "name": ".env",
+          "path": "templates/harmony-speech-engine/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        },
+        {
+          "name": "config.yml",
+          "path": "templates/harmony-speech-engine/config.yml",
+          "description": "Model configuration for CPU inference",
+          "type": "yaml",
+          "required": true
+        }
+      ],
+      "nvidia": [
+        {
+          "name": ".env",
+          "path": "templates/harmony-speech-engine/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        },
+        {
+          "name": "config.yml",
+          "path": "templates/harmony-speech-engine/config.gpu.yml",
+          "description": "Model configuration for GPU inference",
+          "type": "yaml",
+          "required": true
+        }
+      ],
+      "amd-wsl": [
+        {
+          "name": ".env",
+          "path": "templates/harmony-speech-engine/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        },
+        {
+          "name": "config.yml",
+          "path": "templates/harmony-speech-engine/config.gpu.yml",
+          "description": "Model configuration for GPU inference",
+          "type": "yaml",
+          "required": true
+        }
+      ]
+    },
+    "compatibleProviders": {
+      "tts": ["harmonyspeech"],
+      "stt": ["harmonyspeech"],
+      "vad": ["harmonyspeech"]
+    }
+  },
+  {
+    "name": "localai",
+    "displayName": "LocalAI",
+    "description": "Drop-In Framework for local AI Services in the style of OpenAI. Supports LLMs, Neural Encoders, TTS & STT Pipelines",
+    "projectWebsite": "https://localai.io/",
+    "apiPath": "/v1",
+    "webPath": "/",
+    "configFiles": {
+      "cpu": [
+        {
+          "name": ".env",
+          "path": "templates/localai/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "nvidia": [
+        {
+          "name": ".env",
+          "path": "templates/localai/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ]
+    },
+    "compatibleProviders": {
+      "backend": ["openaicompatible"],
+      "cognition": ["openaicompatible"],
+      "movement": ["openaicompatible"],
+      "rag": ["openaicompatible"],
+      "tts": ["openaicompatible"],
+      "stt": ["openaicompatible"]
+    }
+  },
+  {
+    "name": "ollama",
+    "displayName": "Ollama",
+    "description": "Drop-In Framework for local AI Services in the style of OpenAI. Supports LLMs & Neural Encoders",
+    "projectWebsite": "https://ollama.com/",
+    "apiPath": "/v1",
+    "webPath": "/",
+    "configFiles": {
+      "cpu": [
+        {
+          "name": ".env",
+          "path": "templates/ollama/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "nvidia": [
+        {
+          "name": ".env",
+          "path": "templates/ollama/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "amd": [
+        {
+          "name": ".env",
+          "path": "templates/ollama/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "amd-wsl": [
+        {
+          "name": ".env",
+          "path": "templates/ollama/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ]
+    },
+    "compatibleProviders": {
+      "backend": ["openaicompatible"],
+      "cognition": ["openaicompatible"],
+      "movement": ["openaicompatible"],
+      "rag": ["openaicompatible"]
+    }
+  },
+  {
+    "name": "aphrodite-engine",
+    "displayName": "Aphrodite-Engine",
+    "description": "LLM Inference Engine with a focus on hobbyist and local LLM users. Supports a variety of quantization methods and optimizations.",
+    "projectWebsite": "https://aphrodite.pygmalion.chat",
+    "apiPath": "/v1",
+    "configFiles": {
+      "cpu": [
+        {
+          "name": ".env",
+          "path": "templates/aphrodite-engine/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "nvidia": [
+        {
+          "name": ".env",
+          "path": "templates/aphrodite-engine/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ]
+    },
+    "compatibleProviders": {
+      "backend": ["openaicompatible"],
+      "cognition": ["openaicompatible"],
+      "movement": ["openaicompatible"]
+    }
+  },
+  {
+    "name": "vllm",
+    "displayName": "vLLM",
+    "description": "High Performance LLM Inference Engine optimized for enterprise workloads. Supports a variety of quantization methods and optimizations.",
+    "projectWebsite": "https://github.com/vllm-project/vllm",
+    "apiPath": "/v1",
+    "configFiles": {
+      "cpu": [
+        {
+          "name": ".env",
+          "path": "templates/vllm/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "nvidia": [
+        {
+          "name": ".env",
+          "path": "templates/vllm/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "amd": [
+        {
+          "name": ".env",
+          "path": "templates/vllm/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ],
+      "amd-wsl": [
+        {
+          "name": ".env",
+          "path": "templates/vllm/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        }
+      ]
+    },
+    "compatibleProviders": {
+      "backend": ["openaicompatible"],
+      "cognition": ["openaicompatible"],
+      "movement": ["openaicompatible"]
+    }
+  }
+]

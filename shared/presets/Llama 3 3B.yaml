@@ -1,0 +1,8 @@
+temperature: 0.98
+top_p: 0.37
+top_k: 100
+repetition_penalty: 1.23
+repetition_penalty_range: 2048
+typical_p: 0
+tfs: 0.68
+dry_multiplier: 0.8

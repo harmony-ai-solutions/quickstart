@@ -1,0 +1,24 @@
+services:
+  aphrodite-engine:
+    image: alpindale/aphrodite-openai:latest
+    pull_policy: always
+    env_file: .env
+    ports:
+      - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-2242}:${CONTAINER_PORT:-2242}"
+    volumes:
+      - ../../../../shared/cache:/root/.cache
+    command: >
+      --model ${APHRODITE_MODEL:-NousResearch/Meta-Llama-3.1-8B-Instruct}
+      --tensor-parallel-size ${APHRODITE_TENSOR_PARALLEL_SIZE:-1}
+      --api-key ${APHRODITE_API_KEY:-""}
+      ${APHRODITE_EXTRA_ARGS}
+    networks:
+      - harmony-link-network
+    labels:
+      com.docker.compose.project: harmony-link-integration-aphrodite-engine
+      com.docker.compose.service: aphrodite-engine
+
+networks:
+  harmony-link-network:
+    external: true
+    name: harmony-link-network

@@ -11,7 +11,7 @@ on:
         default: 'dev'
 
 jobs:
-  build-and-push-base-rocm-wsl:
+  build-and-push-base-rocm-wsl2:
     runs-on: ubuntu-latest
 
     steps:
@@ -36,7 +36,7 @@ jobs:
         run: |
           $inputsVersion = '${{ github.event.inputs.version }}'
           if ($env:GITHUB_REF -like 'refs/tags/*') {
-            $env:VERSION = '6.4.4-py3.12-wsl'
+            $env:VERSION = '6.4.4-py3.12-wsl2'
           } elseif ($env:GITHUB_EVENT_NAME -eq 'workflow_dispatch' -and $inputsVersion -ne '') {
             $env:VERSION = $inputsVersion
           } else {
@@ -84,12 +84,12 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
-      - name: Build and push base-rocm-wsl image
+      - name: Build and push base-rocm-wsl2 image
         uses: docker/build-push-action@v3
         with:
           context: ./docker/base
           file: ./docker/base/Dockerfile-ROCm-6_4_4-Python-3_12-WSL2
           push: true
           tags: |
-            ${{ secrets.DOCKER_HUB_USERNAME }}/base-rocm-wsl:${{ env.VERSION }}
-            ${{ secrets.DOCKER_HUB_USERNAME }}/base-rocm-wsl:latest
+            ${{ secrets.DOCKER_HUB_USERNAME }}/base-rocm-wsl2:${{ env.VERSION }}
+            ${{ secrets.DOCKER_HUB_USERNAME }}/base-rocm-wsl2:latest

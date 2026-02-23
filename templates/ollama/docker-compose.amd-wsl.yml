@@ -1,0 +1,43 @@
+# Thanks to https://github.com/mythrantic/ollama-docker for providing docker examples!
+services:
+  ollama:
+    image: ollama/ollama:rocm
+    pull_policy: always
+    tty: true
+    env_file: .env
+    # IPC & shared memory settings: Required for WSL multi-gpu
+    ipc: host
+    shm_size: '8gb'
+    ports:
+      - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-11434}:${CONTAINER_PORT:-11434}"
+    volumes:
+      - ../../../../shared/ollama-data:/root/.ollama
+      # WSL2: Override interfaces to allow GPU access
+      - /usr/lib/wsl/lib/libdxcore.so:/usr/lib/libdxcore.so
+    devices:
+      - "/dev/dxg" # WSL2
+    networks:
+      - harmony-link-network
+    labels:
+      com.docker.compose.project: harmony-link-integration-ollama
+      com.docker.compose.service: ollama
+
+  ollama-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    pull_policy: always
+    env_file: .env
+    volumes:
+      - ../../../../shared/ollama-webui-data:/app/backend/data
+    depends_on:
+      - ollama
+    ports:
+      - "${BIND_IP:-0.0.0.0}:${WEBUI_HOST_PORT:-8080}:${WEBUI_CONTAINER_PORT:-8080}"
+    networks:
+      - harmony-link-network
+    labels:
+      com.docker.compose.project: harmony-link-integration-ollama-webui
+      com.docker.compose.service: ollama-webui
+
+networks:
+  harmony-link-network:
+    external: true

@@ -1,12 +1,12 @@
 {
+  "admin": {
+    "port": 28081,
+    "apikey": "admin"
+  },
   "entities": {
     "kaji": {
       "backend": {
-        "module": "kajiwoto",
-        "characterai": {
-          "apitoken": "",
-          "chatroomurl": "https://beta.character.ai/chat?char=Hpk0GozjACb3mtHeAaAMb0r9pcJGbzF317I_Ux_ALOA"
-        },
+        "provider": "",
         "kajiwoto": {
           "username": "",
           "password": "",
@@ -16,14 +16,9 @@
           "apikey": "",
           "kindroidid": ""
         },
-        "oobabooga": {
-          "endpoint": "http://text-generation-webui-harmonyai:5000/v1",
-          "character": "Example",
-          "operationmode": "chat",
-          "instructiontemplate": "WizardLM",
-          "preset": "Kobold-Godlike",
-          "maxnewtokens": 200,
-          "usebackendhistory": true
+        "characterai": {
+          "apitoken": "",
+          "chatroomurl": "https://beta.character.ai/chat?char=Hpk0GozjACb3mtHeAaAMb0r9pcJGbzF317I_Ux_ALOA"
         },
         "openai": {
           "openaiapikey": "",
@@ -41,24 +36,83 @@
             "Your main task is to act as a companion for empathic, supportive and helpful conversation."
           ],
           "userprompts": []
+        },
+        "openaicompatible": {
+          "baseurl": "",
+          "apikey": "",
+          "model": "",
+          "maxtokens": 0,
+          "temperature": 0,
+          "topp": 0,
+          "n": 0,
+          "stoptokens": null,
+          "systemprompts": null,
+          "userprompts": null,
+          "normalized": null
         }
       },
       "countenance": {
-        "module": "harmony",
-        "harmony": {
-          "endpoint": "http://text-generation-webui-harmonyai:5000/v1"
+        "provider": "",
+        "openaicompatible": {
+          "baseurl": "",
+          "apikey": "",
+          "model": "",
+          "maxtokens": 0,
+          "temperature": 0,
+          "topp": 0,
+          "n": 0,
+          "stoptokens": null,
+          "systemprompts": null,
+          "userprompts": null,
+          "normalized": null
         }
       },
       "movement": {
-        "module": "disabled",
-        "harmony": {
-          "endpoint": "http://text-generation-webui-harmonyai:5000/v1"
+        "provider": "",
+        "openaicompatible": {
+          "baseurl": "",
+          "apikey": "",
+          "model": "",
+          "maxtokens": 0,
+          "temperature": 0,
+          "topp": 0,
+          "n": 0,
+          "stoptokens": null,
+          "systemprompts": null,
+          "userprompts": null,
+          "normalized": null
         },
         "startupsynctimeout": 30,
         "executionthreshold": 0.9
       },
+      "rag": {
+        "provider": "",
+        "chromem": {
+          "embeddingconcurrency": 0
+        },
+        "providerlocalai": {
+          "embeddingmodel": ""
+        },
+        "provideropenai": {
+          "openaiapikey": "",
+          "embeddingmodel": ""
+        },
+        "provideropenaicompatible": {
+          "baseurl": "",
+          "apikey": "",
+          "embeddingmodel": "",
+          "normalized": null
+        },
+        "providermistral": {
+          "mistralapikey": ""
+        },
+        "providerollama": {
+          "baseurl": "",
+          "embeddingmodel": ""
+        }
+      },
       "stt": {
-        "module": "disabled",
+        "provider": "",
         "transcription": {
           "mainstreamtimemillis": 2000,
           "transitionstreamtimemillis": 2000,
@@ -74,7 +128,7 @@
         }
       },
       "tts": {
-        "module": "harmony",
+        "provider": "",
         "outputtype": "file",
         "wordstoreplace": {
           "rracer2021": "Dom"
@@ -92,33 +146,32 @@
           "voiceid": "21m00Tcm4TlvDq8ikWAM",
           "modelid": "eleven_monolingual_v1",
           "stability": 0,
-          "similarityboost": 0,
-          "style": 0
+          "similarityboost": 0
         },
         "openai": {
           "openaiapikey": "",
-          "voice": "alloy",
           "model": "tts-1",
-          "speed": 1.00,
+          "voice": "alloy",
+          "speed": 1,
           "format": "flac"
         }
       }
     },
     "user": {
       "backend": {
-        "module": "disabled",
+        "provider": "",
         "kajiwoto": {
           "username": "",
           "password": "",
           "kajiroomurl": ""
         },
+        "kindroid": {
+          "apikey": "",
+          "kindroidid": ""
+        },
         "characterai": {
           "apitoken": "",
-          "plus": false,
           "chatroomurl": ""
-        },
-        "oobabooga": {
-          "endpoint": ""
         },
         "openai": {
           "openaiapikey": "",
@@ -130,24 +183,83 @@
           "stoptokens": null,
           "systemprompts": null,
           "userprompts": null
+        },
+        "openaicompatible": {
+          "baseurl": "",
+          "apikey": "",
+          "model": "",
+          "maxtokens": 0,
+          "temperature": 0,
+          "topp": 0,
+          "n": 0,
+          "stoptokens": null,
+          "systemprompts": null,
+          "userprompts": null,
+          "normalized": null
         }
       },
       "countenance": {
-        "module": "disabled",
-        "harmony": {
-          "endpoint": ""
+        "provider": "",
+        "openaicompatible": {
+          "baseurl": "",
+          "apikey": "",
+          "model": "",
+          "maxtokens": 0,
+          "temperature": 0,
+          "topp": 0,
+          "n": 0,
+          "stoptokens": null,
+          "systemprompts": null,
+          "userprompts": null,
+          "normalized": null
         }
       },
       "movement": {
-        "module": "disabled",
-        "harmony": {
-          "endpoint": ""
+        "provider": "",
+        "openaicompatible": {
+          "baseurl": "",
+          "apikey": "",
+          "model": "",
+          "maxtokens": 0,
+          "temperature": 0,
+          "topp": 0,
+          "n": 0,
+          "stoptokens": null,
+          "systemprompts": null,
+          "userprompts": null,
+          "normalized": null
         },
         "startupsynctimeout": 0,
         "executionthreshold": 0
       },
+      "rag": {
+        "provider": "",
+        "chromem": {
+          "embeddingconcurrency": 0
+        },
+        "providerlocalai": {
+          "embeddingmodel": ""
+        },
+        "provideropenai": {
+          "openaiapikey": "",
+          "embeddingmodel": ""
+        },
+        "provideropenaicompatible": {
+          "baseurl": "",
+          "apikey": "",
+          "embeddingmodel": "",
+          "normalized": null
+        },
+        "providermistral": {
+          "mistralapikey": ""
+        },
+        "providerollama": {
+          "baseurl": "",
+          "embeddingmodel": ""
+        }
+      },
       "stt": {
-        "module": "harmony",
+        "provider": "",
         "transcription": {
           "mainstreamtimemillis": 2000,
           "transitionstreamtimemillis": 2000,
@@ -163,7 +275,7 @@
         }
       },
       "tts": {
-        "module": "disabled",
+        "provider": "",
         "outputtype": "",
         "wordstoreplace": null,
         "vocalizenonverbal": false,
@@ -179,14 +291,13 @@
           "voiceid": "",
           "modelid": "",
           "stability": 0,
-          "similarityboost": 0,
-          "style": 0
+          "similarityboost": 0
         },
         "openai": {
           "openaiapikey": "",
-          "voice": "alloy",
           "model": "tts-1",
-          "speed": 1.00,
+          "voice": "alloy",
+          "speed": 1,
           "format": "flac"
         }
       }
@@ -200,6 +311,7 @@
     "clientconnectionbuffer": 8192000,
     "useharmonycloud": false,
     "authendpoint": "https://auth.project-harmony.ai/v1",
-    "userapikey": ""
+    "userapikey": "",
+    "quickstartrepopath": "D:/projects/quickstart"
   }
 }

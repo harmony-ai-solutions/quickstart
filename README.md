@@ -1,15 +1,19 @@
 # Project Harmony.AI - Quickstart
-This repo contains scripts and configurations for quickly setting up Harmony AI modules for running locally.
+This repo contains configurations and templates for quickly setting up external Harmony AI modules for running locally, primarily orchestrated by Harmony Link.
 
-It provides as simplistic approach using docker compose files and docker images which are being provided via hub.
-The default configuration consists of:
+It provides a simplistic approach using Docker Compose files and Docker images which are being provided via Docker Hub.
+The available integrations include:
 - [Harmony Link](https://github.com/harmony-ai-solutions/harmony-link), our agentic runtime.
-- [Our Text-Generation Web-UI fork](https://github.com/harmony-ai-solutions/text-generation-webui-harmony-ai), 
+- [Our Text-Generation Web-UI fork](https://github.com/harmony-ai-solutions/text-generation-webui-harmony-ai),
 a slightly modified version of [Oobabooga's great repository](https://github.com/oobabooga/text-generation-webui).
 - [Harmony Speech Engine](https://github.com/harmony-ai-solutions/harmony-speech-engine), our custom inference engine
 for AI voice generation, voice cloning and Speech transcription.
+- [LocalAI](https://localai.io/), a drop-in framework for local AI services supporting LLMs, Neural Encoders, TTS & STT pipelines.
+- [Ollama](https://ollama.com/), a drop-in framework for local AI services supporting LLMs and Neural Encoders.
+- [Aphrodite-Engine](https://aphrodite.pygmalion.chat), an LLM Inference Engine with a focus on hobbyist and local LLM users with support for various quantization methods and optimizations.
+- [vLLM](https://github.com/vllm-project/vllm), a high-performance LLM inference engine optimized for enterprise workloads and supporting various quantization methods.
 
-All docker Images and revision can be found at [Docker-Hub](https://hub.docker.com/u/harmonyai).
+All Docker Images and revisions can be found at [Docker-Hub](https://hub.docker.com/u/harmonyai).
 
 For supporting with setup, we created a tutorial video available on YouTube:
 
@@ -45,71 +49,34 @@ git clone https://github.com/harmony-ai-solutions/quickstart
 cd quickstart
 ```
 
-### 3. Check configuration
-The default `docker-compose.yml` file will download and start all services we offer, using the CPU-only profile.
-Check if you need all of them or just a specific one, and comment out the ones you don't need.
+### 3. Initial Setup with Harmony Link
+The `docker-compose.yml` file in this repository is now primarily used to launch Harmony Link and its UI. Harmony Link's UI will then allow you to discover, configure, and manage other AI services (like Text Generation WebUI and Harmony Speech Engine) directly.
 
-#### Harmony Speech Engine
-While most speech engine provided models have reasonable performance on CPU, running them via GPU if possible
-improves performance significantly. Please make sure your machine has enough RAM / VRAM availiable. Otherwise, make a
-backup of the default files, and remove the models you don't want to use.
+To get started:
 
-Relevant config files:
+#### Launch Harmony Link and its UI
+From the shell which is pointed at the repo's folder back in Step 2, launch Harmony Link:
 ```
-harmony-speech-engine/config.yml
-harmony-speech-engine/config.nvidia.yml 
+docker compose up -d harmony-link harmony-link-ui
 ```
+This will start Harmony Link and its UI in detached mode.
+Alternatively, launch the standalone binary.
 
-The following table should help with evaluating the requirements:
+#### Configure Integrations via Harmony Link UI
+1.  **Launch Harmony Link Application**: Launch the `harmony-link` and `harmony-link-ui` containers or the Harmony Link desktop application.
+2.  **Navigate to "Integrations" Tab**: In the Harmony Link UI, go to the newly added "Integrations" tab.
+3.  **Set Quickstart Repository Path**: You will be prompted to set the path to this quickstart repository (e.g., `D:/projects/quickstart` on Windows, or `/path/to/quickstart` on Linux/macOS). This path is crucial for Harmony Link to discover available integrations and their templates.
+4.  **Discover and Manage Integrations**: Once the path is set, Harmony Link will discover the `integrations.json` file and list available AI services (Text Generation WebUI, Harmony Speech Engine, LocalAI, and Ollama).
+5.  **Configure Docker Compose**: For each integration, you can click the "Configure" button to open a YAML editor. Here, you can view the default Docker Compose template (e.g., `docker-compose.cpu.yml` or `docker-compose.nvidia.yml` from the `templates/` directory) or customize it. Your custom configurations will be saved in the `.automation/` directory within this quickstart repo.
+6.  **Configure Additional Files**: For integrations that require additional configuration files (e.g., `CMD_FLAGS.txt` for Text-Generation WebUI, `config.yml` for Harmony Speech Engine), click the "Config Files" button. This will open a modal where you can view and edit these files directly. Changes are saved to the original files in this repository. A "Revert to Default" option is available to restore files to their last committed state using Git.
+7.  **Start/Stop/Restart**: Use the control buttons to manage the lifecycle of the individual AI service containers. Harmony Link will orchestrate these services using their respective Docker Compose files.
+8.  **Shared Network**: All services managed by Harmony Link will join the `harmony-link-network` for seamless communication. This network will be automatically created if it doesn't exist.
 
-| Model Toolchain   | Type | Embedding requires Whisper | CPU only Performance | Voice Quality | Storage & RAM / VRAM required |
-|-------------------|------|----------------------------|----------------------|---------------|-------------------------------|
-| Harmony Speech V1 | TTS  | No                         | Very Good            | Good          | ~1GB                          |
-| OpenVoice V1      | TTS  | Yes                        | Good                 | Very Good     | ~512GB per language           |
-| OpenVoice V2      | TTS  | Yes                        | Good                 | Very Good     | ~512GB per language           |
-| Faster-Whisper    | STT  | N / A                      | Medium               | N / A         | ~1-6GB (depending on model)   |
+All integrations are managed through Harmony Link. You can configure their specific settings (e.g., models, ports) after creating an Instance in the "Integrations" tab, by editing it's Configuration (docker compose setup) and individual config and env files.
 
-For more details on configuring the models in detail, please check out the 
-[Harmony Speech Engine Model Documentation](https://github.com/harmony-ai-solutions/harmony-speech-engine/blob/main/docs/models.md).
+The base template files for these services are located in the `templates/` directory; you should not edit them unless you want to apply a global change. After creation of an instance, a copy of the template and the corresponding config files will be stored in the instance's folder inside the `.automation/` directory.
 
-#### Harmony Link
-Dockerized Harmony Link currently can't expose its configuration UI via Web URL. If you want to use the UI to modify your setup
-in a more convenient way, you can always run the standalone version (availiable [via our website](https://project-harmony.ai/technology/)) and
-copy the `config.json` file into the `harmony-link` folder. Make sure to change network routes for usage inside the docker image accordingly,
-so they will work inside the container as well:
-```
-http://localhost:12080 => http://harmonyspeech-engine:12080
-```
-
-Relevant config files:
-```
-harmony-link/config.json 
-```
-
-#### Text-Generation-Web-UI
-The API is found via `http://localhost:5000`. To Access the API from inside the harmony-link docker container, use this
-URL instead: `http://text-generation-webui-harmonyai:5000`
-
-Make sure to access `http://localhost:7860` after launch and configure the model to be used. 
-Alternatively, you can also download a model into the models folder below text-generation-webui-harmonyai, and comment
-out the flag `--model` in the file `CMD_FLAGS.txt` to load the model on startup. Make sure to download a model which
-is compatible with your system, e.g. GGUF model for CPU vs. GPTQ / EXL2 model for GPU, and that you have sufficient
-RAM / VRAM to load the model and inference cache.
-
-### 4. Launch the services using docker compose
-From the shell which is pointed at the repo's folder back in Step 2, start and stop the services via docker compose.
-Make sure Docker Desktop or your docker service is running. 
-
-For CPU-Only:
-```
-docker compose up
-docker compose down
-```
-For Nvidia:
-```
-docker compose -f docker-compose.nvidia.yml up
-docker compose -f docker-compose.nvidia.yml down
-```
+For further configuration and setup details, please refer to each integration's particular documentation, reachable via the "Project Website" buttons in Harmony Link's UI.
 
 If you have questions, or run into issues, please feel free to reach out via Discord; Server link shared below.
 
@@ -143,7 +110,7 @@ Feel free to join our Discord Server and / or subscribe to our Patreon - Even $1
 
 ![Harmony.AI Discord Server](docs/images/discord32.png) [Harmony.AI Discord Server](https://discord.gg/f6RQyhNPX8)
 
-![Harmony.AI Discord Server](docs/images/patreon32.png) [Harmony.AI Patreon](https://patreon.com/harmony_ai)
+![Harmony.AI Patreon](docs/images/patreon32.png) [Harmony.AI Patreon](https://patreon.com/harmony_ai)
 
 #### If you want to use our software commercially or discuss a business or development partnership:
 

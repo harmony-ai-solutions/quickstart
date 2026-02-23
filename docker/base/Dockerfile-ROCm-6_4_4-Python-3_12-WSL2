@@ -1,0 +1,94 @@
+# Base image for ROCm 6.4.4 with Python 3.12 on WSL2
+# Provides AMDGPU drivers, ROCm runtime, and Python environment
+# Optimized for WSL2 with AMD RDNA 1-4 discrete GPUs
+# Base: Ubuntu 24.04
+FROM ubuntu:24.04
+
+# GPU architectures to compile for (RDNA 1-4 discrete GPUs)
+# RDNA 1: gfx1010 (RX 5700/XT), gfx1012 (RX 5500/XT)
+# RDNA 2: gfx1030 (RX 6800/XT/6900 XT), gfx1031 (RX 6700 XT)
+# RDNA 3: gfx1100 (RX 7900 XTX/XT/GRE)
+# RDNA 4: gfx1200 (RX 9060/XT), gfx1201 (RX 9070/XT/GRE)
+ARG GPU_TARGETS="gfx1010;gfx1012;gfx1030;gfx1031;gfx1100;gfx1200;gfx1201"
+
+# Install AMD GPU WSL Driver and ROCm 6.4.4
+RUN set -eux; \
+    export DEBIAN_FRONTEND=noninteractive \
+    && apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y wget curl
+
+RUN wget https://repo.radeon.com/amdgpu-install/6.4.4/ubuntu/noble/amdgpu-install_6.4.60404-1_all.deb \
+    && apt-get install -y ./amdgpu-install_6.4.60404-1_all.deb \
+    && amdgpu-install -y --usecase=wsl,rocm --no-dkms \
+    && rm amdgpu-install_6.4.60404-1_all.deb
+
+# Install Python 3.12 & dependencies
+RUN apt-get update \
+    && apt-get install -y software-properties-common \
+    && add-apt-repository ppa:deadsnakes/ppa \
+    && apt-get update \
+    && apt-get install -y python3.12 python3.12-dev python3.12-venv python3-pip
+
+# Install common libraries which may be required
+# (Credits: @Bod9001 - https://github.com/Bod9001/DockerFileForAMDAIWin)
+RUN add-apt-repository universe \
+    && apt-get update \
+    && apt-get install -y \
+        libtinfo6 \
+        libsuitesparse-dev \
+        libccolamd3 \
+        libcamd3 \
+        libcolamd3 \
+        libamd3 \
+        libncurses6 \
+        libssl3 \
+        libffi8
+
+# Install build essentials for downstream images
+RUN apt-get install -y \
+        build-essential \
+        cmake \
+        ninja-build \
+        git \
+        pkg-config \
+        libcurl4-openssl-dev \
+        ccache \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set up ROCm environment variables for WSL2
+ENV LLVM_SYMBOLIZER_PATH=/opt/rocm/llvm/bin/llvm-symbolizer
+ENV PATH=$PATH:/opt/rocm/bin:/opt/rocm-6.4.4/lib/llvm/bin
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rocm/lib
+ENV CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/opt/rocm/include
+ENV HIP_PLATFORM=amd
+ENV HIP_VISIBLE_DEVICES=0
+# ATTENTION: Multi-GPU support is disabled on purpose in the base image because WSL does not support multi-GPU workloads w/ ROCm.
+# Even if rocminfo may show multiple devices, trying to set a different device index than '0' will result in driver crash.
+# It is possible to run multiple models in parallel on the same GPU however.
+# See also mGPU Limitations: https://rocm.docs.amd.com/projects/radeon-ryzen/en/latest/docs/install/installrad/native_linux/mgpu.html#windows-subsystem-for-linux-wsl-support
+
+# Set GPU architectures as environment variables for downstream builds
+ENV PYTORCH_ROCM_ARCH=${GPU_TARGETS}
+ENV GPU_TARGETS=${GPU_TARGETS}
+
+# Allow statements and log messages to immediately appear
+ENV PYTHONUNBUFFERED=True
+
+# Set Python 3.12 as default python3
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 1 \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python3.12 1
+
+# Verify installations
+RUN python3 --version \
+    && rocm-smi --version || echo "rocm-smi check skipped in build" \
+    && /opt/rocm/bin/rocminfo | grep -E "Name|Marketing Name" || echo "rocminfo failed" \
+    && hipconfig --version
+
+# Labels
+LABEL maintainer="Harmony AI Solutions"
+LABEL description="Base ROCm 6.4.4 + Python 3.12 image for AMD RDNA 1-4 GPUs on WSL2"
+LABEL rocm.version="6.4.4"
+LABEL python.version="3.12"
+LABEL gpu.targets="gfx1010,gfx1012,gfx1030,gfx1031,gfx1100,gfx1200,gfx1201"
+LABEL base.os="ubuntu-24.04"

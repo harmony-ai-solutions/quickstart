@@ -1,0 +1,43 @@
+# Thanks to https://github.com/mythrantic/ollama-docker for providing docker examples!
+services:
+  ollama:
+    image: ollama/ollama:latest
+    pull_policy: always
+    tty: true
+    env_file: .env
+    ports:
+      - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-11434}:${CONTAINER_PORT:-11434}"
+    volumes:
+      - ../../../../shared/ollama-data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [ gpu ]
+    networks:
+      - harmony-link-network
+    labels:
+      com.docker.compose.project: harmony-link-integration-ollama
+      com.docker.compose.service: ollama
+
+  ollama-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    pull_policy: always
+    env_file: .env
+    volumes:
+      - ../../../../shared/ollama-webui-data:/app/backend/data
+    depends_on:
+      - ollama
+    ports:
+      - "${BIND_IP:-0.0.0.0}:${WEBUI_HOST_PORT:-8080}:${WEBUI_CONTAINER_PORT:-8080}"
+    networks:
+      - harmony-link-network
+    labels:
+      com.docker.compose.project: harmony-link-integration-ollama-webui
+      com.docker.compose.service: ollama-webui
+
+networks:
+  harmony-link-network:
+    external: true
+    name: harmony-link-network

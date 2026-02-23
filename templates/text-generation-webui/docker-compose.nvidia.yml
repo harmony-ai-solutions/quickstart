@@ -1,0 +1,45 @@
+services:
+  text-generation-webui:
+    image: harmonyai/text-generation-webui-harmony-ai-nvidia:latest
+    pull_policy: always
+    env_file: .env
+    user: "${APP_RUNTIME_UID:-6972}:${APP_RUNTIME_GID:-6972}"
+    ports:
+      - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-7860}:${CONTAINER_PORT:-7860}"
+      - "${BIND_IP:-0.0.0.0}:${HOST_API_PORT:-5000}:${CONTAINER_API_PORT:-5000}"
+    stdin_open: true
+    tty: true
+    volumes:
+      - ../../../../shared/cache:/home/app/text-generation-webui/user_data/cache
+      - ../../../../shared/cloudflared:/etc/user_data/cloudflared
+      - ../../../../shared/characters:/home/app/text-generation-webui/user_data/characters
+      - ../../../../shared/extensions:/home/app/text-generation-webui/user_data/extensions
+      - ../../../../shared/grammars:/home/app/text-generation-webui/user_data/grammars
+      - ../../../../shared/instruction-templates:/home/app/text-generation-webui/user_data/instruction-templates
+      - ../../../../shared/loras:/home/app/text-generation-webui/user_data/loras
+      - ../../../../shared/logs:/home/app/text-generation-webui/user_data/logs
+      - ../../../../shared/mmproj:/home/app/text-generation-webui/user_data/mmproj
+      - ../../../../shared/models:/home/app/text-generation-webui/user_data/models
+      - ../../../../shared/.textgen/config.yaml:/home/app/text-generation-webui/user_data/models/config.yaml
+      - ../../../../shared/presets:/home/app/text-generation-webui/user_data/presets
+      - ../../../../shared/prompts:/home/app/text-generation-webui/user_data/prompts
+      - ../../../../shared/softprompts:/home/app/text-generation-webui/user_data/softprompts
+      - ../../../../shared/training:/home/app/text-generation-webui/user_data/training
+      - ./settings.yaml:/home/app/text-generation-webui/user_data/settings.yaml
+      - ./CMD_FLAGS.txt:/home/app/text-generation-webui/user_data/CMD_FLAGS.txt
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [ gpu ]
+    networks:
+      - harmony-link-network
+    labels:
+      com.docker.compose.project: harmony-link-integration-text-generation-webui
+      com.docker.compose.service: text-generation-webui
+
+networks:
+  harmony-link-network:
+    external: true
+    name: harmony-link-network

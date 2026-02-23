@@ -1,0 +1,39 @@
+# PyTorch 2.7.1 with ROCm 6.4.4 and Python 3.12 on WSL2
+# Built on top of base ROCm WSL2 image
+# Provides PyTorch, TorchVision, TorchAudio, and Triton for AMD RDNA GPUs
+FROM harmonyai/base-rocm-wsl2:6.4.4-py3.12-wsl2
+
+# Set working directory for downloads
+WORKDIR /tmp/pytorch-install
+
+# Download PyTorch wheels
+RUN wget -nv https://repo.radeon.com/rocm/manylinux/rocm-rel-6.4.4/pytorch_triton_rocm-3.3.1%2Brocm6.4.4.git9c7bc0a3-cp312-cp312-linux_x86_64.whl
+RUN wget -nv https://repo.radeon.com/rocm/manylinux/rocm-rel-6.4.4/torch-2.7.1%2Brocm6.4.4.git1781ec08-cp312-cp312-linux_x86_64.whl
+RUN wget -nv https://repo.radeon.com/rocm/manylinux/rocm-rel-6.4.4/torchaudio-2.7.1%2Brocm6.4.4.git95c61b41-cp312-cp312-linux_x86_64.whl
+RUN wget -nv https://repo.radeon.com/rocm/manylinux/rocm-rel-6.4.4/torchvision-0.22.1%2Brocm6.4.4.git59a3e1f9-cp312-cp312-linux_x86_64.whl
+
+# Install PyTorch and dependencies
+RUN pip install --no-cache-dir --break-system-packages *.whl
+
+# Verify PyTorch installation (basic import test only - GPU checks require runtime)
+RUN python -c "import torch; print(f'PyTorch version: {torch.__version__}')"
+RUN python -c "import torchvision; print(f'TorchVision version: {torchvision.__version__}')"
+RUN python -c "import torchaudio; print(f'TorchAudio version: {torchaudio.__version__}')"
+
+# Cleanup downloaded wheels
+RUN rm -f *.whl
+
+# Reset working directory
+WORKDIR /
+
+# Labels
+LABEL maintainer="Harmony AI Solutions"
+LABEL description="PyTorch 2.7.1 with ROCm 6.4.4 + Python 3.12 for AMD RDNA GPUs on WSL2"
+LABEL pytorch.version="2.7.1"
+LABEL torchvision.version="0.22.1"
+LABEL torchaudio.version="2.7.1"
+LABEL triton.version="3.3.1"
+LABEL rocm.version="6.4.4"
+LABEL python.version="3.12"
+LABEL gpu.targets="gfx1010,gfx1012,gfx1030,gfx1031,gfx1100,gfx1200,gfx1201"
+LABEL base.image="harmonyai/base-rocm-wsl2:6.4.4-py3.12-wsl2"
