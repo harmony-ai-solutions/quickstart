@@ -56,7 +56,8 @@
       "backend": ["openaicompatible"],
       "cognition": ["openaicompatible"],
       "movement": ["openaicompatible"],
-      "rag": ["openaicompatible"]
+      "rag": ["openaicompatible"],
+      "vision": ["openaicompatible"]
     }
   },
   {
@@ -141,7 +142,8 @@
       "backend": ["openaicompatible"],
       "cognition": ["openaicompatible"],
       "movement": ["openaicompatible"],
-      "rag": ["openaicompatible"]
+      "rag": ["openaicompatible"],
+      "vision": ["openaicompatible"]
     }
   },
   {
@@ -239,7 +241,8 @@
       "movement": ["openaicompatible"],
       "rag": ["openaicompatible"],
       "tts": ["openaicompatible"],
-      "stt": ["openaicompatible"]
+      "stt": ["openaicompatible"],
+      "vision": ["openaicompatible"]
     }
   },
   {
@@ -291,7 +294,8 @@
       "backend": ["openaicompatible"],
       "cognition": ["openaicompatible"],
       "movement": ["openaicompatible"],
-      "rag": ["openaicompatible"]
+      "rag": ["openaicompatible"],
+      "vision": ["openaicompatible"]
     }
   },
   {
@@ -323,7 +327,8 @@
     "compatibleProviders": {
       "backend": ["openaicompatible"],
       "cognition": ["openaicompatible"],
-      "movement": ["openaicompatible"]
+      "movement": ["openaicompatible"],
+      "vision": ["openaicompatible"]
     }
   },
   {
@@ -373,7 +378,8 @@
     "compatibleProviders": {
       "backend": ["openaicompatible"],
       "cognition": ["openaicompatible"],
-      "movement": ["openaicompatible"]
+      "movement": ["openaicompatible"],
+      "vision": ["openaicompatible"]
     }
   }
 ]
