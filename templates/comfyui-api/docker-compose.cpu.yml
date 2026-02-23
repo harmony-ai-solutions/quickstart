@@ -1,0 +1,28 @@
+# ComfyUI API — CPU Only Template (STUB)
+# WARNING: CPU-based image generation is extremely slow (minutes per image).
+# Recommended only for testing workflow connectivity, not production use.
+# For actual image generation, use the NVIDIA or AMD-WSL template.
+
+services:
+  comfyui-api:
+    image: ghcr.io/saladtechnologies/comfyui-api:comfy0.12.3-api1.17.1-torch2.8.0-cuda12.8-runtime
+    pull_policy: always
+    env_file: .env
+    ports:
+      - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-3000}:3000"
+      - "${BIND_IP:-0.0.0.0}:8188:8188"
+    volumes:
+      - ../../../../shared/comfyui-models:/opt/ComfyUI/models
+      - ../../../../shared/comfyui-cache:/root/.cache/comfyui-api
+      # - ./manifest.yml:/app/manifest.yml
+    labels:
+      com.docker.compose.project: harmony-link-integration-comfyui-api
+      com.docker.compose.service: comfyui-api
+    networks:
+      - harmony-link-network
+    restart: unless-stopped
+
+networks:
+  harmony-link-network:
+    external: true
+    name: harmony-link-network

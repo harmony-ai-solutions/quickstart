@@ -1,0 +1,39 @@
+# ComfyUI API — NVIDIA GPU Template
+# Requires NVIDIA Container Toolkit
+# Image: ghcr.io/saladtechnologies/comfyui-api (includes ComfyUI + wrapper binary)
+
+services:
+  comfyui-api:
+    image: ghcr.io/saladtechnologies/comfyui-api:comfy0.12.3-api1.17.1-torch2.8.0-cuda12.8-runtime
+    pull_policy: always
+    env_file: .env
+    ports:
+      - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-3000}:3000"
+      - "${BIND_IP:-0.0.0.0}:8188:8188"
+    volumes:
+      # Shared ComfyUI models directory (persisted across instances/restarts)
+      - ../../../../shared/comfyui-models:/opt/ComfyUI/models
+      # Shared download dedup cache (avoids re-downloading models from URLs)
+      - ../../../../shared/comfyui-cache:/root/.cache/comfyui-api
+      # Instance-specific: manifest.yml for model auto-download (optional)
+      # - ./manifest.yml:/app/manifest.yml
+      # Instance-specific: warmup workflow JSON (optional)
+      # - ./warmup.json:/app/warmup.json
+    labels:
+      com.docker.compose.project: harmony-link-integration-comfyui-api
+      com.docker.compose.service: comfyui-api
+    networks:
+      - harmony-link-network
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+              count: all
+    restart: unless-stopped
+
+networks:
+  harmony-link-network:
+    external: true
+    name: harmony-link-network

@@ -1,0 +1,40 @@
+# ComfyUI API — AMD ROCm WSL2 Template (STUB - NOT YET FUNCTIONAL)
+# AMD support for ComfyUI requires a ROCm-based Docker image.
+# This template is a stub. A custom base image is required.
+# Future: will use harmonyai/comfyui-api-rocm-wsl image when available.
+#
+# TODO: Build ROCm-compatible ComfyUI + comfyui-api image using:
+#   - harmonyai/base-rocm-wsl2:6.4.4-py3.12-wsl2 as base
+#   - Install ComfyUI with ROCm PyTorch
+#   - Add comfyui-api binary
+
+services:
+  comfyui-api:
+    # image: harmonyai/comfyui-api-rocm-wsl:latest  # NOT YET AVAILABLE
+    image: ghcr.io/saladtechnologies/comfyui-api:comfy0.12.3-api1.17.1-torch2.8.0-cuda12.8-runtime
+    pull_policy: always
+    env_file: .env
+    ports:
+      - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-3000}:3000"
+      - "${BIND_IP:-0.0.0.0}:8188:8188"
+    volumes:
+      - ../../../../shared/comfyui-models:/opt/ComfyUI/models
+      - ../../../../shared/comfyui-cache:/root/.cache/comfyui-api
+      # - ./manifest.yml:/app/manifest.yml
+    labels:
+      com.docker.compose.project: harmony-link-integration-comfyui-api
+      com.docker.compose.service: comfyui-api
+    networks:
+      - harmony-link-network
+    # AMD ROCm device access (WSL2) — uncomment when custom image is available:
+    # devices:
+    #   - /dev/kfd
+    #   - /dev/dri
+    # group_add:
+    #   - video
+    restart: unless-stopped
+
+networks:
+  harmony-link-network:
+    external: true
+    name: harmony-link-network

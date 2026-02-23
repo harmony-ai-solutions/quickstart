@@ -1,0 +1,41 @@
+# ============================================================
+# ComfyUI Model Manifest — Example
+# ============================================================
+# Copy this file to manifest.yml, configure your models,
+# and mount it into the container:
+#   - ./manifest.yml:/app/manifest.yml
+# Then uncomment MANIFEST=/app/manifest.yml in your .env file.
+#
+# Models in "before_start" are downloaded before ComfyUI launches.
+# Models in "after_start" are downloaded in the background (non-blocking).
+#
+# Supported URL sources: HTTPS, HuggingFace (hf://), S3 (s3://)
+# Dynamic loading: URLs in workflow nodes are also auto-cached.
+# ============================================================
+
+# Optional: install custom ComfyUI nodes
+# custom_nodes:
+#   - comfyui_essentials
+#   - https://github.com/cubiq/ComfyUI_IPAdapter_plus
+
+models:
+  before_start:
+    # ---- Checkpoint (base model) ----
+    # Example: DreamShaper 8 from CivitAI
+    # - url: https://civitai.com/api/download/models/128713?type=Model&format=SafeTensor&size=pruned&fp=fp16
+    #   local_path: models/checkpoints/dreamshaper_8.safetensors
+
+    # ---- Character LoRA (for Selfie workflow) ----
+    # Replace with your character's LoRA URL and trigger words
+    # - url: https://your-storage.example.com/my-character-lora.safetensors
+    #   local_path: models/loras/my-character.safetensors
+
+    # ---- VAE (optional, if your workflow uses a separate VAE) ----
+    # - url: https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors
+    #   local_path: models/vae/vae-ft-mse-840000.safetensors
+
+  after_start:
+    # Models here download in background after server starts (non-blocking)
+    # Useful for large models not needed immediately on startup
+    # - url: https://example.com/large-upscaler-model.safetensors
+    #   local_path: models/upscale_models/4x-ultrasharp.safetensors

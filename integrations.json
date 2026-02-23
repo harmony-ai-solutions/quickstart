@@ -381,5 +381,66 @@
       "movement": ["openaicompatible"],
       "vision": ["openaicompatible"]
     }
+  },
+  {
+  "name": "comfyui-api",
+  "displayName": "ComfyUI (via API Wrapper)",
+  "description": "ComfyUI image generation with a stateless REST API wrapper. Used by Harmony Link's Imagination Module for AI-driven image and selfie generation.",
+  "projectWebsite": "https://github.com/SaladTechnologies/comfyui-api",
+  "apiPath": "",
+  "webPath": "/",
+    "configFiles": {
+      "cpu": [
+        {
+          "name": ".env",
+          "path": "templates/comfyui-api/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        },
+        {
+          "name": "manifest.yml",
+          "path": "templates/comfyui-api/manifest.yml.example",
+          "description": "Model download manifest (checkpoints, LoRAs, VAE). Rename to manifest.yml and configure.",
+          "type": "yaml",
+          "required": false
+        }
+      ],
+      "nvidia": [
+        {
+          "name": ".env",
+          "path": "templates/comfyui-api/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        },
+        {
+          "name": "manifest.yml",
+          "path": "templates/comfyui-api/manifest.yml.example",
+          "description": "Model download manifest (checkpoints, LoRAs, VAE). Rename to manifest.yml and configure.",
+          "type": "yaml",
+          "required": false
+        }
+      ],
+      "amd-wsl": [
+        {
+          "name": ".env",
+          "path": "templates/comfyui-api/.env",
+          "description": "Basic env configuration & overrides",
+          "type": "txt",
+          "required": true
+        },
+        {
+          "name": "manifest.yml",
+          "path": "templates/comfyui-api/manifest.yml.example",
+          "description": "Model download manifest (checkpoints, LoRAs, VAE). Rename to manifest.yml and configure.",
+          "type": "yaml",
+          "required": false
+        }
+      ]
+    },
+    "compatibleProviders": {
+      "imagination": ["comfyui"]
+    }
   }
 ]
