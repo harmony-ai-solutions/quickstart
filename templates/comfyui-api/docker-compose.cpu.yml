@@ -9,8 +9,8 @@ services:
     pull_policy: always
     env_file: .env
     ports:
-      - "${BIND_IP:-0.0.0.0}:${HOST_PORT:-3000}:3000"
-      - "${BIND_IP:-0.0.0.0}:8188:8188"
+      - "${BIND_IP:-0.0.0.0}:${HOST_PORT_API:-3000}:3000"
+      - "${BIND_IP:-0.0.0.0}:${HOST_PORT_WEBUI:-8188}:8188"
     volumes:
       - ../../../../shared/comfyui-models:/opt/ComfyUI/models
       - ../../../../shared/comfyui-cache:/root/.cache/comfyui-api
