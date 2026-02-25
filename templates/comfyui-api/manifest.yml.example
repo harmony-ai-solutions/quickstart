@@ -6,6 +6,13 @@
 #   - ./manifest.yml:/app/manifest.yml
 # Then uncomment MANIFEST=/app/manifest.yml in your .env file.
 #
+# IMPORTANT: Remove ALL comments and non-used nodes when using the manifest
+#            You may run into an error "Invalid manifest file format" otherwise.
+#            If a model fails to download but you have it already, move it to "after_start".
+#
+# Check original Readme for supported Params:
+# https://github.com/SaladTechnologies/comfyui-api?tab=readme-ov-file#model-manifest
+#
 # Models in "before_start" are downloaded before ComfyUI launches.
 # Models in "after_start" are downloaded in the background (non-blocking).
 #
@@ -19,7 +26,7 @@
 #   - https://github.com/cubiq/ComfyUI_IPAdapter_plus
 
 models:
-  before_start:
+  before_start: []
     # ---- Checkpoint (base model) ----
     # Example: DreamShaper 8 from CivitAI
     # - url: https://civitai.com/api/download/models/128713?type=Model&format=SafeTensor&size=pruned&fp=fp16
@@ -34,7 +41,7 @@ models:
     # - url: https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors
     #   local_path: models/vae/vae-ft-mse-840000.safetensors
 
-  after_start:
+  after_start: []
     # Models here download in background after server starts (non-blocking)
     # Useful for large models not needed immediately on startup
     # - url: https://example.com/large-upscaler-model.safetensors
